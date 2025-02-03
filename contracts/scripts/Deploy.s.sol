@@ -12,7 +12,7 @@ contract DeployScript is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         Thaink thaink = new Thaink();
-        console2.log(address(thaink)); // Just output the address for the script to capture
+        console2.log(address(thaink));
 
         vm.stopBroadcast();
     }

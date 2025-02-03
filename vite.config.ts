@@ -10,7 +10,8 @@ export default defineConfig({
   plugins: [react(), nodePolyfills()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./app")
+      "@": path.resolve(__dirname, "./app"),
+      "~": path.resolve(__dirname, "./")
     }
   },
 })

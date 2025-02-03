@@ -8,7 +8,7 @@ import { notify, hide, parseError } from '@/components/Notification'
 import { useAccount, chain } from '@/wallet'
 
 
-export const TxButton = ({ simulateHook, writeHook, params, emoji, text }) => {
+export default function TxButton({ simulateHook, writeHook, params, emoji, text }) {
     const account = useAccount()
 
     const txLink = (hash, text) => (
@@ -114,20 +114,17 @@ export const TxButton = ({ simulateHook, writeHook, params, emoji, text }) => {
         }
     }, [isConfirmationError, isConfirmationSuccess])
 
+    const loading = isWritePending || isConfirmationLoading && !isConfirmationSuccess && !isConfirmationError
+    const disabled = !account?.connected || !params?.enabled || !Boolean(simulateData?.request) || loading
+
+    const onClick = () => writeContract({ ...simulateData!.request, account: undefined })
+
     return (
         <div>
-            <Button
-                variant="ghost"
-                disabled={!account?.connected || !params?.enabled || !Boolean(simulateData?.request)}
-                onClick={() => writeContract({ ...simulateData!.request, account: undefined })}
-            >
-                {isWritePending ? (
-                    <LoaderCircle className="animate-spin" />
-                ) : (
-                    <span>{emoji}</span>
-                )}
+            <Button variant="ghost" disabled={disabled} onClick={onClick}>
+                {loading ? <LoaderCircle className="animate-spin" /> : <span>{emoji}</span>}
                 {text}
             </Button>
-        </div>
+        </div >
     )
 }

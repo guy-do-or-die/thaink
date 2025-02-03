@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -85,7 +91,16 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.NavigationMenuLink {
+  text-decoration: none;
+}
+
+.NavigationMenuLink[data-active] {
+  text-decoration: "underline";
 }

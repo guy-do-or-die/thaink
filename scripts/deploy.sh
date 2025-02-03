@@ -38,11 +38,18 @@ else
   VERIFY_FLAG=""
 fi
 
+# Setup for blacksmith
+if [ "$CHAIN_NAME" = "ANVIL" ]; then
+    VERIFY_FLAGS="--verify --unlocked --verifier-url http://localhost:3000/api/verify --verifier sourcify"
+else
+    VERIFY_FLAGS="$VERIFY_FLAG"
+fi
+
 # Deploy contract and capture address
 OUTPUT=$(PRIVATE_KEY="$PRIVATE_KEY" forge script contracts/scripts/Deploy.s.sol \
     --rpc-url $RPC_URL \
     --broadcast \
-    $VERIFY_FLAG \
+    $VERIFY_FLAGS \
     2>&1)
 
 echo "$OUTPUT"

@@ -15,7 +15,7 @@ const supportedChains = {
 export const chain = supportedChains[import.meta.env.VITE_CHAIN]
 export const RPC_URL = import.meta.env.VITE_RPC_URL
 
-export const useAccount = () => {
+export function useAccount() {
   const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy();
 
   const address = user?.wallet?.address

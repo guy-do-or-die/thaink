@@ -1,21 +1,25 @@
-import Content from '../components/Content';
+import { useNavigation } from '@/hooks/useNavigation'
+import { ROUTES } from '@/routes.config'
+
+import Content from '@/components/Content'
+import TxButton from '@/components/TxButton'
 
 import { useAccount } from '@/wallet'
 
-import { TxButton } from '@/components/TxButton'
 
 import { useSimulateThainkMakeTank, useWriteThainkMakeTank } from '@/contracts'
 
 
-export default function HomePage() {
+export default function MakePage() {
 
+  const { navigateTo } = useNavigation()
   const { connected } = useAccount()
 
   const makeTankParams = {
     args: [],
     enabled: connected,
     onConfirmationSuccess: data => {
-      console.log('data', data)
+      navigateTo(ROUTES.TANKS.path)
     }
   }
 
