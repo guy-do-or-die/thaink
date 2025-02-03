@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "wagmi": "wagmi generate",
     "dev": "bun run wagmi && vite",
-    "build": "bun run wagmi && vite build",
+    "build": "vite build",
     "deploy:anvil": "scripts/deploy.sh .env.anvil",
     "deploy:base": "scripts/deploy.sh .env.base",
     "deploy:base-sepolia": "scripts/deploy.sh .env.base-sepolia"
