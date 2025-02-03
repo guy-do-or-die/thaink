@@ -1,17 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "Dockerfile",
-      "use": "@vercel/docker"
-    }
-  ],
+  "builds": [],
   "routes": [
     {
       "src": "/(.*)",
       "dest": "/"
     }
   ],
+  "buildCommand": "bun run build",
+  "devCommand": "bun run dev",
+  "installCommand": "bun install",
   "framework": "vite",
   "outputDirectory": "dist"
 }

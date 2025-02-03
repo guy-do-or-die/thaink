@@ -5,16 +5,22 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: frontend-builder
+      target: builder
+      cache_from:
+        - oven/bun:1
+      args:
+        BUILDKIT_INLINE_CACHE: 1
     command: bun run dev
     ports:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+      - DOCKER_BUILDKIT=1
     volumes:
       - ./contracts:/app/contracts
       - ./app:/app/app
       - ./dist:/app/dist
+      - ./.bun-cache:/root/.bun
       - /app/node_modules
     networks:
       - thaink-network
