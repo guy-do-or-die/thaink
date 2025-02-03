@@ -1,14 +1,14 @@
 import { thainkAddress } from '@/contracts'
 import { chain } from '@/wallet'
 
-import xUrl from '~/public/assets/icons/x.png'
-import telegramUrl from '~/public/assets/icons/telegram.png'
-import discordUrl from '~/public/assets/icons/discord.png'
-import farcasterUrl from '~/public/assets/icons/farcaster.png'
-import guildUrl from '~/public/assets/icons/guild.png'
-import gitUrl from '~/public/assets/icons/git.png'
-import openseaUrl from '~/public/assets/icons/opensea.png'
-import etherscanUrl from '~/public/assets/icons/etherscan.png'
+import xUrl from '/assets/icons/x.png'
+import telegramUrl from '/assets/icons/telegram.png'
+import discordUrl from '/assets/icons/discord.png'
+import farcasterUrl from '/assets/icons/farcaster.png'
+import guildUrl from '/assets/icons/guild.png'
+import gitUrl from '/assets/icons/git.png'
+import openseaUrl from '/assets/icons/opensea.png'
+import etherscanUrl from '/assets/icons/etherscan.png'
 
 
 function Link({ href, icon, title }) {

@@ -1,6 +1,8 @@
 import { Toaster, toast } from "react-hot-toast"
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+import { CheckCircle, CircleX, Info, LoaderCircle } from "lucide-react"
+
 
 export function Copy({
     content,
@@ -58,18 +60,24 @@ export function parseError(error: unknown) {
 
 export function notify(
     content: string,
-    typ: 'success' | 'error' | 'info',
+    typ: 'success' | 'error' | 'info' | 'loading',
     params: object = {}
 ) {
     const defaultParams = {
         "error": {
             duration: 5000,
+            icon: <CircleX className="text-red-500" />,
         },
         "success": {
             duration: 2000,
+            icon: <CheckCircle className="text-green-500" />,
         },
         "info": {
             duration: 4000,
+            icon: <Info className="text-blue-500" />,
+        },
+        "loading": {
+            icon: <LoaderCircle className="animate-spin" />
         }
     }[typ] || {}
 
@@ -88,7 +96,7 @@ export function hide(id: string) {
 
 export default function Notification({ }) {
     const options = {
-        position: 'top-right',
+        position: 'top-center',
     }
 
     return <>

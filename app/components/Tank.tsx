@@ -1,4 +1,4 @@
-import { useAccount } from '@/wallet'
+import { Flame, Check } from 'lucide-react'
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -13,6 +13,7 @@ import {
     useWriteThainkMint
 } from '@/contracts'
 
+import { useAccount } from '@/wallet'
 import { useBlockStore } from '@/stores/useBlockStore'
 
 
@@ -64,8 +65,8 @@ export default function Tank({ tankId }: { tankId: number }) {
                 </div>
             </CardContent>
             <CardFooter className="pt-2 sm:pt-4">
-                <TxButton emoji={`${balance > 0 ? '✅' : '🔥'}`}
-                    text={`${balance > 0 ? 'Minted' : 'Mint'}`}
+                <TxButton emoji={balance > 0n ? <Check className="text-green-500" /> : <Flame className="text-red-500" />}
+                    text={`${balance > 0n ? 'Minted' : 'Mint'}`}
                     simulateHook={useSimulateThainkMint}
                     writeHook={useWriteThainkMint}
                     params={mintConfig} />
