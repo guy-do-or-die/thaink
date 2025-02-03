@@ -1,7 +1,7 @@
 .env*
 !.env.example
+!.env.chain.example
 
-# Logs
 logs
 *.log
 
@@ -10,5 +10,13 @@ node_modules
 
 .vscode/*
 
+*.swp
+*.swo
+
+
+app/contracts.ts
+
 contracts/lib
-contracts/
+contracts/out
+contracts/cache
+contracts/broadcast
