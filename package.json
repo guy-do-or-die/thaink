@@ -9,7 +9,6 @@
     "wagmi": "wagmi generate",
     "dev": "bun run wagmi && vite",
     "build": "bun run wagmi && vite build",
-    "start": "vite preview --host --port 3000",
     "deploy:anvil": "scripts/deploy.sh .env.anvil",
     "deploy:base": "scripts/deploy.sh .env.base",
     "deploy:base-sepolia": "scripts/deploy.sh .env.base-sepolia"
