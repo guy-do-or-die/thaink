@@ -3,61 +3,43 @@ FROM ghcr.io/foundry-rs/foundry:latest AS foundry-builder
 
 WORKDIR /app
 
-# Cache the lib directory for Foundry dependencies
-COPY contracts/lib/ contracts/lib/
+# Copy Foundry configuration and contracts
 COPY foundry.toml ./
-
-# Copy only the source contracts first to cache the compilation
-COPY contracts/src/ contracts/src/
-RUN forge build --sizes
-
-# Copy the rest of the contracts directory
 COPY contracts/ contracts/
+
+# Build contracts
 RUN forge build
 
 # Build frontend
-FROM oven/bun:1 AS deps
+FROM oven/bun:1 AS frontend-builder
 
 WORKDIR /app
 
-# Copy package files for dependency installation
-COPY package.json bun.lockb ./
+# Copy package files
+COPY package*.json bun.lockb ./
 
-# Install dependencies with cache mount
-RUN --mount=type=cache,target=/root/.bun \
-    bun install --frozen-lockfile
+# Install dependencies
+RUN bun install
 
-# Build stage
-FROM oven/bun:1 AS builder
-
-WORKDIR /app
-
-# Copy deps from previous stage
-COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/package.json /app/bun.lockb ./
-
-# Copy source code
+# Copy source code and built contracts
 COPY . .
 COPY --from=foundry-builder /app/contracts/out ./contracts/out
 
-# Build with cache mount
-RUN --mount=type=cache,target=/root/.bun \
-    --mount=type=cache,target=/app/dist \
-    bun run build
+# Build the app
+RUN bun run build
 
 # Production stage
 FROM oven/bun:1 AS runner
 
 WORKDIR /app
 
-# Copy only necessary files
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package.json /app/bun.lockb ./
-COPY --from=builder /app/contracts/out ./contracts/out
+# Copy built assets from builders
+COPY --from=frontend-builder /app/dist ./dist
+COPY --from=frontend-builder /app/package*.json ./
+COPY --from=foundry-builder /app/contracts/out ./contracts/out
 
-# Install production dependencies with cache
-RUN --mount=type=cache,target=/root/.bun \
-    bun install --production --frozen-lockfile
+# Install production dependencies only
+RUN bun install --production
 
 # Expose port
 EXPOSE 3000
