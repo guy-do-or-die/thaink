@@ -5,15 +5,29 @@ import {Script, console2} from "forge-std/Script.sol";
 import {Thaink} from "../src/Thaink.sol";
 
 contract DeployScript is Script {
+    Thaink public thaink;
+    
     function setUp() public {}
 
     function run() public {
-        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
-        vm.startBroadcast(deployerPrivateKey);
+        address deployer = msg.sender;
+        console2.log("Deploying Thaink contract with address:", deployer);
+        
+        vm.startBroadcast();
 
-        Thaink thaink = new Thaink();
-        console2.log(address(thaink));
+        thaink = new Thaink();
+        
+        // Verify ownership
+        if (thaink.owner() != deployer) {
+            revert("Ownership verification failed");
+        }
+            
+        console2.log("Deployment successful and verified");
 
         vm.stopBroadcast();
+    }
+    
+    function getDeployedAddress() public view returns (address) {
+        return address(thaink);
     }
 }

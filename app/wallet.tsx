@@ -1,8 +1,8 @@
-import { PrivyProvider, usePrivy, useWallets } from '@privy-io/react-auth'
+import { PrivyProvider, usePrivy } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig } from '@privy-io/wagmi'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { http } from 'wagmi'
+import { http, useWalletClient } from 'wagmi'
 
 import * as chains from 'viem/chains'
 
@@ -16,12 +16,17 @@ export const chain = supportedChains[import.meta.env.VITE_CHAIN]
 export const RPC_URL = import.meta.env.VITE_RPC_URL
 
 export function useAccount() {
-  const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy();
+  const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy()
 
   const address = user?.wallet?.address
-  const connected = !ready || (ready && authenticated);
+  const connected = !ready || (ready && authenticated)
+
+  const { data: client } = useWalletClient({ account: address })
+
+  const chain = client?.chain
 
   return {
+    chain,
     address,
     connect,
     connected,
