@@ -51,7 +51,7 @@ export function InfiniteScrollArea<T>({
           {items.map((item, index) => (
             <div
               key={index}
-              className={newItemAnimation && isNewItem?.(item) ? "animate-in slide-in-from-top duration-500" : ""}
+              className={newItemAnimation && isNewItem?.(item) ? "animate-in fade-in slide-in-from-top" : ""}
             >
               {renderItem(item)}
             </div>
