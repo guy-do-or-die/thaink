@@ -6,7 +6,8 @@ import Footer from '@/components/Footer'
 import LandingPage from '@/pages/LandingPage'
 import MakePage from '@/pages/MakePage'
 import TanksPage from '@/pages/TanksPage'
-import ThinkPage from '@/pages/ThinkPage'
+import TankPage from '@/pages/TankPage'
+import SharePage from '@/pages/SharePage'
 
 import { useAccount } from '@/wallet'
 import { useWatchBlock } from '@/stores/useBlockStore'
@@ -35,8 +36,11 @@ export function App() {
           <Route path={ROUTES.TANKS.path}>
             <TanksPage />
           </Route>
-          <Route path={ROUTES.THINK.path}>
-            <ThinkPage />
+          <Route path={ROUTES.TANK.path}>
+            <TankPage />
+          </Route>
+          <Route path={ROUTES.SHARE.path}>
+            <SharePage />
           </Route>
         </main>
         <Footer />

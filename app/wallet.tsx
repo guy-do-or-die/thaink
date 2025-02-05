@@ -39,6 +39,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
 
   const privyConfig = {
     loginMethods: ['wallet'],
+    defaultChain: chain,
     supportedChains: [chain],
     appearance: { theme: 'light' },
   }

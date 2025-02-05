@@ -36,6 +36,7 @@ export function parseError(error: unknown) {
         /(User rejected the request)/,
         /following reason:\n(.*?)\n/s,
         /(RPC Error)/,
+        /(RPC error)/,
     ]
 
     let msg
@@ -59,7 +60,7 @@ export function parseError(error: unknown) {
 
 
 export function notify(
-    content: string,
+    content: string | React.ReactNode,
     typ: 'success' | 'error' | 'info' | 'loading',
     params: object = {}
 ) {
@@ -99,7 +100,5 @@ export default function Notification({ }) {
         position: 'top-center',
     }
 
-    return <>
-        <Toaster toastOptions={options} />
-    </>
+    return <Toaster containerStyle={{ top: 80 }} toastOptions={options} />
 }

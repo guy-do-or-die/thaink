@@ -8,7 +8,7 @@ import { notify, hide, parseError } from '@/components/Notification'
 import { useAccount, chain } from '@/wallet'
 
 
-export default function TxButton({ simulateHook, writeHook, params, emoji, text }) {
+export default function TxButton({ simulateHook, writeHook, params, emoji, text, className }) {
     const account = useAccount()
 
     const txLink = (hash, text) => (
@@ -121,7 +121,7 @@ export default function TxButton({ simulateHook, writeHook, params, emoji, text 
 
     return (
         <div>
-            <Button variant="ghost" disabled={disabled} onClick={onClick}>
+            <Button variant="ghost" disabled={disabled} onClick={onClick} className={className}>
                 {loading ? <LoaderCircle className="animate-spin" /> : <span>{emoji}</span>}
                 {text}
             </Button>

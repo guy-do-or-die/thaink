@@ -16,5 +16,6 @@ invariant_runs = 256
 
 # Remappings
 remappings = [
-    '@openzeppelin/=contracts/lib/openzeppelin-contracts/'
+    '@openzeppelin/=contracts/lib/openzeppelin-contracts/',
+    'forge-std/=contracts/lib/forge-std/src/'
 ]

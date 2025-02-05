@@ -10,7 +10,6 @@ interface BlockState {
 export const useBlockStore = create<BlockState>((set) => ({
     blockNumber: null,
     setBlockNumber: (blockNumber) => {
-        console.log('New block:', blockNumber)
         set({ blockNumber })
     },
 }))
@@ -29,7 +28,6 @@ export function useWatchBlock() {
 
         const unwatch = publicClient.watchBlockNumber({
             onBlockNumber: (blockNumber) => {
-                console.log('Block received:', blockNumber)
                 setBlockNumber(Number(blockNumber))
             },
             emitOnBegin: true,
