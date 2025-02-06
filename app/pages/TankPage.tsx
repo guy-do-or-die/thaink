@@ -1,16 +1,32 @@
 import { useParams } from 'wouter'
+import { useAccount } from '@/wallet'
+import { useReadThainkBalanceOf } from '@/contracts'
 
 import Content from '@/components/Content'
 import Tank from '@/components/Tank'
+import Interact from '@/components/Interact'
 
 export default function TankPage() {
-  const params = useParams()
-  const tankId = parseInt(params?.id || '0', 10)
+  const { id } = useParams()
+  const tankId = parseInt(id || '0')
+  const { address } = useAccount()
+  
+  const { data: balance } = useReadThainkBalanceOf({
+    args: [address, BigInt(tankId)]
+  })
+
+  const hasMinted = Boolean(balance && balance > 0)
+  const hasContributed = false // TODO: Implement this check
 
   return (
     <Content>
-      <div className="flex justify-center p-4 w-full md:w-2/3 lg:w-1/2">
+      <div className="w-full space-y-8">
         <Tank tankId={tankId} variant="single" />
+        <Interact 
+          tankId={tankId}
+          hasMinted={hasMinted}
+          hasContributed={hasContributed}
+        />
       </div>
     </Content>
   )

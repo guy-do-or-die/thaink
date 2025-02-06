@@ -1501,7 +1501,7 @@ export const tankAbi = [
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -1824,18 +1824,18 @@ export const thainkAbi = [
 ] as const
 
 /**
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
 export const thainkAddress = {
-  8453: '0x0000000000000000000000000000000000000000',
+  8453: '0x68aF043C57aC9b4749841c4974dF04D49Ff8fD88',
   31337: '0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d',
   84532: '0x68aF043C57aC9b4749841c4974dF04D49Ff8fD88',
 } as const
 
 /**
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3090,7 +3090,7 @@ export const useWatchTankNoteAddedEvent =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3102,7 +3102,7 @@ export const useReadThaink = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"balanceOf"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3115,7 +3115,7 @@ export const useReadThainkBalanceOf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"balanceOfBatch"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3128,7 +3128,7 @@ export const useReadThainkBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"exists"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3141,7 +3141,7 @@ export const useReadThainkExists = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3155,7 +3155,7 @@ export const useReadThainkIsApprovedForAll =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"owner"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3168,7 +3168,7 @@ export const useReadThainkOwner = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"supportsInterface"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3182,7 +3182,7 @@ export const useReadThainkSupportsInterface =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"tankImplementation"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3196,7 +3196,7 @@ export const useReadThainkTankImplementation =
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"tanks"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3209,7 +3209,7 @@ export const useReadThainkTanks = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"tanksNumber"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3222,7 +3222,7 @@ export const useReadThainkTanksNumber = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"totalSupply"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3235,7 +3235,7 @@ export const useReadThainkTotalSupply = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"uri"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3248,7 +3248,7 @@ export const useReadThainkUri = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3260,7 +3260,7 @@ export const useWriteThaink = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"makeTank"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3273,7 +3273,7 @@ export const useWriteThainkMakeTank = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"mint"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3286,7 +3286,7 @@ export const useWriteThainkMint = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3300,7 +3300,7 @@ export const useWriteThainkRenounceOwnership =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3314,7 +3314,7 @@ export const useWriteThainkSafeBatchTransferFrom =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3328,7 +3328,7 @@ export const useWriteThainkSafeTransferFrom =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3342,7 +3342,7 @@ export const useWriteThainkSetApprovalForAll =
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3356,7 +3356,7 @@ export const useWriteThainkTransferOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3368,7 +3368,7 @@ export const useSimulateThaink = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"makeTank"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3382,7 +3382,7 @@ export const useSimulateThainkMakeTank =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"mint"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3395,7 +3395,7 @@ export const useSimulateThainkMint = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"renounceOwnership"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3409,7 +3409,7 @@ export const useSimulateThainkRenounceOwnership =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3423,7 +3423,7 @@ export const useSimulateThainkSafeBatchTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3437,7 +3437,7 @@ export const useSimulateThainkSafeTransferFrom =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3451,7 +3451,7 @@ export const useSimulateThainkSetApprovalForAll =
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"transferOwnership"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3465,7 +3465,7 @@ export const useSimulateThainkTransferOwnership =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3477,7 +3477,7 @@ export const useWatchThainkEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"ApprovalForAll"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3491,7 +3491,7 @@ export const useWatchThainkApprovalForAllEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3505,7 +3505,7 @@ export const useWatchThainkOwnershipTransferredEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"TransferBatch"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3519,7 +3519,7 @@ export const useWatchThainkTransferBatchEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"TransferSingle"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */
@@ -3533,7 +3533,7 @@ export const useWatchThainkTransferSingleEvent =
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"URI"`
  *
- * - [__View Contract on Base Basescan__](https://basescan.org/address/0x0000000000000000000000000000000000000000)
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
  * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  */

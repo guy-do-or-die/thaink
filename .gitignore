@@ -20,3 +20,7 @@ contracts/lib
 contracts/out
 contracts/cache
 contracts/broadcast
+
+
+coinbase_cloud_api_key.json
+wallet_data.txt

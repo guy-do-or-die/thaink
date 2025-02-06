@@ -32,13 +32,11 @@ export default function TanksPage() {
 
   return (
     <Content>
-      <div className="flex flex-col items-center justify-center w-full md:w-2/3 lg:w-1/2">
-        <InfiniteScrollArea
-          items={displayedTanks}
-          hasMore={hasMore}
-          onLoadMore={loadMore}
-          renderItem={renderTank} />
-      </div>
+      <InfiniteScrollArea
+        items={displayedTanks}
+        hasMore={hasMore}
+        onLoadMore={loadMore}
+        renderItem={renderTank} />
     </Content>
   )
 }

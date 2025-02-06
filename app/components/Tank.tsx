@@ -133,27 +133,32 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
     const isListView = variant === 'list'
 
     return (
-        <Card className="w-full group">
-            <CardHeader className="space-y-1 sm:space-y-2">
-                <CardTitle className="text-lg sm:text-xl">{data.meta.name}</CardTitle>
+        <Card className={`group relative transition-all duration-200 ${isListView ? 'h-52 hover:shadow-[0_4px_6px_rgba(0,82,255,0.5)]' : 'min-h-52'}  m-2`}>
+            <CardHeader className="h-20 space-y-1 sm:space-y-2">
+                <CardTitle className="text-lg sm:text-xl truncate">{data.meta.name}</CardTitle>
                 <CardDescription className="text-sm sm:text-base"></CardDescription>
             </CardHeader>
-            <CardContent className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div className="space-y-2 w-full sm:w-auto text-sm sm:text-base">
-                    <div>{data.meta.description}</div>
+            <CardContent className={isListView ? "pb-16" : ""}>
+                <div className="w-full text-sm sm:text-base">
+                    <div className={isListView ? "line-clamp-2 overflow-hidden text-ellipsis" : ""}>{data.meta.description}</div>
                 </div>
             </CardContent>
-            <CardFooter className="flex justify-between items-center">
+            <CardFooter className={`h-12 flex justify-between items-center ${isListView ? "absolute bottom-0 left-0 right-0" : ""} px-6`}>
                 <TxButton
                     emoji={emoji} text={text}
                     simulateHook={useSimulateThainkMint}
                     writeHook={useWriteThainkMint}
                     params={mintConfig} />
-                {isListView && (
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-100">
-                        <Button variant="outline" onClick={() => navigateTo(tankPage)}>Join</Button>
+                <div className="flex justify-end w-1/3 md:w-1/4 space-x-2">
+                    <div className={isListView ? "opacity-0 group-hover:opacity-100 transition-opacity duration-100" : ""}>
+                        <Button variant="outline" onClick={() => { }}>Fund</Button>
                     </div>
-                )}
+                    {isListView && (
+                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-100">
+                            <Button variant="outline" onClick={() => navigateTo(tankPage)}>Join</Button>
+                        </div>
+                    )}
+                </div>
             </CardFooter>
         </Card>
     )

@@ -44,7 +44,7 @@ export function InfiniteScrollArea<T>({
   }, [inView, hasMore, loading, isLoading, handleLoadMore])
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-8rem)] w-full">
+    <div className="relative h-[calc(100vh-4rem)] md:h-[calc(100vh-10rem)] w-full">
       <div className="pointer-events-none absolute top-0 z-10 h-12 md:h-16 w-full bg-gradient-to-b from-background via-background/80 via-background/50 via-background/20 to-transparent" />
       <ScrollArea className={`h-full md:px-8 py-4 md:py-8 ${className}`}>
         <div className="space-y-4">

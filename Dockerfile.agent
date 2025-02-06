@@ -1,0 +1,38 @@
+# Use the official Node.js 20 image as a parent image
+FROM oven/bun:1.0.21
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY agent/package*.json ./agent/
+
+# Install dependencies
+WORKDIR /app/agent
+RUN bun install
+
+# Copy the rest of the application
+COPY . /app/
+
+# Set environment variables
+ENV NODE_ENV=production
+ENV AGENT_MODE=server
+ENV AGENT_PORT=3001
+
+# Required environment variables (these will be overridden by docker-compose)
+ENV CDP_API_KEY_NAME=""
+ENV CDP_API_KEY_PRIVATE_KEY=""
+ENV OPENAI_API_KEY=""
+ENV NETWORK_ID="base-sepolia"
+
+# Create a directory for wallet data
+RUN mkdir -p /app/data
+
+# Set working directory to agent folder
+WORKDIR /app/agent
+
+# Expose the agent's HTTP port
+EXPOSE 3001
+
+# Command to run the agent
+CMD ["bun", "thainky.ts"]

@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "4173:4173"
+    environment:
+      - NODE_ENV=production
+      - VITE_CHAIN=${VITE_CHAIN}
+      - VITE_RPC_URL=${VITE_RPC_URL}
+      - VITE_PRIVY_APP_ID=${VITE_PRIVY_APP_ID}
+      - CONTRACT_ANVIL=${CONTRACT_ANVIL}
+      - CONTRACT_BASE=${CONTRACT_BASE}
+      - CONTRACT_BASE_SEPOLIA=${CONTRACT_BASE_SEPOLIA}
+    restart: unless-stopped
+
+  agent:
+    build:
+      context: .
+      dockerfile: Dockerfile.agent
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+    environment:
+      CDP_API_KEY_NAME: ${CDP_API_KEY_NAME}
+      CDP_API_KEY_PRIVATE_KEY: ${CDP_API_KEY_PRIVATE_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      NETWORK_ID: ${NETWORK_ID:-base-sepolia}
+    restart: unless-stopped
