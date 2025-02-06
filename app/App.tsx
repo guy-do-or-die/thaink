@@ -36,6 +36,9 @@ export function App() {
           <Route path={ROUTES.TANKS.path}>
             <TanksPage />
           </Route>
+          <Route path={ROUTES.MINTED.path}>
+            <TanksPage filter="minted" />
+          </Route>
           <Route path={ROUTES.TANK.path}>
             <TankPage />
           </Route>

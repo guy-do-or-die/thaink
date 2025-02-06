@@ -6,11 +6,17 @@ import Tank from '@/components/Tank'
 
 import { InfiniteScrollArea } from '@/components/InfiniteScrollArea'
 import { useInfiniteCollection } from '@/hooks/useInfiniteCollection'
+import { useAccount } from '@/wallet'
 
 import { useReadThainkTanksNumber } from '@/contracts'
 
-export default function TanksPage() {
+interface TanksPageProps {
+  filter?: 'minted'
+}
+
+export default function TanksPage({ filter }: TanksPageProps) {
   const [lastTankId, setLastTankId] = useState(0)
+  const { address } = useAccount()
 
   const { data: blockNumber } = useBlockNumber({ watch: true })
   const { data: tanksNumber } = useReadThainkTanksNumber({ blockNumber })
@@ -28,7 +34,11 @@ export default function TanksPage() {
     initialLoad: 5,
   })
 
-  const renderTank = (id: number) => <div key={id}><Tank tankId={id} /></div>
+  const renderTank = (id: number) => (
+    <div key={id}>
+      <Tank tankId={id} variant={filter === 'minted' ? 'minted' : 'list'} />
+    </div>
+  )
 
   return (
     <Content>
@@ -36,7 +46,8 @@ export default function TanksPage() {
         items={displayedTanks}
         hasMore={hasMore}
         onLoadMore={loadMore}
-        renderItem={renderTank} />
+        renderItem={renderTank} 
+      />
     </Content>
   )
 }

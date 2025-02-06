@@ -6,6 +6,7 @@ import { useAccount, chain } from '@/wallet'
 
 import { notify, hide } from '@/components/Notification'
 import { thainkAddress } from '@/contracts'
+import { LogIn, LogOut } from 'lucide-react'
 
 
 function SwitchChain({ onSuccess, onError }) {
@@ -57,8 +58,14 @@ export default function Connection() {
 
   return <>
     {connected ?
-      <Button variant="outline" onClick={disconnect}>Log out</Button> :
-      <Button onClick={connect}>Log in</Button>
+      <Button variant="outline" onClick={disconnect} className="gap-2">
+        <LogOut className="h-4 w-4" />
+        <span className="md:inline max-md:hidden">Log Out</span>
+      </Button> :
+      <Button onClick={connect} className="gap-2">
+        <LogIn className="h-4 w-4" />
+        <span className="md:inline max-md:hidden">Log In</span>
+      </Button>
     }
   </>
 }
