@@ -27,7 +27,7 @@ export default function Links() {
         <div className="flex flex-wrap gap-x-2 md:gap-4 filter grayscale">
             <Link title="Farcaster" href="https://warpcast.com/~/channel/thaink" icon={farcasterUrl} />
             <Link title="Telegram" href="https://t.me/thaink_in" icon={telegramUrl} />
-            <Link title="Discord" href="https://discord.gg/VkkCtT8Eeh" icon={discordUrl} />
+            <Link title="Discord" href="https://discord.gg/VkkCtT7Eeh" icon={discordUrl} />
             <Link title="Guild" href="https://guild.xyz/thaink" icon={guildUrl} />
             <Link title="X" href="http://x.com/thaink_in" icon={xUrl} />
             {chain ? <Link title="Opensea" href={`https://${chain.testnet ? 'testnets.' : ''}opensea.io/assets/${chain.network}/${contractAddress}`} icon={openseaUrl} /> : ""}

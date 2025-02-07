@@ -14,11 +14,14 @@ import {
 } from "@coinbase/agentkit"
 
 import { ChatOpenAI } from "@langchain/openai"
-import { HumanMessage } from "@langchain/core/messages"
+import { HumanMessage, SystemMessage } from "@langchain/core/messages"
+
+import * as prompts from "./prompts.ts"
 
 dotenv.config()
 
 const WALLET_DATA_FILE = "wallet_data.txt"
+
 
 async function initializeAgent() {
     try {
@@ -98,32 +101,87 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
     })
 
     app.post('/chat', async (req, res) => {
-        console.log("Chat endpoint called with message:", req.body.message)
+        console.log("Chat endpoint invoked with body:", req.body)
+        const { action, idea = "", digest = "", note = "", prompt = "" } = req.body
+
+        // Validate required fields
+        if (!action || !idea || !digest) {
+            console.error("Missing required fields: 'action', 'idea', and 'digest' are required")
+            return res.status(400).json({ error: "'action', 'idea', and 'digest' are required" })
+        }
+
+        // Construct the prompt based on the action
+        let finalPrompt = ""
+        switch (action.toLowerCase()) {
+            case "hint":
+                finalPrompt = prompts.HINT_PROMPT_TEMPLATE(idea, digest)
+                break
+            case "evaluation":
+                if (!note) {
+                    return res.status(400).json({ error: "'note' is required for evaluation action" })
+                }
+                finalPrompt = prompts.EVALUATION_PROMPT_TEMPLATE(idea, digest, note)
+                break
+            case "digest":
+                if (!note || !digest) {
+                    return res.status(400).json({ error: "'note' and 'digest' are required for digest action" })
+                }
+                finalPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
+                break
+            case "prompt":
+                if (!prompt) {
+                    return res.status(400).json({ error: "'prompt' is required for prompt action" })
+                }
+                finalPrompt = prompts.PROMPTING_PROMPT_TEMPLATE(idea, digest, prompt)
+                break
+            default:
+                return res.status(400).json({ error: "Invalid action. Use 'hint', 'evaluation', or 'prompt'" })
+        }
+
+        console.log("Constructed prompt for LLM:", finalPrompt)
+
         try {
-            const { message } = req.body
-            if (!message) {
-                console.log("No message provided in request")
-                return res.status(400).json({ error: 'Message is required' })
-            }
+            const promptObject = JSON.parse(finalPrompt);
+            const stream = await llm.stream([
+                new SystemMessage(prompts.CONTEXT_HEADER),
+                new SystemMessage(promptObject.system),
+                new HumanMessage(promptObject.user)
+            ])
 
-            const stream = await llm.stream([new HumanMessage(message)])
-            let response = ''
-
+            let generatedResponse = ""
             for await (const chunk of stream) {
-                response += chunk.content
+                generatedResponse += chunk.content
             }
 
-            console.log("Generated response:", response)
-            res.json({ response })
+            console.log("LLM generated response:", generatedResponse)
+
+            let parsedResponse = {}
+            try {
+                parsedResponse = JSON.parse(generatedResponse)
+            } catch (e) {
+                console.warn("LLM response could not be parsed as JSON, using raw content.")
+                if (action.toLowerCase() === "hint") parsedResponse = { hint: generatedResponse }
+                if (action.toLowerCase() === "evaluation") parsedResponse = { evaluation: generatedResponse }
+                if (action.toLowerCase() === "prompt") parsedResponse = { reasoning: generatedResponse }
+            }
+
+            const finalResponse = {
+                digest: parsedResponse.digest || digest,
+                evaluation: parsedResponse.evaluation || (action.toLowerCase() === "evaluation" ? parsedResponse.evaluation : ""),
+                hint: parsedResponse.hint || (action.toLowerCase() === "hint" ? parsedResponse.hint : ""),
+                reasoning: parsedResponse.reasoning || (action.toLowerCase() === "prompt" ? parsedResponse.reasoning : "")
+            }
+
+            res.json(finalResponse)
         } catch (error) {
-            console.error('Error processing chat request:', error)
-            res.status(500).json({ error: 'Internal server error' })
+            console.error("Error during processing /chat endpoint:", error)
+            res.status(500).json({ error: "Internal server error" })
         }
     })
 
     try {
         app.listen(port, () => {
-            console.log(`Agent server listening on port ${port}`)
+            console.log(`Agent server listening on port ${port} `)
         })
     } catch (error) {
         console.error("Failed to start server:", error)

@@ -186,7 +186,7 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
             </CardHeader>
             <CardContent className="flex-1 px-6 pt-8 pb-6">
                 <div className="w-full">
-                    <div className={`text-base leading-relaxed text-foreground ${isListView || isMintedView ? "line-clamp-2 overflow-hidden text-ellipsis" : ""}`}>
+                    <div className={`text-sm md:text-base leading-relaxed text-foreground ${isListView || isMintedView ? "line-clamp-2 overflow-hidden text-ellipsis" : ""}`}>
                         {data.meta.description}
                     </div>
                 </div>

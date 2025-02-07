@@ -15,6 +15,21 @@ const supportedChains = {
 export const chain = supportedChains[import.meta.env.VITE_CHAIN]
 export const RPC_URL = import.meta.env.VITE_RPC_URL
 
+export const queryClient = new QueryClient();
+
+export const privyConfig = {
+  loginMethods: ['wallet'],
+  defaultChain: chain,
+  supportedChains: [chain],
+  appearance: { theme: 'light' },
+}
+
+export const wagmiConfig = createConfig({
+  chains: [chain],
+  transports: { [chain.id]: http(RPC_URL) }
+})
+
+
 export function useAccount() {
   const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy()
 
@@ -35,20 +50,6 @@ export function useAccount() {
 };
 
 export function WalletProvider({ children }: { children: React.ReactNode }) {
-  const queryClient = new QueryClient();
-
-  const privyConfig = {
-    loginMethods: ['wallet'],
-    defaultChain: chain,
-    supportedChains: [chain],
-    appearance: { theme: 'light' },
-  }
-
-  const wagmiConfig = createConfig({
-    chains: [chain],
-    transports: { [chain.id]: http(RPC_URL) }
-  })
-
   return (
     <PrivyProvider appId={import.meta.env.VITE_PRIVY_APP_ID} config={privyConfig}>
       <QueryClientProvider client={queryClient}>
