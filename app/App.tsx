@@ -8,6 +8,7 @@ import MakePage from '@/pages/MakePage'
 import TanksPage from '@/pages/TanksPage'
 import TankPage from '@/pages/TankPage'
 import SharePage from '@/pages/SharePage'
+import NotFound from '@/pages/NotFound'
 
 import { useAccount } from '@/wallet'
 import { useWatchBlock } from '@/stores/useBlockStore'
@@ -44,6 +45,9 @@ export function App() {
           </Route>
           <Route path={ROUTES.SHARE.path}>
             <SharePage />
+          </Route>
+          <Route path={ROUTES.NOT_FOUND.path}>
+            <NotFound />
           </Route>
         </main>
         <Footer />

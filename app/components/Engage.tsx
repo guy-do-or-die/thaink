@@ -1,19 +1,17 @@
-import { useState } from 'react'
-
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { ContributeForm } from '@/components/tank/ContributeForm'
 import { PromptForm } from '@/components/tank/PromptForm'
 
 
-interface InteractProps {
+interface EngageProps {
   tankId: number
   hasMinted: boolean
   hasContributed: boolean
-  address: string
+  tankAddress: string
 }
 
-export default function Interact({ tankId, hasMinted, hasContributed, address }: InteractProps) {
+export default function Engage({ tankId, hasMinted, hasContributed, tankAddress }: EngageProps) {
   if (!hasMinted && !hasContributed) {
     return (
       <Card>
@@ -22,7 +20,7 @@ export default function Interact({ tankId, hasMinted, hasContributed, address }:
           <CardDescription>Join the idea development</CardDescription>
         </CardHeader>
         <CardContent>
-          <ContributeForm tankId={tankId} address={address} />
+          <ContributeForm tankId={tankId} tankAddress={tankAddress} />
         </CardContent>
       </Card>
     )
@@ -39,10 +37,10 @@ export default function Interact({ tankId, hasMinted, hasContributed, address }:
         </CardHeader>
         <CardContent>
           <TabsContent value="contribute" className="mt-0">
-            <ContributeForm tankId={tankId} address={address} />
+            <ContributeForm tankId={tankId} tankAddress={tankAddress} />
           </TabsContent>
           <TabsContent value="prompt" className="mt-0">
-            <PromptForm tankId={tankId} />
+            <PromptForm tankId={tankId} tankAddress={tankAddress} />
           </TabsContent>
         </CardContent>
       </Tabs>

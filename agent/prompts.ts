@@ -6,13 +6,13 @@ Digest: A concise record of previously accepted notes, summarizing progress and 
 Note: A single user contribution. It should add a new perspective, detail, or challenge. Each note is evaluated by AI for its relevance and impact.
 
 Mechanism:
-1 Idea is formulated
-2 Users write a note without seeing the full digest.
-3 The note is AI-evaluated before acceptance, determining its value for rewards.
-4 If accepted, the note is merged into the digest to keep track of evolving insights.
-5 The AI can provide hints on potential angles or details to explore for the next note but does not itself add or alter content.
+1) Idea is published.
+2) Users write a note without seeing the full digest.
+3) The note is AI-evaluated before acceptance, determining its value for rewards.
+4) If accepted, the note is merged into the digest to keep track of evolving insights.
+5) The AI can provide hints on potential angles or details to explore for the next note but does not itself add or alter content.
 
-Use these definitions when referring to “idea,” “digest,” or “note” in any subsequent prompts.
+Use these definitions when referring to “idea”, “digest”, or “note” in any subsequent prompts.
 The AI's role is to facilitate clarity and cohesion, never to invent or speculate beyond what is provided.
 `
 
@@ -28,9 +28,9 @@ Propose a single-sentence suggestion for the next note that:
 - Avoids simply restating the digest or the original idea.
 - Can spark further exploration.
 
-Output only valid JSON with a single key "hint". For example:
+**Output only valid JSON** with one key "hint". For example:
 {
-  "hint": "Your short suggestion here."
+  "hint": <short hint here>
 }
 
 No extra text before or after the JSON.
@@ -79,7 +79,6 @@ Then:
 - Give a short "justification" explaining your numeric ratings.
 
 **Output only valid JSON** with one key "evaluation". For example:
-
 {
   "evaluation": {
     "criteria": {
@@ -91,7 +90,7 @@ Then:
     },
     "weightedScore": number,
     "verdict": "accept" | "reject",
-    "justification": "short explanation"
+    "justification": <short explanation>
   }
 }
 
@@ -107,31 +106,87 @@ Evaluate the new note: "${note}"
 
 export const DIGEST_PROMPT_TEMPLATE = (idea: string, digest: string, note: string) => JSON.stringify({
     system: `
-You are a fact-based summarizer. Your purpose is to merge new, relevant information into an existing digest accurately and concisely, 
-without introducing any invented or speculative details. You must ensure the final digest is coherent,
-remains true to the original prefious digest and relevant to the original idea, and includes key points from the new note without omissions.
-Pluralism is welcome, meaning if the new note contradicts or challenges prior thoughts,
-you must explicitly mark that as a discrepancy or alternative perspective without discarding or harmonizing it.
-Focus on factual reporting, avoid speculation, and maintain clarity.
+You are an analytical information synthesizer focused on progressive summarization.
+Your goal is to create increasingly refined and structured digests by intelligently merging new information with existing content.
 
-Task:
-1. Incorporate the new note into the digest, preserving essential details from both the original digest and the note.
-2. Ensure the updated digest is accurate, exhaustive, yet compact and systematic, with no irrelevant or invented content.
-3. Result should be relevant to the original idea and the current digest.
+Key Principles:
+- Progressive refinement: Each iteration should make the digest more structured and concise
+- Information preservation: No key details should be lost during compression
+- Systematic organization: Group and structure related concepts
+- Conflict awareness: Highlight contradictions without resolving them
 
-**Output only valid JSON** with one key "digest". For example:
+Required Transformations:
+1. ANALYZE
+   - Break down new note into atomic information units
+   - Identify overlap with existing digest content
+   - Map relationships between concepts
+
+2. RESTRUCTURE 
+   - Group related points under common themes
+   - Create hierarchical organization where appropriate
+   - Use bullet points or numbered lists for clear structure
+   - Maintain logical flow between sections
+
+3. COMPRESS
+   - Combine redundant or overlapping points
+   - Remove unnecessary words while preserving meaning
+   - Use precise, specific language
+   - Target 25% length reduction while maintaining information
+
+4. SYNTHESIZE
+   - Weave points together into cohesive narrative
+   - Highlight key relationships between concepts
+   - Mark contradictions with "(Alternative View)" or "(Contradiction)"
+   - Ensure relevance to original idea
+
+
+**Evaluation Criteria**:
+- Content: All key information preserved
+- Structure: Clear organization and grouping
+- Concision: No unnecessary words or repetition
+- Clarity: Easy to understand and follow
+- Progress: Meaningful improvement over previous digest
+
+**Absolute Requirements:**
+- Output 25-50% shorter than combined input lengths
+- Zero verbatim sentences from inputs – reformulate ALL content
+- Use nested bullet points for hierarchical organization
+- Preserve ALL unique perspectives, even conflicting ones
+- Never use transitional phrases like "however" – show relationships through structure
+
+Examples of Required Transformations:
+
+BAD (simple concatenation):
+Old: "Users need notifications for engagement."
+New: "Email notifications increase retention."
+Result: "Users need notifications for engagement. Email notifications increase retention."
+
+GOOD (synthesized and compressed):
+Result: "Strategic notifications (esp. email) drive user engagement and retention."
+
+BAD (lost information):
+Old: "A/B testing showed 23% uplift with gamification."
+New: "Gamification works better for casual users."
+Result: "Gamification improves engagement."
+
+GOOD (preserved detail + structure):
+Result: "Gamification effectiveness:
+- Quantitative: 23% engagement uplift in A/B tests
+- Audience: Particularly resonates with casual users"
+
+Output Format:
 {
-  "digest": "Your updated digest here."
-}
-
-No extra text before or after the JSON.
-`,
+  "digest": "<transformed content following above principles>"
+}`,
     user: `
-Idea: "{idea}"
+Original Idea: "${idea}"
 
-Current Digest: "{digest}"
+Current Digest: "${digest}"
 
-New Note: "{newNote}"
+New Note: "${note}"
+
+Transform and synthesize this information following the structured approach above.
+Remember: You MUST modify the digest to incorporate the new note. Returning the input unchanged is not allowed.
 `
 })
 
@@ -145,9 +200,9 @@ You must:
 2. If the user's prompt is outside the scope of these sources, say you cannot find relevant information.
 3. Do not invent or speculate on details not provided.
 
-Provide your response as valid JSON with one key "answer". For example:
+**Output only valid JSON** with one key "reasoning". For example:
 {
-  "answer": "short factual statement or clarifying message based on the idea/digest"
+  "reasoning": <short factual statement or clarifying user prompt message based on the idea and especially the digest>
 }
 
 No extra text before or after the JSON.

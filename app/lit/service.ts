@@ -1,4 +1,4 @@
-import { AuthSig } from '@lit-protocol/types'
+import ethers from 'ethers'
 
 import * as LitJsSdk from "@lit-protocol/lit-node-client"
 import { LitContracts } from '@lit-protocol/contracts-sdk'
@@ -11,11 +11,7 @@ import {
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
 
-import { ethConnect } from '@lit-protocol/auth-browser'
-
 import { chain as walletChain } from '@/wallet'
-
-import { test } from '@/lit/actions/test'
 
 
 const pkpPublicKey = import.meta.env.VITE_PKP_PUBLIC_KEY
@@ -48,68 +44,29 @@ class LitService {
     return this.litNodeClient
   }
 
-  async test(ethersSigner, tankAddress: string, content: string, digestKey: string, noteKey: string) {
+  async action(
+    signer: ethers.providers.JsonRpcSigner,
+    action: LitAction,
+    params: Object,
+  ) {
     try {
       console.log("Starting note evaluation")
       const litClient = await this.getClient()
 
-      const contributor = await ethersSigner.getAddress()
+      const contributor = await signer.getAddress()
       console.log("Connected account:", contributor)
 
-      // Create contract interface to get idea and digest
-      const tankInterface = new ethers.utils.Interface([
-        "function idea() view returns (string)",
-        "function digest() view returns (string)"
-      ]);
-
-      const provider = ethersSigner.provider;
-      
-      // Get idea and digest from the contract
-      const ideaData = tankInterface.encodeFunctionData("idea");
-      const ideaResult = await provider.call({
-        to: tankAddress,
-        data: ideaData
-      });
-      const idea = tankInterface.decodeFunctionResult("idea", ideaResult)[0];
-
-      const digestData = tankInterface.encodeFunctionData("digest");
-      const digestResult = await provider.call({
-        to: tankAddress,
-        data: digestData
-      });
-      const digest = tankInterface.decodeFunctionResult("digest", digestResult)[0];
-
-      console.log("Got idea and digest from contract")
-
-      // Get transaction parameters in case we need them
-      const nonce = await provider.getTransactionCount(contributor)
-      const feeData = await provider.getFeeData()
-      const chainId = (await provider.getNetwork()).chainId
-
-      const sessionSigs = await getSessionSigs(litClient, ethersSigner)
+      const sessionSigs = await getSessionSigs(litClient, signer)
       console.log("Got Session Signatures!")
 
-      const litActionSignatures = await litClient.executeJs({
+      const response = await litClient.executeJs({
         sessionSigs,
-        code: test,
-        jsParams: {
-          idea,
-          digest,
-          content,
-          digestKey,
-          noteKey,
-          contributor,
-          tankAddress,
-          nonce,
-          maxFeePerGas: feeData.maxFeePerGas?.toString(),
-          maxPriorityFeePerGas: feeData.maxPriorityFeePerGas?.toString(),
-          chainId,
-          publicKey: await getPkpPublicKey(ethersSigner),
-          sigName: "sig",
-        },
+        code: action,
+        jsParams: params,
       })
-      console.log("litActionSignatures: ", litActionSignatures)
-      return litActionSignatures
+
+      console.log("response: ", response)
+      return response
     } catch (error) {
       console.error(error)
       throw error
@@ -119,7 +76,7 @@ class LitService {
   }
 }
 
-async function getPkpPublicKey(ethersSigner) {
+async function getPkpPublicKey(signer) {
   return pkpPublicKey
   if (
     process.env.PKP_PUBLIC_KEY !== undefined &&
@@ -127,15 +84,15 @@ async function getPkpPublicKey(ethersSigner) {
   )
     return process.env.PKP_PUBLIC_KEY
 
-  const pkp = await mintPkp(ethersSigner)
+  const pkp = await mintPkp(signer)
   console.log("Minted PKP!", pkp)
   return pkp.publicKey
 }
 
-async function mintPkp(ethersSigner) {
+async function mintPkp(signer) {
   console.log("Minting new PKP...")
   const litContracts = new LitContracts({
-    signer: ethersSigner,
+    signer: signer,
     network: LIT_NETWORK.DatilDev,
   })
 
@@ -144,11 +101,11 @@ async function mintPkp(ethersSigner) {
   return (await litContracts.pkpNftContractUtils.write.mint()).pkp
 }
 
-async function getSessionSigs(litNodeClient, ethersSigner) {
+async function getSessionSigs(litNodeClient, signer) {
   console.log("Getting Session Signatures...")
 
   return litNodeClient.getSessionSigs({
-    chain: "ethereum",
+    chain: walletChain.network,
     expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // 24 hours
     resourceAbilityRequests: [
       {
@@ -160,22 +117,22 @@ async function getSessionSigs(litNodeClient, ethersSigner) {
         ability: LIT_ABILITY.PKPSigning,
       },
     ],
-    authNeededCallback: getAuthNeededCallback(litNodeClient, ethersSigner),
+    authNeededCallback: getAuthNeededCallback(litNodeClient, signer),
   })
 
-  function getAuthNeededCallback(litNodeClient, ethersSigner) {
+  function getAuthNeededCallback(litNodeClient, signer) {
     return async ({ resourceAbilityRequests, expiration, uri }) => {
       const toSign = await createSiweMessageWithRecaps({
         uri,
         expiration,
         resources: resourceAbilityRequests,
-        walletAddress: await ethersSigner.getAddress(),
+        walletAddress: await signer.getAddress(),
         nonce: await litNodeClient.getLatestBlockhash(),
         litNodeClient,
       })
 
       const authSig = await generateAuthSig({
-        signer: ethersSigner,
+        signer: signer,
         toSign,
       })
 

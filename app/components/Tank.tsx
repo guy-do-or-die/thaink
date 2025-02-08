@@ -164,7 +164,8 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
     const isMintedView = variant === 'minted'
 
     return (
-        <Card className={`group relative flex flex-col transition-all duration-200 my-4 ${isListView || isMintedView ? 'h-52 hover:shadow-[0_4px_4px_rgba(0,82,255,0.3)]' : 'min-h-52'}`}>
+        <Card className={`group relative flex flex-col transition-all duration-200 my-4
+                        ${isListView || isMintedView ? 'h-52 hover:shadow-[0_4px_4px_rgba(0,82,255,0.3)]' : 'min-h-52'}`}>
             <CardHeader className="h-8 py-4 px-4">
                 <div className="flex justify-between items-center">
                     <div className="flex gap-6 text-sm text-muted-foreground">

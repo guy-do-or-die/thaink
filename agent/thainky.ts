@@ -26,8 +26,8 @@ const WALLET_DATA_FILE = "wallet_data.txt"
 async function initializeAgent() {
     try {
         const llm = new ChatOpenAI({
-            model: "gpt-4o-mini",
-            temperature: 0
+            model: "gpt-4o",
+            temperature: 0.5
         })
 
         let walletDataStr: string | null = null
@@ -143,8 +143,7 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
         try {
             const promptObject = JSON.parse(finalPrompt);
             const stream = await llm.stream([
-                new SystemMessage(prompts.CONTEXT_HEADER),
-                new SystemMessage(promptObject.system),
+                new SystemMessage(`${prompts.CONTEXT_HEADER}${promptObject.system}`),
                 new HumanMessage(promptObject.user)
             ])
 
@@ -157,7 +156,8 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
 
             let parsedResponse = {}
             try {
-                parsedResponse = JSON.parse(generatedResponse)
+                parsedResponse = JSON.parse(generatedResponse.replace(/^```json|```$/g, ""))
+                console.log("Parsed LLM response:", parsedResponse)
             } catch (e) {
                 console.warn("LLM response could not be parsed as JSON, using raw content.")
                 if (action.toLowerCase() === "hint") parsedResponse = { hint: generatedResponse }

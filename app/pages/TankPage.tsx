@@ -1,29 +1,48 @@
 import { useParams } from 'wouter'
 import { useAccount } from '@/wallet'
-import { useReadThainkBalanceOf } from '@/contracts'
+import { useReadThainkBalanceOf, useReadThainkTanks } from '@/contracts'
+import { useNavigation } from '@/hooks/useNavigation'
+
+import { ROUTES } from '@/routes.config'
 
 import Content from '@/components/Content'
 import Tank from '@/components/Tank'
-import Interact from '@/components/Interact'
+import Engage from '@/components/Engage'
+
 
 export default function TankPage() {
   const { id } = useParams()
+  const { navigateTo } = useNavigation()
+
   const tankId = parseInt(id || '0')
-  const { address } = useAccount()
-  
-  const { data: balance } = useReadThainkBalanceOf({
-    args: [address, BigInt(tankId)]
+
+  const { data: tankAddress } = useReadThainkTanks({
+    args: [BigInt(tankId)],
+    enabled: !!tankId,
   })
 
+  const { address } = useAccount()
+
+  const { data: balance } = useReadThainkBalanceOf({
+    args: [address, BigInt(tankId)],
+    enabled: !!address,
+  })
+
+  if (!tankAddress) {
+    navigateTo(ROUTES.NOT_FOUND.path)
+    return null
+  }
+
   const hasMinted = Boolean(balance && balance > 0)
-  const hasContributed = false // TODO: Implement this check
+  const hasContributed = false
 
   return (
     <Content>
       <div className="w-full space-y-8">
         <Tank tankId={tankId} variant="single" />
-        <Interact 
+        <Engage
           tankId={tankId}
+          tankAddress={tankAddress}
           hasMinted={hasMinted}
           hasContributed={hasContributed}
         />

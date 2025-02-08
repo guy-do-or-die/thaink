@@ -17,7 +17,8 @@ export const ROUTES = {
     pattern: ['/tank/', '/minted']  // Both tank and minted routes activate Engage
   },
   MINTED: { path: '/minted', label: 'Minted', menu: false }, // Hide from menu since it's part of Engage
-  SHARE: { path: '/share/:id/:action', label: 'Share', menu: false }
+  SHARE: { path: '/share/:id/:action', label: 'Share', menu: false },
+  NOT_FOUND: { path: '/404', label: 'Not Found', menu: false }
 } as const
 
 export type RoutePath = typeof ROUTES[keyof typeof ROUTES]['path']

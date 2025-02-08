@@ -13,12 +13,14 @@ contract ThainkTest is Test, ERC1155Holder {
     address public owner;
     address public user;
     address public user2;
+    bytes32 public constant TEST_PKP = bytes32(uint256(1));
+    bytes public constant TEST_SIGNATURE = hex"00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff00"; // Mock signature
 
     error OwnableUnauthorizedAccount(address account);
     error IdeaTooLong(uint256 length, uint256 maxLength);
 
     function setUp() public {
-        thaink = new Thaink();
+        thaink = new Thaink(TEST_PKP);
         owner = thaink.owner();
         user = makeAddr("user");
         user2 = makeAddr("user2");
@@ -135,6 +137,8 @@ contract ThainkTest is Test, ERC1155Holder {
         string memory noteContent = "Test note content";
         uint noteValue = 100;
         string memory digest = "test digest";
+        string memory contentHash = "contentHash";
+        string memory digestHash = "digestHash";
         
         // Create tank and mint to user
         vm.startPrank(owner);
@@ -147,16 +151,68 @@ contract ThainkTest is Test, ERC1155Holder {
         Tank tank = thaink.tanks(1);
         
         // Add note
-        tank.addNote(user, noteContent, noteValue, digest);
+        tank.addNote(
+            user,
+            noteContent,
+            digest,
+            contentHash,
+            digestHash,
+            noteValue,
+            TEST_SIGNATURE
+        );
         
         // Verify note data
-        (uint timestamp, address contributor, string memory content, uint value) = tank.notes(1);
+        (
+            string memory content,
+            string memory storedContentHash,
+            address contributor,
+            uint256 timestamp,
+            uint256 value
+        ) = tank.notes(1);
+        
         assertEq(contributor, user);
         assertEq(content, noteContent);
+        assertEq(storedContentHash, contentHash);
         assertEq(value, noteValue);
+        assertGt(timestamp, 0); // Ensure timestamp was set
         assertEq(tank.digest(), digest);
+        assertEq(tank.digestHash(), digestHash);
         assertEq(tank.notesCount(), 1);
         assertEq(tank.contributors(user), 1);
+        vm.stopPrank();
+    }
+
+    function testInvalidSignature() public {
+        string memory idea = "Test note idea";
+        string memory noteContent = "Test note content";
+        uint noteValue = 100;
+        string memory digest = "test digest";
+        string memory contentHash = "contentHash";
+        string memory digestHash = "digestHash";
+        bytes memory invalidSignature = hex"deadbeef"; // Invalid signature
+        
+        // Create tank and mint to user
+        vm.startPrank(owner);
+        thaink.makeTank(idea);
+        vm.stopPrank();
+
+        vm.startPrank(user);
+        thaink.mint(user, 1);
+        
+        Tank tank = thaink.tanks(1);
+        
+        // Try to add note with invalid signature
+        vm.expectRevert("Invalid signature");
+        tank.addNote(
+            user,
+            noteContent,
+            digest,
+            contentHash,
+            digestHash,
+            noteValue,
+            invalidSignature
+        );
+        vm.stopPrank();
     }
 
     function testEmptyIdea() public {

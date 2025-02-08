@@ -15,13 +15,16 @@ contract Thaink is ERC1155Supply, Ownable {
     mapping(uint => Tank) public tanks;
     uint public tanksNumber;
 
-    constructor() ERC1155("") Ownable(msg.sender) {
+    bytes32 public immutable pkp;
+
+    constructor(bytes32 _pkp) ERC1155("") Ownable(msg.sender) {
         tankImplementation = new Tank();
+        pkp = _pkp;
     }
 
-    function makeTank(string memory _idea) public {
+    function makeTank(string calldata _idea) public {
         Tank tank = Tank(address(tankImplementation).clone());
-        tank.initialize(++tanksNumber, _idea);
+        tank.initialize(++tanksNumber, _idea, pkp);
         tanks[tanksNumber] = tank;
     }
 
@@ -29,6 +32,9 @@ contract Thaink is ERC1155Supply, Ownable {
         require(address(tanks[id]) != address(0), "Tank does not exist");
         require(balanceOf(to, id) == 0, "Tank already minted by this address");
         _mint(to, id, 1, "");
+
+        Tank tank = tanks[id];
+        tank.incrementMintsCount();
     }
 
     function uri(uint id) public view override returns (string memory) {

@@ -5,18 +5,13 @@ import { LoaderCircle } from "lucide-react"
 import { Button } from '@/components/ui/button'
 
 import { notify, hide, parseError } from '@/components/Notification'
-import { useAccount, chain } from '@/wallet'
+import { txLink } from '@/components/Utils'
+
+import { useAccount } from '@/wallet'
 
 
 export default function TxButton({ simulateHook, writeHook, params, emoji, text, className }) {
     const account = useAccount()
-
-    const txLink = (hash, text) => (
-        <a href={`${chain.blockExplorers?.default.url}/tx/${hash}`}
-            className="font-bold underline" target="_blank">
-            {text}
-        </a>
-    )
 
     const {
         data: simulateData,

@@ -83,7 +83,14 @@ export function notify(
     }[typ] || {}
 
     if (content) {
-        const contentEl = typ === 'error' ? <Copy content={content} /> : content
+
+        let contentEl = content
+        if (typ === 'info' || typ === 'error') {
+            const id = Math.random().toString(36)
+            params.id = id
+
+            contentEl = <Copy content={content} onCopy={() => { hide(id) }} toCopy={content} />
+        }
 
         return (toast[typ] || toast)(contentEl, { ...defaultParams, ...params })
     }
