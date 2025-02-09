@@ -1,13 +1,7 @@
-import * as fs from 'fs'
-import * as path from 'path'
-
-import { fileURLToPath } from 'url'
-
 import * as ipfsOnlyHash from 'ipfs-only-hash'
 import * as actions from '../app/lit/actions'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+import { updateEnvFile } from './utils'
 
 async function generateIpfsCidFromString(data) {
   try {
@@ -15,22 +9,6 @@ async function generateIpfsCidFromString(data) {
   } catch (error) {
     console.error('Error generating IPFS CID:', error)
   }
-}
-
-function updateEnvFile(key, value) {
-  const newLine = `${key}=${value}`
-  const regex = new RegExp(`^${key}=.*`, 'm')
-  const envPath = path.resolve(__dirname, '../.env')
-
-  let envContent = fs.existsSync(envPath) ? fs.readFileSync(envPath, 'utf-8') : ''
-
-  if (regex.test(envContent)) {
-    envContent = envContent.replace(regex, newLine)
-  } else {
-    envContent += `\n${newLine}`
-  }
-
-  fs.writeFileSync(envPath, envContent, 'utf-8')
 }
 
 async function processLitActions() {

@@ -24,7 +24,17 @@ interface LitButtonProps {
 const agentEndpoint = import.meta.env.VITE_AGENT_ENDPOINT
 
 
-export default function LitButton({ icon, text, className, action, actionParams = {}, disabled = false, onSuccess, onError, variant = 'default' }: LitButtonProps) {
+export default function LitButton({
+  icon,
+  text,
+  className,
+  action,
+  actionParams = {},
+  disabled = false,
+  onSuccess,
+  onError,
+  variant = 'default'
+}: LitButtonProps) {
   const [isProcessing, setIsProcessing] = useState(false)
 
   const signer = useEthersSigner()
@@ -54,8 +64,14 @@ export default function LitButton({ icon, text, className, action, actionParams 
         return true
       }
     } catch (error) {
+      let message = error.message || 'Failed to perform action'
+
+      if (error?.originalError.message) {
+        message = litService.parseError(error.originalError.message)
+      }
+
+      notify(message, 'error', { style: { maxWidth: '50%' } })
       console.error(error)
-      notify(error.message || 'Failed to perform action', 'error')
       return false
     } finally {
       setIsProcessing(false)

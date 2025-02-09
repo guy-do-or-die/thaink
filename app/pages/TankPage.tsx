@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams } from 'wouter'
 import { useAccount } from '@/wallet'
 import { useReadThainkBalanceOf, useReadThainkTanks } from '@/contracts'
@@ -16,7 +17,7 @@ export default function TankPage() {
 
   const tankId = parseInt(id || '0')
 
-  const { data: tankAddress } = useReadThainkTanks({
+  const { data: tankAddress, isFetched: isTankAddressFetched } = useReadThainkTanks({
     args: [BigInt(tankId)],
     enabled: !!tankId,
   })
@@ -28,8 +29,13 @@ export default function TankPage() {
     enabled: !!address,
   })
 
+  useEffect(() => {
+    if (isTankAddressFetched && !tankAddress) {
+      navigateTo(ROUTES.NOT_FOUND.path)
+    }
+  }, [tankAddress, isTankAddressFetched])
+
   if (!tankAddress) {
-    navigateTo(ROUTES.NOT_FOUND.path)
     return null
   }
 

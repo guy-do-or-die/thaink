@@ -80,6 +80,46 @@ async function initializeAgent() {
 }
 
 
+async function handleLLMPrompt(llm: ChatOpenAI, prompt: string, action: string, digest: string = "") {
+    console.log("Constructed prompt for LLM:", prompt)
+
+    try {
+        const promptObject = JSON.parse(prompt);
+        const stream = await llm.stream([
+            new SystemMessage({ content: `${prompts.CONTEXT_HEADER}${promptObject.system}` }),
+            new HumanMessage({ content: promptObject.user })
+        ])
+
+        let generatedResponse = ""
+        for await (const chunk of stream) {
+            generatedResponse += chunk.content
+        }
+
+        console.log("LLM generated response:", generatedResponse)
+
+        let parsedResponse = {}
+        try {
+            parsedResponse = JSON.parse(generatedResponse.replace(/^```json|```$/g, ""))
+            console.log("Parsed LLM response:", parsedResponse)
+        } catch (e) {
+            console.warn("LLM response could not be parsed as JSON, using raw content.")
+            if (action.toLowerCase() === "hint") parsedResponse = { hint: generatedResponse }
+            if (action.toLowerCase() === "evaluation") parsedResponse = { evaluation: generatedResponse }
+            if (action.toLowerCase() === "prompt") parsedResponse = { reasoning: generatedResponse }
+        }
+
+        return {
+            digest: parsedResponse.digest || digest,
+            evaluation: parsedResponse.evaluation || (action.toLowerCase() === "evaluation" ? parsedResponse.evaluation : ""),
+            hint: parsedResponse.hint || (action.toLowerCase() === "hint" ? parsedResponse.hint : ""),
+            reasoning: parsedResponse.reasoning || (action.toLowerCase() === "prompt" ? parsedResponse.reasoning : "")
+        }
+    } catch (error) {
+        console.error("Error during LLM prompt handling:", error)
+        throw error
+    }
+}
+
 async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
     console.log("Initializing server mode...")
     console.log("Environment variables:", {
@@ -128,6 +168,42 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
                 }
                 finalPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
                 break
+            case "evaluate_and_digest":
+                if (!note) {
+                    return res.status(400).json({ error: "'note' is required for evaluate_and_digest action" })
+                }
+                try {
+                    const evaluationPrompt = prompts.EVALUATION_PROMPT_TEMPLATE(idea, digest, note)
+                    const evaluationResult = await handleLLMPrompt(llm, evaluationPrompt, "evaluation", digest)
+                    const evaluation = evaluationResult.evaluation
+
+                    let digestResult = null
+                    if (typeof evaluation === 'string') {
+                        const parsedEval = JSON.parse(evaluation)
+                        if (parsedEval.verdict === 'accept') {
+                            const digestPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
+                            const digestResponse = await handleLLMPrompt(llm, digestPrompt, "digest", digest)
+                            digestResult = digestResponse.digest
+                        }
+                        return res.json({
+                            evaluation: parsedEval,
+                            digest: digestResult
+                        })
+                    } else {
+                        if (evaluation.verdict === 'accept') {
+                            const digestPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
+                            const digestResponse = await handleLLMPrompt(llm, digestPrompt, "digest", digest)
+                            digestResult = digestResponse.digest
+                        }
+                        return res.json({
+                            evaluation,
+                            digest: digestResult
+                        })
+                    }
+                } catch (error) {
+                    console.error("Error during evaluate_and_digest:", error)
+                    return res.status(500).json({ error: "Internal server error" })
+                }
             case "prompt":
                 if (!prompt) {
                     return res.status(400).json({ error: "'prompt' is required for prompt action" })
@@ -135,44 +211,12 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
                 finalPrompt = prompts.PROMPTING_PROMPT_TEMPLATE(idea, digest, prompt)
                 break
             default:
-                return res.status(400).json({ error: "Invalid action. Use 'hint', 'evaluation', or 'prompt'" })
+                return res.status(400).json({ error: "Invalid action. Use 'hint', 'evaluation', 'digest', 'evaluate_and_digest', or 'prompt'" })
         }
 
-        console.log("Constructed prompt for LLM:", finalPrompt)
-
         try {
-            const promptObject = JSON.parse(finalPrompt);
-            const stream = await llm.stream([
-                new SystemMessage(`${prompts.CONTEXT_HEADER}${promptObject.system}`),
-                new HumanMessage(promptObject.user)
-            ])
-
-            let generatedResponse = ""
-            for await (const chunk of stream) {
-                generatedResponse += chunk.content
-            }
-
-            console.log("LLM generated response:", generatedResponse)
-
-            let parsedResponse = {}
-            try {
-                parsedResponse = JSON.parse(generatedResponse.replace(/^```json|```$/g, ""))
-                console.log("Parsed LLM response:", parsedResponse)
-            } catch (e) {
-                console.warn("LLM response could not be parsed as JSON, using raw content.")
-                if (action.toLowerCase() === "hint") parsedResponse = { hint: generatedResponse }
-                if (action.toLowerCase() === "evaluation") parsedResponse = { evaluation: generatedResponse }
-                if (action.toLowerCase() === "prompt") parsedResponse = { reasoning: generatedResponse }
-            }
-
-            const finalResponse = {
-                digest: parsedResponse.digest || digest,
-                evaluation: parsedResponse.evaluation || (action.toLowerCase() === "evaluation" ? parsedResponse.evaluation : ""),
-                hint: parsedResponse.hint || (action.toLowerCase() === "hint" ? parsedResponse.hint : ""),
-                reasoning: parsedResponse.reasoning || (action.toLowerCase() === "prompt" ? parsedResponse.reasoning : "")
-            }
-
-            res.json(finalResponse)
+            const result = await handleLLMPrompt(llm, finalPrompt, action.toLowerCase(), digest)
+            res.json(result)
         } catch (error) {
             console.error("Error during processing /chat endpoint:", error)
             res.status(500).json({ error: "Internal server error" })

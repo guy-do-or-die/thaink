@@ -55,12 +55,13 @@ function parseTankMetadata(uri: string): Record<string, any> {
 }
 
 export default function Tank({ tankId, variant = 'list' }: TankProps) {
-    const { address } = useAccount()
+    const { address, connected } = useAccount()
     const { data: blockNumber } = useBlockNumber({ watch: true })
     const [tankData, setTankData] = useState<TankData | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
     const { data: readData, isError } = useReadContracts({
+        enabled: connected && !!address,
         blockNumber,
         contracts: [
             {

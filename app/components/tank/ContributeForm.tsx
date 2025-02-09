@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-import { useWaitForTransactionReceipt } from 'wagmi'
+import { useWaitForTransactionReceipt, useSendTransaction } from 'wagmi'
 
-import { Send, Lightbulb } from 'lucide-react'
+import { Send, Lightbulb, Brain } from 'lucide-react'
 
 import { Textarea } from '@/components/ui/textarea'
 import LitButton from '@/components/LitButton'
@@ -13,8 +13,9 @@ import { submitLitAction, submitLitActionParams } from '@/lit/actions/submit'
 import { notify } from '@/components/Notification'
 import { txLink } from '@/components/Utils'
 
-import { useAccount } from '@/wallet'
-
+import { useAccount, chain } from '@/wallet'
+import { Button } from '../ui/button'
+import { ethers } from 'ethers'
 
 interface ContributeFormProps {
   tankId: number
@@ -27,18 +28,20 @@ enum NotificationType {
   info = 'info',
 }
 
-const SUBMIT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_SUBMIT_LIT_ACTION_IPFS_CID
+const SUBMIT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_SUBMITLITACTION_IPFS_CID
 const PKP_PUBLIC_KEY = import.meta.env.VITE_PKP_PUBLIC_KEY
+const PKP_TOKEN_ID = import.meta.env.VITE_PKP_TOKEN_ID
 
 
 export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
   const [note, setNote] = useState('')
+
+  const [signedTx, setSignedTx] = useState()
   const [tx, setTx] = useState('')
 
   const txMessageId = `${tx}-message`
 
   const { address } = useAccount()
-
 
 
   const hintParams: hintLitActionParams = {
@@ -48,6 +51,8 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
   const submitParams: submitLitActionParams = {
     ipfsCid: SUBMIT_LIT_ACTION_IPFS_CID,
     pkp: PKP_PUBLIC_KEY,
+    pkpTokenId: PKP_TOKEN_ID,
+    chainNetwork: chain.network,
     contractAddress: tankAddress,
     address,
     note,
@@ -70,6 +75,39 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
     }
   })
 
+  const { sendTransaction } = useSendTransaction({
+    onSuccess: (data) => {
+      console.log(`Transaction sent: ${data.hash}`)
+      setTx(data.hash)
+    },
+    onError: (error) => {
+      if (error.message.includes('insufficient funds')) {
+        notify(
+          'Insufficient funds. Please get test ETH from:\n' +
+          '1. Base Sepolia Faucet: https://sepoliafaucet.com/base\n' +
+          '2. Or bridge ETH using Base Bridge: https://bridge.base.org/deposit',
+          'error'
+        )
+      } else {
+        notify(error.message, 'error')
+      }
+    }
+  })
+
+  const handleSubmit = () => {
+    if (!signedTx) return
+
+    // Parse the signed transaction
+    const parsedTx = ethers.utils.parseTransaction(signedTx)
+
+    sendTransaction({
+      to: parsedTx.to,
+      data: parsedTx.data,
+      chainId: chain.id,
+      value: parsedTx.value
+    })
+  }
+
   const hintSuccess = (result: any) => {
     notify(result.hint, 'info', notificationParams(NotificationType.info))
   }
@@ -79,6 +117,10 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
 
     if (evaluation.verdict === 'accept') {
       notify(evaluation.justification, 'info', notificationParams(NotificationType.success))
+
+      if (result.signedTx) {
+        setSignedTx(result.signedTx)
+      }
 
       if (result.txHash) {
         notify(<span>{txLink(result.txHash, 'Transaction')} sent</span>, 'success', { id: txMessageId })
@@ -115,22 +157,35 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
   return (
     <div className="flex flex-col w-full">
       <div className="flex-1 space-y-4">
-        <Textarea
-          placeholder="Share your thoughts..."
-          className="flex-1 min-h-[180px] p-2 w-full"
-          onChange={(e) => setNote(e.target.value)}
-          value={note} />
+        {
+          !signedTx &&
+          <Textarea
+            placeholder="Share your thoughts..."
+            className="flex-1 min-h-[180px] p-2 w-full"
+            onChange={(e) => setNote(e.target.value)}
+            value={note} />
+        }
       </div>
       <div className="flex space-x-2 justify-center mt-4">
         <LitButton
           action={hintLitAction} actionParams={hintParams} onSuccess={hintSuccess}
           icon={<Lightbulb />} text="Hint" variant="outline"
           className="w-32" />
-        <LitButton
-          action={submitLitAction} actionParams={submitParams} onSuccess={submitSuccess}
-          icon={<Send />} text="Submit" disabled={!note.trim()}
-          className="w-32" />
+        {
+          signedTx ?
+            <Button
+              variant="outline"
+              className="w-32"
+              onClick={handleSubmit}>
+              <Send /> Submit
+            </Button>
+            :
+            <LitButton
+              action={submitLitAction} actionParams={submitParams} onSuccess={submitSuccess}
+              icon={<Brain />} text="Evaluate" disabled={!note.trim()}
+              className="w-32" />
+        }
       </div>
-    </div >
+    </div>
   )
 }

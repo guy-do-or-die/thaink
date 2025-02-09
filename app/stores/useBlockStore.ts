@@ -10,6 +10,7 @@ interface BlockState {
 export const useBlockStore = create<BlockState>((set) => ({
     blockNumber: null,
     setBlockNumber: (blockNumber) => {
+        if (!blockNumber) return
         set({ blockNumber })
     },
 }))

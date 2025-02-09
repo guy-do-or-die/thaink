@@ -22,6 +22,7 @@ export const privyConfig = {
   defaultChain: chain,
   supportedChains: [chain],
   appearance: { theme: 'light' },
+  walletChainType: 'ethereum-only',
 }
 
 export const wagmiConfig = createConfig({
@@ -34,7 +35,7 @@ export function useAccount() {
   const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy()
 
   const address = user?.wallet?.address
-  const connected = !ready || (ready && authenticated)
+  const connected = ready && authenticated
 
   const { data: client } = useWalletClient({ account: address })
 
