@@ -1,6 +1,8 @@
+import { config } from 'dotenv'
 import { ethers } from 'ethers'
 import { LitContracts } from '@lit-protocol/contracts-sdk'
 import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, LIT_ERROR_KIND, LIT_NETWORK } from '@lit-protocol/constants'
+import bs58 from 'bs58'
 
 import { updateEnvFile } from './utils'
 
@@ -11,6 +13,8 @@ async function withTimeout(promise: Promise<any>, ms: number) {
   })
   return Promise.race([promise, timeout])
 }
+
+config() // Load environment variables
 
 async function mintPKP() {
   try {
@@ -92,6 +96,47 @@ async function mintPKP() {
     console.log('Token ID:', mintInfo.pkp.tokenId)
     console.log('Public Key:', mintInfo.pkp.publicKey)
     console.log('ETH Address:', mintInfo.pkp.ethAddress)
+
+    // Set up permissions for specific Lit Actions
+    //console.log('Setting up Lit Action permissions...')
+    //const litActionCids = [
+    //  process.env.VITE_HINTLITACTION_IPFS_CID,
+    //  process.env.VITE_SUBMITLITACTION_IPFS_CID
+    //]
+
+    //try {
+    //  for (const ipfsCid of litActionCids) {
+    //    if (!ipfsCid) continue;
+    //    console.log(`Adding permissions for Lit Action: ${ipfsCid}`)
+    //    
+    //    // Convert token ID to BigNumber
+    //    const tokenIdBN = ethers.BigNumber.from(mintInfo.pkp.tokenId)
+
+    //    // Use the IPFS CID directly as bytes32
+    //    const ipfsCidBytes = ethers.utils.hexlify(ethers.utils.toUtf8Bytes(ipfsCid))
+    //    console.log('IPFS CID as bytes32:', ipfsCidBytes)
+
+    //    const authMethod = {
+    //      authMethodType: 2, // 2 for LitAction
+    //      accessToken: "0x", // Empty hex string
+    //    }
+    //    
+    //    const tx = await contractClient.pkpPermissionsContract.write.addPermittedAuthMethod(
+    //      tokenIdBN,
+    //      authMethod,
+    //      [ipfsCidBytes],
+    //      {
+    //        gasLimit: 400000
+    //      }
+    //    )
+    //    await tx.wait()
+    //    console.log(`Successfully added permissions for ${ipfsCid}`)
+    //  }
+    //  console.log('Successfully set up all Lit Action permissions')
+    //} catch (error) {
+    //  console.error('Failed to set up Lit Action permissions:', error)
+    //  // Continue execution since PKP was already minted
+    //}
 
     // Update the .env file with PKP details
     updateEnvFile('VITE_PKP_TOKEN_ID', mintInfo.pkp.tokenId)

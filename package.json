@@ -13,8 +13,7 @@
     "deploy:base": "scripts/deploy.sh .env.base",
     "deploy:base-sepolia": "scripts/deploy.sh .env.base-sepolia",
     "gen:lit-ipfs-cid": "tsx scripts/generateIpfsCid.ts",
-    "gen:lit-pkp": "tsx scripts/mintPKP.ts",
-    "gen:lit-auth": "tsx scripts/addPKPAuthMethod.ts"
+    "gen:lit-pkp": "tsx scripts/mintPKP.ts"
   },
   "dependencies": {
     "@lit-protocol/auth-browser": "^7.0.5",

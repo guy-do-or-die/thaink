@@ -80,7 +80,8 @@ const _submitLitAction = async () => {
 
   let response = agentResult
   if (evaluation.verdict === 'accept') {
-    const toSign = ethers.utils.arrayify(ethers.utils.keccak256(ethers.utils.toUtf8Bytes(idea)))
+    const ideaHash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(idea))
+    const toSign = ethers.utils.arrayify(ethers.utils.hashMessage(ethers.utils.arrayify(ideaHash)))
     const sigObjectStr = await Lit.Actions.signAndCombineEcdsa({
       toSign,
       publicKey: pkp,

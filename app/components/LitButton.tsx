@@ -66,7 +66,7 @@ export default function LitButton({
     } catch (error) {
       let message = error.message || 'Failed to perform action'
 
-      if (error?.originalError.message) {
+      if (error?.originalError?.message) {
         message = litService.parseError(error.originalError.message)
       }
 
