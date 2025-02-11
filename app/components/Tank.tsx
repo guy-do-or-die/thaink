@@ -4,8 +4,8 @@ import JSON5 from 'json5'
 
 import { useReadContracts, useBlockNumber } from 'wagmi'
 
-import { Flame, CheckCircle, PenLine, Coins, Hash, HandCoins } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Flame, CheckCircle, PenLine, Hash, HandCoins } from 'lucide-react'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 
 import TxButton from '@/components/TxButton'
@@ -17,7 +17,7 @@ import {
     thainkAbi,
     thainkAddress,
     useSimulateThainkMint,
-    useWriteThainkMint
+    useWriteThainkMint,
 } from '@/contracts'
 
 import { useAccount, chain } from '@/wallet'
@@ -40,10 +40,11 @@ interface TankProps {
     variant?: 'list' | 'single' | 'minted'
 }
 
-const CONTRACT_CONFIG = {
+const THAINK_CONTRACT_CONFIG = {
     abi: thainkAbi,
     address: thainkAddress[chain.id],
 }
+
 
 function parseTankMetadata(uri: string): Record<string, any> {
     try {
@@ -54,35 +55,36 @@ function parseTankMetadata(uri: string): Record<string, any> {
     }
 }
 
+
 export default function Tank({ tankId, variant = 'list' }: TankProps) {
     const { address, connected } = useAccount()
     const { data: blockNumber } = useBlockNumber({ watch: true })
+
     const [tankData, setTankData] = useState<TankData | null>(null)
     const [isLoading, setIsLoading] = useState(true)
 
     const { data: readData, isError } = useReadContracts({
-        enabled: connected && !!address,
         blockNumber,
         contracts: [
             {
                 functionName: 'tanks',
                 args: [BigInt(tankId)],
-                ...CONTRACT_CONFIG,
+                ...THAINK_CONTRACT_CONFIG,
             },
             {
                 functionName: 'balanceOf',
                 args: [address, BigInt(tankId)],
-                ...CONTRACT_CONFIG,
+                ...THAINK_CONTRACT_CONFIG,
             },
             {
                 functionName: 'totalSupply',
                 args: [BigInt(tankId)],
-                ...CONTRACT_CONFIG,
+                ...THAINK_CONTRACT_CONFIG,
             },
             {
                 functionName: 'uri',
                 args: [BigInt(tankId)],
-                ...CONTRACT_CONFIG,
+                ...THAINK_CONTRACT_CONFIG,
             }
         ]
     })
@@ -96,7 +98,7 @@ export default function Tank({ tankId, variant = 'list' }: TankProps) {
                 mintsCount: Number(readData[2].result || 0),
                 meta: parseTankMetadata(readData[3].result || ""),
             })
-            setTimeout(() => setIsLoading(false), 300)
+            setTimeout(() => setIsLoading(false), 100)
         }
     }, [readData, isError, tankId])
 
@@ -154,7 +156,7 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
 
     const mintConfig = {
         args: [address, BigInt(data.id)],
-        enabled: connected && !data.minted
+        enabled: connected && data.minted === 0
     }
 
     const emoji = data.minted ? <CheckCircle className="text-green-500" /> : <Flame className="text-red-500" />
@@ -171,13 +173,13 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
                 <div className="flex justify-between items-center">
                     <div className="flex gap-6 text-sm text-muted-foreground">
                         <div title="Minted Times" className="flex items-center gap-1">
-                            <CheckCircle className="h-4 w-4" /> {data.mintsCount}
+                            <CheckCircle className="h-4 w-4" /> {data.meta?.attributes?.[1]?.value || 0}
                         </div>
                         <div title="Contributions" className="flex items-center gap-1">
-                            <PenLine className="h-4 w-4" /> {data.meta.contributions || 0}
+                            <PenLine className="h-4 w-4" /> {data.meta?.attributes?.[0]?.value || 0}
                         </div>
                         <div title="Funds Received" className="flex items-center gap-1">
-                            <HandCoins className="h-4 w-4" /> {data.meta.funds || 0} ETH
+                            <HandCoins className="h-4 w-4" /> {data.meta?.attributes?.[3]?.value || 0} ETH
                         </div>
                     </div>
                     <div title="Minted Times" className="flex items-center gap-1 text-xs text-muted-foreground">

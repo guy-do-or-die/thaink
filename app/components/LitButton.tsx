@@ -9,7 +9,7 @@ import { notify } from '@/components/Notification'
 import litService from '@/lit/service'
 
 import { tankAbi } from '@/contracts'
-import { RPC_URL } from '@/wallet'
+import { chain, RPC_URL } from '@/wallet'
 
 
 interface LitButtonProps {
@@ -22,6 +22,13 @@ interface LitButtonProps {
 }
 
 const agentEndpoint = import.meta.env.VITE_AGENT_ENDPOINT
+
+const SUBMIT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_SUBMITLITACTION_IPFS_CID
+const HINT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_HINTLITACTION_IPFS_CID
+const PROMPT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_PROMPTLITACTION_IPFS_CID
+
+const PKP_PUBLIC_KEY = import.meta.env.VITE_PKP_PUBLIC_KEY
+const PKP_TOKEN_ID = import.meta.env.VITE_PKP_TOKEN_ID
 
 
 export default function LitButton({
@@ -43,6 +50,10 @@ export default function LitButton({
     setIsProcessing(true)
 
     const params = {
+      chainNetwork: chain.network.replace(/-([a-z])/g, (_, c) => c.toUpperCase()),
+      ipfsCid: [SUBMIT_LIT_ACTION_IPFS_CID, HINT_LIT_ACTION_IPFS_CID, PROMPT_LIT_ACTION_IPFS_CID],
+      pkp: PKP_PUBLIC_KEY,
+      pkpTokenId: PKP_TOKEN_ID,
       rpcUrl: RPC_URL,
       contractAbi: tankAbi,
       agentEndpoint,

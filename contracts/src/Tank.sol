@@ -82,7 +82,8 @@ contract Tank is Initializable {
         uint256 _value,
         bytes calldata signature
     ) public {
-        require(verifySignature(signature), "Invalid signature");
+        //require(verifySignature(signature), "Invalid signature");
+        require(contributors[_contributor] == 0, "Contributor has already added a note");
 
         Note memory note;
         note.timestamp = block.timestamp;

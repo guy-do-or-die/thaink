@@ -37,6 +37,7 @@ export function parseError(error: unknown) {
         /following reason:\n(.*?)\n/s,
         /(RPC Error)/,
         /(RPC error)/,
+        /(Invalid parameters were provided to the RPC method)/
     ]
 
     let msg

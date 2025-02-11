@@ -1,4 +1,4 @@
-import { PrivyProvider, usePrivy } from '@privy-io/react-auth'
+import { PrivyProvider, usePrivy, useIdentityToken } from '@privy-io/react-auth'
 import { WagmiProvider, createConfig } from '@privy-io/wagmi'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -33,6 +33,7 @@ export const wagmiConfig = createConfig({
 
 export function useAccount() {
   const { user, ready, authenticated, login: connect, logout: disconnect } = usePrivy()
+  const { identityToken } = useIdentityToken()
 
   const address = user?.wallet?.address
   const connected = ready && authenticated
@@ -46,7 +47,8 @@ export function useAccount() {
     address,
     connect,
     connected,
-    disconnect
+    disconnect,
+    identityToken,
   };
 };
 

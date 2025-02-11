@@ -9,17 +9,19 @@
     "wagmi": "wagmi generate",
     "dev": "bun run wagmi && vite",
     "build": "vite build",
+    "gen:lit-ipfs-cid": "tsx scripts/generateIpfsCid.ts",
+    "gen:lit-pkp": "tsx scripts/mintPKP.ts",
+    "lit": "bun run gen:lit-ipfs-cid && bun run gen:lit-pkp",
     "deploy:anvil": "scripts/deploy.sh .env.anvil",
     "deploy:base": "scripts/deploy.sh .env.base",
-    "deploy:base-sepolia": "scripts/deploy.sh .env.base-sepolia",
-    "gen:lit-ipfs-cid": "tsx scripts/generateIpfsCid.ts",
-    "gen:lit-pkp": "tsx scripts/mintPKP.ts"
+    "deploy:base-sepolia": "scripts/deploy.sh .env.base-sepolia"
   },
   "dependencies": {
     "@lit-protocol/auth-browser": "^7.0.5",
     "@lit-protocol/aw-cli": "^0.1.0-16",
     "@lit-protocol/constants": "^7.0.5",
     "@lit-protocol/contracts-sdk": "^7.0.5",
+    "@lit-protocol/lit-auth-client": "^7.0.6",
     "@lit-protocol/lit-node-client": "^7.0.5",
     "@lit-protocol/types": "^7.0.5",
     "@privy-io/react-auth": "^2.2.1",

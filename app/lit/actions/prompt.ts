@@ -1,4 +1,4 @@
-import 'ethers'
+import { createLitAction, getAccessControlConditions, decrypt, callAgent, callAgentForPrompt } from './utils'
 
 export interface promptLitActionParams {
     rpcUrl: string
@@ -14,25 +14,17 @@ const _promptLitAction = async () => {
 
     const idea = await contract.idea()
     const digest = await contract.digest()
+    const digestHash = await contract.digestHash()
 
-    const agentResponse = await fetch(agentEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            action: 'prompt',
-            idea,
-            digest: digest || 'empty',
-            prompt
-        })
-    })
+    const decryptedDigest = digest ? await decrypt(ipfsCid, digest, digestHash) : 'empty'
 
-    if (!agentResponse.ok) {
-        throw new Error(`Agent call failed: ${agentResponse.statusText}`)
-    }
-
-    Lit.Actions.setResponse({ response: JSON.stringify(await agentResponse.json()) })
+    const agentResult = await callAgentForPrompt(agentEndpoint, idea, decryptedDigest, prompt)
+    Lit.Actions.setResponse({ response: JSON.stringify(agentResult) })
 }
 
-export const promptLitAction = `(${_promptLitAction.toString()})()`
+export const promptLitAction = createLitAction(_promptLitAction, [
+    getAccessControlConditions,
+    decrypt,
+    callAgent,
+    callAgentForPrompt
+])

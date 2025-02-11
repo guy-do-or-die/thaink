@@ -7,16 +7,15 @@ import LandingPage from '@/pages/LandingPage'
 import MakePage from '@/pages/MakePage'
 import TanksPage from '@/pages/TanksPage'
 import TankPage from '@/pages/TankPage'
+import EngagePage from '@/pages/EngagePage'
 import SharePage from '@/pages/SharePage'
 import NotFound from '@/pages/NotFound'
 
-import { useAccount } from '@/wallet'
 import { useWatchBlock } from '@/stores/useBlockStore'
 
 import { ROUTES } from '@/routes.config'
 
 export function App() {
-  const { connected } = useAccount()
   const [location] = useLocation()
 
   useWatchBlock()
@@ -38,7 +37,7 @@ export function App() {
             <TanksPage />
           </Route>
           <Route path={ROUTES.MINTED.path}>
-            <TanksPage filter="minted" />
+            <EngagePage />
           </Route>
           <Route path={ROUTES.TANK.path}>
             <TankPage />

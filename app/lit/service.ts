@@ -1,7 +1,6 @@
 import ethers from 'ethers'
 
 import * as LitJsSdk from "@lit-protocol/lit-node-client"
-import { LitContracts } from '@lit-protocol/contracts-sdk'
 import { disconnectWeb3 } from "@lit-protocol/auth-browser"
 import { LIT_NETWORK, LIT_ABILITY, LIT_ERROR_KIND } from "@lit-protocol/constants";
 import {
@@ -22,8 +21,6 @@ interface NodeError {
   };
 }
 
-const pkpPublicKey = import.meta.env.VITE_PKP_PUBLIC_KEY
-
 class LitService {
   litNodeClient
   chain
@@ -36,6 +33,8 @@ class LitService {
     try {
       this.litNodeClient = new LitJsSdk.LitNodeClient({
         litNetwork: LIT_NETWORK.DatilDev,
+        debug: true,
+        minNodeCount: 1,
       })
       await this.litNodeClient.connect()
     } catch (error) {
@@ -87,11 +86,15 @@ class LitService {
 
       const sessionSigs = await getSessionSigs(litClient, signer)
       console.log("Got Session Signatures!")
+      console.log(sessionSigs)
 
       const response = await litClient.executeJs({
         sessionSigs,
         code: action,
-        jsParams: params,
+        jsParams: {
+          sessionSigs,
+          ...params
+        },
       })
 
       console.log("response: ", response)
@@ -130,26 +133,6 @@ class LitService {
     }
   }
 
-}
-
-async function getPkpPublicKey(signer) {
-  if (pkpPublicKey) return pkpPublicKey
-
-  const pkp = await mintPkp(signer)
-  console.log("Minted PKP!", pkp)
-  return pkp.publicKey
-}
-
-async function mintPkp(signer) {
-  console.log("Minting new PKP...")
-  const litContracts = new LitContracts({
-    signer: signer,
-    network: LIT_NETWORK.DatilDev,
-  })
-
-  await litContracts.connect()
-
-  return (await litContracts.pkpNftContractUtils.write.mint()).pkp
 }
 
 async function getSessionSigs(litNodeClient, signer) {

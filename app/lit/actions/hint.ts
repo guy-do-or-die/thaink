@@ -1,5 +1,4 @@
-import 'ethers'
-
+import { createLitAction, getAccessControlConditions, decrypt, callAgent, callAgentForHint } from './utils'
 
 export interface hintLitActionParams {
     rpcUrl: string
@@ -14,24 +13,18 @@ const _hintLitAction = async () => {
 
     const idea = await contract.idea()
     const digest = await contract.digest()
+    const digestHash = await contract.digestHash()
 
-    const agentResponse = await fetch(agentEndpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            action: 'hint',
-            idea,
-            digest: digest || 'empty'
-        })
-    })
+    const decryptedDigest = digest ? await decrypt(ipfsCid, digest, digestHash) : 'empty'
 
-    if (!agentResponse.ok) {
-        throw new Error(`Agent call failed: ${agentResponse.statusText}`)
-    }
+    const agentResult = await callAgentForHint(agentEndpoint, idea, decryptedDigest)
 
-    Lit.Actions.setResponse({ response: JSON.stringify(await agentResponse.json()) })
+    Lit.Actions.setResponse({ response: JSON.stringify(agentResult) })
 }
 
-export const hintLitAction = `(${_hintLitAction.toString()})()`
+export const hintLitAction = createLitAction(_hintLitAction, [
+    getAccessControlConditions,
+    decrypt,
+    callAgent,
+    callAgentForHint,
+])

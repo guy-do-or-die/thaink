@@ -19,14 +19,18 @@ export default function TankPage() {
 
   const { data: tankAddress, isFetched: isTankAddressFetched } = useReadThainkTanks({
     args: [BigInt(tankId)],
-    enabled: !!tankId,
+    query: {
+      enabled: !!tankId,
+    }
   })
 
   const { address } = useAccount()
 
   const { data: balance } = useReadThainkBalanceOf({
     args: [address, BigInt(tankId)],
-    enabled: !!address,
+    query: {
+      enabled: !!address,
+    }
   })
 
   useEffect(() => {
