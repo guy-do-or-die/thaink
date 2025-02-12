@@ -11,13 +11,17 @@ const Base = () => {
 export default function Footer() {
   return (
     <footer className="w-full border-t border-gray-200 bg-gray-50 py-3 sm:py-4 px-2 sm:px-6 text-gray-600 mt-auto">
-      <div className="container lg:w-1/3 mx-auto flex flex-row justify-between items-center gap-3 sm:gap-0">
-        <div className="flex gap-4">
+      <div className="container lg:w-1/2 mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-3">
+        <div className="flex gap-4 order-1">
           <Links />
         </div>
-        <div className="flex justify-center items-center text-center">
-          <div className="mr-3 mt-1 text-sm sm:text-base">built on</div>
-          <div className="mt-1">
+        <div className="flex justify-center items-center text-center order-2">
+          <div className="flex items-center gap-2">
+            <div className="mt-2 mx-1">built with</div>
+            <a href="https://litprotocol.com/" target="_blank">
+              <img src="/assets/lit.svg" alt="Lit Protocol" className="h-5" />
+            </a>
+            <span className="mt-2 mx-1">on</span>
             <a href="https://base.org/" target="_blank">
               <Base />
             </a>
