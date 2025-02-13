@@ -17,7 +17,7 @@ contract Thaink is ERC1155Supply, Ownable {
 
     bytes32 public immutable pkp;
 
-    event MintEvent(address indexed to, uint indexed id, uint timestamp);
+    event MintEvent(address indexed to, uint indexed id);
 
     constructor(bytes32 _pkp) ERC1155("") Ownable(msg.sender) {
         tankImplementation = new Tank();
@@ -38,7 +38,7 @@ contract Thaink is ERC1155Supply, Ownable {
         Tank tank = tanks[id];
         tank.incrementMintsCount();
 
-        emit MintEvent(to, id, block.timestamp);
+        emit MintEvent(to, id);
     }
 
     function uri(uint id) public view override returns (string memory) {

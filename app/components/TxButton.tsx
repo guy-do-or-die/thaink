@@ -117,7 +117,17 @@ export default function TxButton({ simulateHook, writeHook, params, emoji, text,
     return (
         <div>
             <Button variant="ghost" disabled={disabled} onClick={onClick} className={className}>
-                {loading ? <LoaderCircle className="animate-spin" /> : <span>{emoji}</span>}
+                <div className="w-8 h-8 flex items-center justify-center">
+                    {loading ? (
+                        <LoaderCircle
+                            className="w-8 h-8"
+                            style={{
+                                animation: 'spin 1s linear infinite',
+                                transformOrigin: 'center'
+                            }}
+                        />
+                    ) : <span>{emoji}</span>}
+                </div>
                 {text}
             </Button>
         </div >

@@ -1781,12 +1781,6 @@ export const thainkAbi = [
     inputs: [
       { name: 'to', internalType: 'address', type: 'address', indexed: true },
       { name: 'id', internalType: 'uint256', type: 'uint256', indexed: true },
-      {
-        name: 'timestamp',
-        internalType: 'uint256',
-        type: 'uint256',
-        indexed: false,
-      },
     ],
     name: 'MintEvent',
   },

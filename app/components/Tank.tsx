@@ -163,6 +163,7 @@ function TankCard({ data, variant }: TankCardProps & { variant: 'list' | 'single
     const text = data.minted ? 'Minted' : 'Mint'
 
     const tankPage = `${ROUTES.TANK.path.replace(":id", data.id)}`
+
     const isListView = variant === 'list'
     const isMintedView = variant === 'minted'
 
