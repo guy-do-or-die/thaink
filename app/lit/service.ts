@@ -8,6 +8,7 @@ import {
   generateAuthSig,
   LitActionResource,
   LitPKPResource,
+  LitAccessControlConditionResource
 } from "@lit-protocol/auth-helpers";
 
 import { chain as walletChain } from '@/wallet'
@@ -76,6 +77,7 @@ class LitService {
     signer: ethers.providers.JsonRpcSigner,
     action: LitAction,
     params: Object,
+    ipfsCid?: string,
   ) {
     try {
       console.log("Starting Lit Action...")
@@ -84,7 +86,7 @@ class LitService {
       const contributor = await signer.getAddress()
       console.log("Connected account:", contributor)
 
-      const sessionSigs = await getSessionSigs(litClient, signer)
+      const sessionSigs = await getSessionSigs(litClient, signer, ipfsCid)
       console.log("Got Session Signatures!")
       console.log(sessionSigs)
 
@@ -135,22 +137,32 @@ class LitService {
 
 }
 
-async function getSessionSigs(litNodeClient, signer) {
+async function getSessionSigs(litNodeClient, signer, ipfsCid?: string) {
   console.log("Getting Session Signatures...")
+
+  const resourceAbilityRequests: any[] = [
+    {
+      resource: new LitActionResource("*"),
+      ability: LIT_ABILITY.LitActionExecution,
+    },
+    {
+      resource: new LitPKPResource("*"),
+      ability: LIT_ABILITY.PKPSigning,
+    },
+  ];
+
+  if (ipfsCid) {
+    resourceAbilityRequests.push({
+      resource: new LitAccessControlConditionResource(ipfsCid),
+      ability: LIT_ABILITY.LitActionDecryption,
+    });
+    console.log("Added decryption capability for IPFS CID:", ipfsCid);
+  }
 
   return litNodeClient.getSessionSigs({
     chain: walletChain.network,
     expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
-    resourceAbilityRequests: [
-      {
-        resource: new LitActionResource("*"),
-        ability: LIT_ABILITY.LitActionExecution,
-      },
-      {
-        resource: new LitPKPResource("*"),
-        ability: LIT_ABILITY.PKPSigning,
-      },
-    ],
+    resourceAbilityRequests: resourceAbilityRequests,
     authNeededCallback: getAuthNeededCallback(litNodeClient, signer),
   })
 
