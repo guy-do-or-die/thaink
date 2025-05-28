@@ -47,30 +47,7 @@ async function initializeAgent() {
             networkId: process.env.NETWORK_ID || "base-sepolia",
         }
 
-        const walletProvider = await CdpWalletProvider.configureWithWallet(config)
-
-        const agent = await AgentKit.from({
-            walletProvider,
-            actionProviders: [
-                wethActionProvider(),
-                pythActionProvider(),
-                walletActionProvider(),
-                erc20ActionProvider(),
-                cdpApiActionProvider({
-                    apiKeyName: process.env.CDP_API_KEY_NAME,
-                    apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-                }),
-                cdpWalletActionProvider({
-                    apiKeyName: process.env.CDP_API_KEY_NAME,
-                    apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-                }),
-            ],
-        })
-
-        const exportedWallet = await walletProvider.exportWallet()
-        fs.writeFileSync(WALLET_DATA_FILE, JSON.stringify(exportedWallet))
-
-        return { agent, llm, config }
+        return { llm, config }
     } catch (error) {
         if (error instanceof Error) {
             console.error("Failed to initialize agent:", error.message)
@@ -120,7 +97,7 @@ async function handleLLMPrompt(llm: ChatOpenAI, prompt: string, action: string, 
     }
 }
 
-async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
+async function runServerMode(llm: ChatOpenAI, config: any) {
     console.log("Initializing server mode...")
     console.log("Environment variables:", {
         AGENT_MODE: process.env.AGENT_MODE,
@@ -177,29 +154,19 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
                     const evaluationResult = await handleLLMPrompt(llm, evaluationPrompt, "evaluation", digest)
                     const evaluation = evaluationResult.evaluation
 
+                    const parsedEval = typeof evaluation === 'string' ? JSON.parse(evaluation) : evaluation
+
                     let digestResult = null
-                    if (typeof evaluation === 'string') {
-                        const parsedEval = JSON.parse(evaluation)
-                        if (parsedEval.verdict === 'accept') {
-                            const digestPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
-                            const digestResponse = await handleLLMPrompt(llm, digestPrompt, "digest", digest)
-                            digestResult = digestResponse.digest
-                        }
-                        return res.json({
-                            evaluation: parsedEval,
-                            digest: digestResult
-                        })
-                    } else {
-                        if (evaluation.verdict === 'accept') {
-                            const digestPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
-                            const digestResponse = await handleLLMPrompt(llm, digestPrompt, "digest", digest)
-                            digestResult = digestResponse.digest
-                        }
-                        return res.json({
-                            evaluation,
-                            digest: digestResult
-                        })
+                    if (parsedEval.verdict === 'accept') {
+                        const digestPrompt = prompts.DIGEST_PROMPT_TEMPLATE(idea, digest, note)
+                        const digestResponse = await handleLLMPrompt(llm, digestPrompt, "digest", digest)
+                        digestResult = digestResponse.digest
                     }
+
+                    return res.json({
+                        evaluation: parsedEval,
+                        digest: digestResult
+                    })
                 } catch (error) {
                     console.error("Error during evaluate_and_digest:", error)
                     return res.status(500).json({ error: "Internal server error" })
@@ -224,8 +191,8 @@ async function runServerMode(agent: AgentKit, llm: ChatOpenAI, config: any) {
     })
 
     try {
-        app.listen(port, () => {
-            console.log(`Agent server listening on port ${port} `)
+        app.listen(port, '0.0.0.0', () => {
+            console.log(`Agent server listening on port ${port} on all interfaces`)
         })
     } catch (error) {
         console.error("Failed to start server:", error)
@@ -241,10 +208,10 @@ async function main() {
             throw new Error("Required environment variables are missing. Please check CDP_API_KEY_NAME, CDP_API_KEY_PRIVATE_KEY, and OPENAI_API_KEY")
         }
 
-        const { agent, llm, config } = await initializeAgent()
+        const { llm, config } = await initializeAgent()
         console.log("Agent initialized successfully")
 
-        await runServerMode(agent, llm, config)
+        await runServerMode(llm, config)
     } catch (error) {
         console.error("Fatal error:", error)
         process.exit(1)

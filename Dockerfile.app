@@ -31,4 +31,4 @@ RUN bun install --production
 EXPOSE 4173
 
 # Start the app with host binding
-CMD ["bun", "run", "preview"]
+CMD ["bun", "run", "preview", "--host", "0.0.0.0"]

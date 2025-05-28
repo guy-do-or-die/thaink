@@ -34,18 +34,24 @@ export async function encrypt(ipfsCids: string[], data: any) {
   return { ciphertext, dataToEncryptHash }
 }
 
-export async function decrypt(ipfsCid, ciphertext, dataToEncryptHash) {
-  //const rpcUrl = await Lit.Actions.getRpcUrl({ chain: chainNetwork })
-  //const authSig = sessionSigs[rpcUrl]
-
+export async function decrypt(ipfsCids: string[], ciphertext: string, dataToEncryptHash: string) {
+  //try {
   const resp = await Lit.Actions.decryptAndCombine({
-    accessControlConditions: getAccessControlConditions(ipfsCid),
+    accessControlConditions: getAccessControlConditions(ipfsCids),
     dataToEncryptHash,
     chain: chainNetwork,
     ciphertext,
   })
-
+  console.log(resp)
   return resp
+  //} catch (e) {
+  //  console.error('ERROR in decrypt function')
+  //  console.error('ipfsCids:', ipfsCids)
+  //  console.error('ciphertext:', ciphertext)
+  //  console.error('dataToEncryptHash:', dataToEncryptHash)
+  //  console.error('error:', e)
+  //  throw new Error(JSON.stringify(e))
+  //}
 }
 
 export function injectFunctions(targetFn: Function, functionsToInject: Function[]): string {
@@ -61,8 +67,53 @@ export function injectFunctions(targetFn: Function, functionsToInject: Function[
     ${targetFnStr.slice(firstBraceIndex + 1)}`
 }
 
+/**
+ * Minifies JavaScript code using Terser with deterministic settings
+ * @param code JavaScript code to minify
+ * @returns Promise resolving to minified code or original code if minification fails
+ */
+export async function minifyWithTerser(code: string): Promise<string> {
+  try {
+    // Dynamically import terser to avoid bundling issues
+    const { minify } = await import('terser');
+
+    // Minify with deterministic settings that preserve more code
+    const minifyOptions = {
+      mangle: {
+        toplevel: false,  // Don't mangle top-level names to preserve exports
+        properties: false // Don't mangle property names
+      },
+      compress: {
+        dead_code: false,    // Don't remove "dead" code
+        drop_console: false, // Keep console.log statements
+        unused: false,       // Don't remove unused variables
+        sequences: false,    // Don't join consecutive statements with commas
+        conditionals: true,  // Optimize if-s and conditional expressions
+        booleans: true,      // Optimize boolean expressions
+        passes: 1            // Just one pass to avoid over-optimization
+      },
+      output: {
+        beautify: false,     // Output compressed
+        comments: false      // Remove comments
+      },
+      keep_classnames: true, // Keep class names
+      keep_fnames: true,     // Keep function names
+      toplevel: false        // Don't transform top-level names
+    };
+
+    const result = await minify(code, minifyOptions);
+
+    // Verify the minified code isn't just an error-throwing snippet
+    return result.code || code;
+  } catch (error) {
+    console.error('Terser minification failed:', error);
+    return code; // Return original code if minification fails
+  }
+}
+
 export function createLitAction(mainFn: Function, functionsToInject: Function[] = []): string {
   const fnWithInjectedCode = injectFunctions(mainFn, functionsToInject)
+
   return `(${fnWithInjectedCode})()`
 }
 
@@ -89,8 +140,7 @@ export async function callAgent({ agentEndpoint, idea, digest, action, prompt, n
       throw new Error(`Agent call failed: ${agentResponse.statusText}`)
     }
 
-    json = await agentResponse.json()
-    return JSON.stringify(json)
+    return JSON.stringify(await agentResponse.json())
   })
 
   if (!res) {
@@ -114,6 +164,7 @@ export async function callAgentForSubmit(agentEndpoint, idea, digest, note) {
 
 export async function signMessage(message: string, pkp: string) {
   const toSign = ethers.utils.arrayify(ethers.utils.hashMessage(ethers.utils.arrayify(message)))
+
   const sigObjectStr = await Lit.Actions.signAndCombineEcdsa({
     toSign,
     publicKey: pkp,

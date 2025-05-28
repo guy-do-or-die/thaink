@@ -34,11 +34,11 @@ const _submitLitAction = async () => {
 
   let response = agentResult
   if (evaluation.verdict === 'accept') {
+    const { ciphertext: encryptedNote, dataToEncryptHash: noteHash } = await encrypt(ipfsCid, note)
+    const { ciphertext: encryptedDigest, dataToEncryptHash: newDigestHash } = await encrypt(ipfsCid, digestResult)
+
     const ideaHash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(idea))
     const ideaSignature = await signMessage(ideaHash, pkp)
-
-    const { ciphertext: encryptedNote, dataToEncryptHash: noteHash } = await encrypt(ipfsCid, note)
-    const { ciphertext: encryptedDigest, dataToEncryptHash: newDigestHash } = await encrypt(ipfsCid, digestResult.digest)
 
     const scoreValue = ethers.BigNumber.from(Math.round(value))
 
@@ -51,7 +51,7 @@ const _submitLitAction = async () => {
       noteHash,
       newDigestHash,
       scoreValue,
-      ideaSignature
+      ideaSignature,
     })
 
     response = {

@@ -8,7 +8,12 @@ import {
   generateAuthSig,
   LitActionResource,
   LitPKPResource,
-} from "@lit-protocol/auth-helpers";
+  LitAccessControlConditionResource
+} from "@lit-protocol/auth-helpers"
+
+import ipfsHash from "ipfs-only-hash"
+
+import { minifyWithTerser } from "./actions/utils"
 
 import { chain as walletChain } from '@/wallet'
 
@@ -84,13 +89,15 @@ class LitService {
       const contributor = await signer.getAddress()
       console.log("Connected account:", contributor)
 
-      const sessionSigs = await getSessionSigs(litClient, signer)
+      const sessionSigs = await getSessionSigs(litClient, signer, params.ipfsCid)
       console.log("Got Session Signatures!")
       console.log(sessionSigs)
-
+      const minifiedAction = await minifyWithTerser(action.toString())
+      console.log(await ipfsHash.of(minifiedAction))
+      console.log(params.ipfsCid)
       const response = await litClient.executeJs({
         sessionSigs,
-        code: action,
+        code: minifiedAction,
         jsParams: {
           sessionSigs,
           ...params
@@ -135,43 +142,47 @@ class LitService {
 
 }
 
-async function getSessionSigs(litNodeClient, signer) {
+async function getSessionSigs(litNodeClient, signer, ipfsCid?: string) {
   console.log("Getting Session Signatures...")
+
+  const resourceAbilityRequests: any[] = [
+    {
+      resource: new LitActionResource("*"),
+      ability: LIT_ABILITY.LitActionExecution,
+    },
+    {
+      resource: new LitPKPResource("*"),
+      ability: LIT_ABILITY.PKPSigning,
+    },
+    ...(ipfsCid?.map(cid => ({
+      resource: new LitAccessControlConditionResource(cid),
+      ability: LIT_ABILITY.AccessControlConditionDecryption,
+    })) || []),
+  ];
 
   return litNodeClient.getSessionSigs({
     chain: walletChain.network,
     expiration: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(),
-    resourceAbilityRequests: [
-      {
-        resource: new LitActionResource("*"),
-        ability: LIT_ABILITY.LitActionExecution,
-      },
-      {
-        resource: new LitPKPResource("*"),
-        ability: LIT_ABILITY.PKPSigning,
-      },
-    ],
     authNeededCallback: getAuthNeededCallback(litNodeClient, signer),
+    resourceAbilityRequests,
   })
 
-  function getAuthNeededCallback(litNodeClient, signer) {
-    return async ({ resourceAbilityRequests, expiration, uri }) => {
-      const toSign = await createSiweMessageWithRecaps({
-        uri,
-        expiration,
-        resources: resourceAbilityRequests,
-        walletAddress: await signer.getAddress(),
-        nonce: await litNodeClient.getLatestBlockhash(),
-        litNodeClient,
-      })
+}
 
-      const authSig = await generateAuthSig({
-        signer: signer,
-        toSign,
-      })
+function getAuthNeededCallback(litNodeClient, signer) {
+  return async ({ resourceAbilityRequests, expiration, uri }) => {
+    const toSign = await createSiweMessageWithRecaps({
+      uri,
+      expiration,
+      resources: resourceAbilityRequests,
+      walletAddress: await signer.getAddress(),
+      nonce: await litNodeClient.getLatestBlockhash(),
+      litNodeClient,
+    })
 
-      return authSig
-    }
+    const sig = await generateAuthSig({ signer, toSign })
+    console.log("sig: ", sig)
+    return sig
   }
 }
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+
 import { notify } from '@/components/Notification'
 import { Sparkles } from 'lucide-react'
 import { promptLitAction, promptLitActionParams } from '@/lit/actions/prompt'

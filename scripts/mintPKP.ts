@@ -39,7 +39,7 @@ async function mintPKP() {
     console.log('Connecting to Lit Contracts...')
     const contractClient = new LitContracts({
       signer: wallet,
-      network: LIT_NETWORK.Yellowstone,
+      network: LIT_NETWORK.DatilDev,
       debug: true // Enable debug logging
     })
 
@@ -69,30 +69,25 @@ async function mintPKP() {
       process.env.VITE_PROMPTLITACTION_IPFS_CID,
     ].map(cid => contractClient.utils.getBytesFromMultihash(cid))
 
-    const scopes = [
-      AUTH_METHOD_SCOPE.SignAnything,
-      AUTH_METHOD_SCOPE.PersonalSign
-    ]
-
-    const mintCost = await contractClient.pkpNftContract.read.mintCost();
-
     console.log('Minting PKP...')
+    const mintCost = await contractClient.pkpNftContract.read.mintCost()
+
+    const scope = [AUTH_METHOD_SCOPE.SignAnything, AUTH_METHOD_SCOPE.PersonalSign]
+    const scopes = [scope, scope, scope, scope]
+
     const mintTx = await contractClient.pkpHelperContract.write.mintNextAndAddAuthMethods(
       2,
       [AUTH_METHOD_TYPE.EthWallet, AUTH_METHOD_TYPE.LitAction, AUTH_METHOD_TYPE.LitAction, AUTH_METHOD_TYPE.LitAction],
       [authIdWallet, ...litActionCids],
       ['0x', '0x', '0x', '0x'],
-      [scopes, scopes, scopes, scopes],
+      scopes,
       true,
       true,
-      {
-        value: mintCost
-      }
+      { value: mintCost }
     )
 
-    // Wait for the minting transaction to be confirmed
     console.log('Waiting for minting transaction to be confirmed...')
-    const receipt = await provider.waitForTransaction(mintTx.hash, 2) // Wait for 2 block confirmations
+    const receipt = await provider.waitForTransaction(mintTx.hash, 2)
     console.log('Minting transaction confirmed')
     console.log('PKP Minted Successfully!')
 
@@ -102,20 +97,34 @@ async function mintPKP() {
         : receipt?.logs[0].topics[1]
     ).toString()
 
-    const pkpPublicKey = (await contractClient.pkpNftContract.read.getPubkey(tokenId)).slice(2)
+    const permittedAuthMethods = await contractClient.pkpPermissionsContract.read.getPermittedAuthMethods(tokenId);
+    console.log("\nPermitted Auth Methods:");
+    permittedAuthMethods.forEach((method, i) => {
+      console.log(`\nAuth Method ${i + 1}:`);
+      console.log("- Type:", method.authMethodType);
+      console.log("- ID:", method.id || "Any ETH address");
+      console.log("- User PubKey:", method.userPubkey);
+    });
 
+    const pkpPublicKey = (await contractClient.pkpNftContract.read.getPubkey(tokenId)).slice(2)
     console.log('Token ID:', tokenId)
     console.log('Public Key:', pkpPublicKey)
 
-    // Get the current auth methods
     console.log('Getting current auth methods...')
     const currentAuthMethods = await contractClient.pkpPermissionsContract.read.getPermittedAuthMethods(tokenId)
     console.log('Current auth methods:', currentAuthMethods)
 
-    // Update the .env file with PKP details
     updateEnvFile('VITE_PKP_TOKEN_ID', tokenId)
     updateEnvFile('VITE_PKP_PUBLIC_KEY', pkpPublicKey)
     console.log('Updated PKP details in .env file')
+
+    const hintLitActionCid = contractClient.utils.getBytesFromMultihash(process.env.VITE_HINTLITACTION_IPFS_CID)
+    const submitLitActionCid = contractClient.utils.getBytesFromMultihash(process.env.VITE_SUBMITLITACTION_IPFS_CID)
+    const promptLitActionCid = contractClient.utils.getBytesFromMultihash(process.env.VITE_PROMPTLITACTION_IPFS_CID)
+
+    console.log('Hint Lit Action CID:', hintLitActionCid)
+    console.log('Submit Lit Action CID:', submitLitActionCid)
+    console.log('Prompt Lit Action CID:', promptLitActionCid)
 
   } catch (error) {
     if (error.kind === LIT_ERROR_KIND.Configuration) {
@@ -131,5 +140,4 @@ async function mintPKP() {
   }
 }
 
-// Execute the mint function
 mintPKP().catch(console.error)

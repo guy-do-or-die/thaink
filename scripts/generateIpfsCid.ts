@@ -1,6 +1,8 @@
 import * as ipfsOnlyHash from 'ipfs-only-hash'
 import * as actions from '../app/lit/actions'
 
+import { minifyWithTerser } from "../app/lit/actions/utils"
+
 import { updateEnvFile } from './utils'
 
 async function generateIpfsCidFromString(data) {
@@ -14,7 +16,8 @@ async function generateIpfsCidFromString(data) {
 async function processLitActions() {
   for (const [actionName, actionExport] of Object.entries(actions)) {
     try {
-      const cid = await generateIpfsCidFromString(actionExport)
+      const minifiedAction = await minifyWithTerser(actionExport.toString())
+      const cid = await generateIpfsCidFromString(minifiedAction)
 
       updateEnvFile(`VITE_${actionName.toUpperCase()}_IPFS_CID`, cid)
 
