@@ -5,7 +5,6 @@ script = 'contracts/scripts'
 broadcast = 'contracts/broadcast'
 cache_path = 'contracts/cache'
 test = 'contracts/test'
-libs = ['contracts/lib']
 solc_version = '0.8.28'
 optimizer = true
 optimizer_runs = 200

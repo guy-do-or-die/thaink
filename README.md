@@ -26,11 +26,13 @@ Thaink Tank is an onchain collaborative ideation platform that leverages AI eval
 Thaink uses a factory-proxy pattern implemented with OpenZeppelin's Clones library:
 
 - **Thaink.sol (Factory)**: Creates and manages Tank instances using minimal proxy pattern
+
   - Implements ERC1155 for Tank ownership tokens
   - Stores the Tank implementation contract address as immutable
   - Maintains a registry of all created Tanks
 
 - **Tank.sol (Implementation)**: The core contract that stores ideas, notes, and digests
+
   - Uses OpenZeppelin's Initializable pattern for proxy initialization
   - Stores the factory address as immutable for security
   - Implements access control to ensure only the factory can initialize new instances
@@ -58,10 +60,12 @@ Our system mints a dedicated PKP for each Tank that:
 We've built three specialized Lit Actions for our Tank operations, each with carefully crafted prompts:
 
 - **Hint Action**: Analyzes the Tank's current state and generates helpful hints for contributors
+
   - Uses a prompt that guides the AI to suggest new angles not covered in the digest
   - Ensures hints are concise, single-sentence suggestions that spark exploration
 
 - **Prompt Action**: Takes user queries about the Tank's idea and provides factual responses
+
   - Uses a strict factual prompt that limits responses to information in the idea/digest
   - Prevents speculation or invention beyond what's been contributed
 
@@ -81,6 +85,7 @@ Our implementation uses Lit's encryption with Tank-specific access controls:
 #### Technical Implementation
 
 **Our Lit Integration Flow**:
+
 1. During Tank deployment, we generate and store IPFS CIDs for our Lit Actions
 2. The Tank factory mints a PKP with these CIDs as authorized controllers
 3. When users submit contributions, our frontend calls the Submit Lit Action
@@ -102,19 +107,23 @@ The frontend is built with React and integrates several key technologies:
 ## Project Structure
 
 - **app/**: Frontend React application
+
   - **components/**: Reusable UI components including Tank-specific forms
   - **pages/**: Main application pages for Tank creation, engagement, and contribution
   - **hooks/**: Custom React hooks for blockchain interactions
 
 - **contracts/**: Solidity smart contracts
+
   - **src/**: Contract source files (Thaink.sol, Tank.sol, Config.sol)
   - **scripts/**: Deployment scripts
 
 - **lit/**: Lit Protocol integration
+
   - **actions/**: Custom Lit Actions for hint, prompt, and submit operations
   - **utils.ts**: Shared utilities for encryption, signing, and blockchain interactions
 
 - **scripts/**: Utility scripts
+
   - **generateIpfsCids.ts**: Generates IPFS CIDs for Lit Actions
   - **mintPKP.ts**: Mints PKPs with specific permissions for Tank operations
   - **setLitConfig.ts**: Configures Lit Protocol settings
@@ -141,10 +150,12 @@ For a full list, see `package.json`.
 ## Scripts
 
 - **Development**:
+
   - `bun run dev`: Generate contract types with wagmi and start the development server
   - `bun run build`: Build the application for production
 
 - **Lit Protocol**:
+
   - `bun run lit-actions`: Generate IPFS CIDs for Lit Actions
   - `bun run lit-pkp`: Mint PKPs with specific permissions
   - `bun run lit-config`: Configure Lit Protocol settings

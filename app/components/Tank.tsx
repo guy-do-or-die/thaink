@@ -42,7 +42,21 @@ const THAINK_CONTRACT_CONFIG = {
 
 function parseTankMetadata(uri: string): Record<string, any> {
   try {
-    return JSON5.parse(atob(uri.substring(29)) || '{}')
+    // Decode Base64 to binary string
+    const base64 = uri.substring(43)
+    const binaryString = atob(base64)
+
+    // Convert binary string to UTF-8 string
+    const bytes = new Uint8Array(binaryString.length)
+    for (let i = 0; i < binaryString.length; i++) {
+      bytes[i] = binaryString.charCodeAt(i)
+    }
+
+    // Decode UTF-8 bytes to string
+    const decoder = new TextDecoder('utf-8')
+    const jsonString = decoder.decode(bytes)
+
+    return JSON5.parse(jsonString || '{}')
   } catch (error) {
     console.error('Failed to parse tank metadata:', error)
     return {}

@@ -4,12 +4,10 @@ pragma solidity ^0.8.28;
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Base64.sol";
 
-import "./lib/LibString.sol";
-
 
 contract Meta {
     using Strings for uint;
-    using LibString for string;
+    using Strings for string;
 
     string public idea;
 
@@ -25,6 +23,7 @@ contract Meta {
                     bytes(
                         string(
                             abi.encodePacked(
+                                '<?xml version="1.0" encoding="UTF-8"?>',
                                 '<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">',
                                 '<style>',
                                 '.title { fill: white; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; }',
@@ -57,7 +56,7 @@ contract Meta {
     function tokenURI() public view returns (string memory) {
         return string(
             abi.encodePacked(
-                "data:application/json;base64,",
+                "data:application/json;charset=utf-8;base64,",
                 Base64.encode(
                     bytes(
                         string(
