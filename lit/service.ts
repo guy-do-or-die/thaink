@@ -1,29 +1,29 @@
 import ethers from 'ethers'
 
-import * as LitJsSdk from "@lit-protocol/lit-node-client"
-import { disconnectWeb3 } from "@lit-protocol/auth-browser"
-import { LIT_NETWORK, LIT_ABILITY, LIT_ERROR_KIND } from "@lit-protocol/constants";
+import * as LitJsSdk from '@lit-protocol/lit-node-client'
+import { disconnectWeb3 } from '@lit-protocol/auth-browser'
+import { LIT_NETWORK, LIT_ABILITY, LIT_ERROR_KIND } from '@lit-protocol/constants'
 import {
   createSiweMessageWithRecaps,
   generateAuthSig,
   LitActionResource,
   LitPKPResource,
-  LitAccessControlConditionResource
-} from "@lit-protocol/auth-helpers"
+  LitAccessControlConditionResource,
+} from '@lit-protocol/auth-helpers'
 
-import ipfsHash from "ipfs-only-hash"
+import ipfsHash from 'ipfs-only-hash'
 
-import { minifyWithTerser } from "./actions/utils"
+import { minifyWithTerser } from './actions/utils'
 
 import { chain as walletChain } from '@/wallet'
 
 interface NodeError {
-  success: boolean;
+  success: boolean
   error: {
-    success: boolean;
-    error: string;
-    logs: string;
-  };
+    success: boolean
+    error: string
+    logs: string
+  }
 }
 
 class LitService {
@@ -46,7 +46,7 @@ class LitService {
       throw {
         message: 'Failed to connect to Lit network',
         kind: LIT_ERROR_KIND.Network,
-        originalError: error
+        originalError: error,
       }
     }
   }
@@ -61,9 +61,9 @@ class LitService {
 
   async getClient() {
     try {
-      console.log("Connecting litNodeClient to network...")
+      console.log('Connecting litNodeClient to network...')
       await this.connect()
-      console.log("litNodeClient connected!")
+      console.log('litNodeClient connected!')
       return this.litNodeClient
     } catch (error) {
       if (error.kind === LIT_ERROR_KIND.Network) {
@@ -72,25 +72,21 @@ class LitService {
       throw {
         message: 'Failed to get Lit client',
         kind: LIT_ERROR_KIND.Configuration,
-        originalError: error
+        originalError: error,
       }
     }
   }
 
-  async action(
-    signer: ethers.providers.JsonRpcSigner,
-    action: LitAction,
-    params: Object,
-  ) {
+  async action(signer: ethers.providers.JsonRpcSigner, action: LitAction, params: Object) {
     try {
-      console.log("Starting Lit Action...")
+      console.log('Starting Lit Action...')
       const litClient = await this.getClient()
 
       const contributor = await signer.getAddress()
-      console.log("Connected account:", contributor)
+      console.log('Connected account:', contributor)
 
       const sessionSigs = await getSessionSigs(litClient, signer, params.ipfsCid)
-      console.log("Got Session Signatures!")
+      console.log('Got Session Signatures!')
       console.log(sessionSigs)
       const minifiedAction = await minifyWithTerser(action.toString())
       console.log(await ipfsHash.of(minifiedAction))
@@ -100,11 +96,11 @@ class LitService {
         code: minifiedAction,
         jsParams: {
           sessionSigs,
-          ...params
+          ...params,
         },
       })
 
-      console.log("response: ", response)
+      console.log('response: ', response)
       return response
     } catch (error) {
       if (error.kind === LIT_ERROR_KIND.Network || error.kind === LIT_ERROR_KIND.Configuration) {
@@ -113,7 +109,7 @@ class LitService {
       throw {
         message: 'Failed to execute Lit action',
         kind: LIT_ERROR_KIND.Execution,
-        originalError: error
+        originalError: error,
       }
     } finally {
       disconnectWeb3()
@@ -122,43 +118,42 @@ class LitService {
 
   parseError(errorStr: string): string {
     try {
-      const jsonMatch = errorStr.match(/Response from the nodes: ({.+?}): \[object Object\]/);
+      const jsonMatch = errorStr.match(/Response from the nodes: ({.+?}): \[object Object\]/)
 
       if (!jsonMatch) {
-        return errorStr;
+        return errorStr
       }
 
-      const jsonStr = jsonMatch[1];
-      const parsedError = JSON.parse(jsonStr) as NodeError;
-      const errorMessage = parsedError.error.error;
+      const jsonStr = jsonMatch[1]
+      const parsedError = JSON.parse(jsonStr) as NodeError
+      const errorMessage = parsedError.error.error
 
-      const cleanedError = errorMessage.replace(/^Uncaught \(in promise\) Error: /, '');
-      const [actualError] = cleanedError.split('\n');
-      return actualError.trim();
+      const cleanedError = errorMessage.replace(/^Uncaught \(in promise\) Error: /, '')
+      const [actualError] = cleanedError.split('\n')
+      return actualError.trim()
     } catch (e) {
-      return errorStr;
+      return errorStr
     }
   }
-
 }
 
 async function getSessionSigs(litNodeClient, signer, ipfsCid?: string) {
-  console.log("Getting Session Signatures...")
+  console.log('Getting Session Signatures...')
 
   const resourceAbilityRequests: any[] = [
     {
-      resource: new LitActionResource("*"),
+      resource: new LitActionResource('*'),
       ability: LIT_ABILITY.LitActionExecution,
     },
     {
-      resource: new LitPKPResource("*"),
+      resource: new LitPKPResource('*'),
       ability: LIT_ABILITY.PKPSigning,
     },
-    ...(ipfsCid?.map(cid => ({
+    ...(ipfsCid?.map((cid) => ({
       resource: new LitAccessControlConditionResource(cid),
       ability: LIT_ABILITY.AccessControlConditionDecryption,
     })) || []),
-  ];
+  ]
 
   return litNodeClient.getSessionSigs({
     chain: walletChain.network,
@@ -166,7 +161,6 @@ async function getSessionSigs(litNodeClient, signer, ipfsCid?: string) {
     authNeededCallback: getAuthNeededCallback(litNodeClient, signer),
     resourceAbilityRequests,
   })
-
 }
 
 function getAuthNeededCallback(litNodeClient, signer) {
@@ -181,7 +175,7 @@ function getAuthNeededCallback(litNodeClient, signer) {
     })
 
     const sig = await generateAuthSig({ signer, toSign })
-    console.log("sig: ", sig)
+    console.log('sig: ', sig)
     return sig
   }
 }

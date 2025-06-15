@@ -1,4 +1,4 @@
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from "@/components/ui/navigation-menu"
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '@/components/ui/navigation-menu'
 import { useNavigation } from '@/hooks/useNavigation'
 import { ROUTES } from '@/routes.config'
 import { Button } from '@/components/ui/button'
@@ -13,9 +13,9 @@ const MENU_ICONS = {
 export default function Menu() {
   const { navigateTo, location } = useNavigation()
 
-  const isRouteActive = (route: typeof ROUTES[keyof typeof ROUTES]) => {
+  const isRouteActive = (route: (typeof ROUTES)[keyof typeof ROUTES]) => {
     if (route.pattern) {
-      return route.pattern.some(pattern => location.startsWith(pattern))
+      return route.pattern.some((pattern) => location.startsWith(pattern))
     }
     return location === route.path
   }
@@ -24,19 +24,18 @@ export default function Menu() {
     <NavigationMenu>
       <NavigationMenuList className="gap-2">
         {Object.values(ROUTES)
-          .filter(route => route.menu)
+          .filter((route) => route.menu)
           .map((route) => {
-            const handleClick = route.pattern
-              ? () => navigateTo(ROUTES.MINTED.path)
-              : () => navigateTo(route.path)
+            const handleClick = route.pattern ? () => navigateTo(ROUTES.MINTED.path) : () => navigateTo(route.path)
 
             return (
               <NavigationMenuItem key={route.path}>
                 <Button
                   onClick={handleClick}
-                  variant={isRouteActive(route) ? "default" : "ghost"}
-                  className={`gap-2 ${isRouteActive(route) ? "bg-primary text-primary-foreground" : ""}`}
-                  size="default">
+                  variant={isRouteActive(route) ? 'default' : 'ghost'}
+                  className={`gap-2 ${isRouteActive(route) ? 'bg-primary text-primary-foreground' : ''}`}
+                  size="default"
+                >
                   {MENU_ICONS[route.label as keyof typeof MENU_ICONS]}
                   <span className="md:inline max-md:hidden">{route.label}</span>
                 </Button>

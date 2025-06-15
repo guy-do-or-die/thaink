@@ -13,9 +13,7 @@ import { thainkAbi, thainkAddress } from '@/contracts'
 
 import { chain } from '@/wallet'
 
-
 import { ROUTES } from '@/routes.config'
-
 
 export default function EngagePage() {
   const [mintedTankIds, setMintedTankIds] = useState<number[]>([])
@@ -35,15 +33,14 @@ export default function EngagePage() {
             inputs: [
               { type: 'address', name: 'to', indexed: true },
               { type: 'uint256', name: 'id', indexed: true },
-              { type: 'uint256', name: 'timestamp', indexed: false }
-            ]
+            ],
           },
-          fromBlock: 0n,
-          toBlock: blockNumber ? BigInt(blockNumber) : 'latest'
+          fromBlock: blockNumber ? BigInt(blockNumber) - 100000n : 'latest',
+          toBlock: blockNumber ? BigInt(blockNumber) : 'latest',
         })
 
         const ids = logs
-          .map(log => {
+          .map((log) => {
             const { args } = decodeEventLog({
               abi: thainkAbi,
               data: log.data,
@@ -93,12 +90,7 @@ export default function EngagePage() {
 
   return (
     <Content>
-      <InfiniteScrollArea
-        items={displayedTanks}
-        hasMore={hasMore}
-        onLoadMore={loadMore}
-        renderItem={renderTank}
-      />
+      <InfiniteScrollArea items={displayedTanks} hasMore={hasMore} onLoadMore={loadMore} renderItem={renderTank} />
     </Content>
   )
 }

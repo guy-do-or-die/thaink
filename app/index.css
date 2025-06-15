@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Prevent horizontal overflow */
   body {
     overflow-x: hidden;
@@ -102,5 +101,5 @@
 }
 
 .NavigationMenuLink[data-active] {
-  text-decoration: "underline";
+  text-decoration: 'underline';
 }

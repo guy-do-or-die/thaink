@@ -16,12 +16,12 @@ export function Navigation() {
         {menuItems.map(({ href, label }) => (
           <NavigationMenuItem key={href}>
             <Link href={href}>
-              <a className={cn(
-                'text-sm font-medium transition-colors hover:text-primary',
-                location === href
-                  ? 'text-foreground'
-                  : 'text-foreground/60'
-              )}>
+              <a
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  location === href ? 'text-foreground' : 'text-foreground/60',
+                )}
+              >
                 {label}
               </a>
             </Link>

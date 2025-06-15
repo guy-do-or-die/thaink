@@ -5,8 +5,8 @@ import { Textarea } from '@/components/ui/textarea'
 
 import LitButton from '@/components/LitButton'
 
-import { hintLitAction, hintLitActionParams } from '@/lit/actions/hint'
-import { submitLitAction, submitLitActionParams } from '@/lit/actions/submit'
+import { hintLitAction, hintLitActionParams } from '../../../lit/actions/hint'
+import { submitLitAction, submitLitActionParams } from '../../../lit/actions/submit'
 
 import { notify } from '@/components/Notification'
 import { txLink } from '@/components/Utils'
@@ -39,11 +39,11 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
     args: [address],
     query: {
       enabled: !!address,
-    }
+    },
   })
 
   const hintParams: hintLitActionParams = {
-    contractAddress: tankAddress
+    contractAddress: tankAddress,
   }
 
   const submitParams: submitLitActionParams = {
@@ -60,13 +60,19 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
       textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
       textAlign: 'center',
       maxWidth: window.innerWidth >= 1024 ? '50%' : window.innerWidth >= 768 ? '80%' : '100%',
-      boxShadow: (
-        type === NotificationType.info ? '0 4px 4px rgba(0, 82, 255, 0.3' :
-          type === NotificationType.fail ? '0 4px 4px rgba(255, 0, 0, 0.3' : '0 4px 4px rgba(0, 128, 0, 0.3)'),
-      backgroundColor: (
-        type === NotificationType.info ? 'rgba(0, 82, 255, 0.9' :
-          type === NotificationType.fail ? 'rgba(255, 0, 0, 0.9)' : 'rgba(0, 128, 0, 0.9)'),
-    }
+      boxShadow:
+        type === NotificationType.info
+          ? '0 4px 4px rgba(0, 82, 255, 0.3'
+          : type === NotificationType.fail
+            ? '0 4px 4px rgba(255, 0, 0, 0.3'
+            : '0 4px 4px rgba(0, 128, 0, 0.3)',
+      backgroundColor:
+        type === NotificationType.info
+          ? 'rgba(0, 82, 255, 0.9'
+          : type === NotificationType.fail
+            ? 'rgba(255, 0, 0, 0.9)'
+            : 'rgba(0, 128, 0, 0.9)',
+    },
   })
 
   const hintSuccess = (result: any) => {
@@ -93,48 +99,63 @@ export function ContributeForm({ tankId, tankAddress }: ContributeFormProps) {
   }
 
   const submitSuccess = () => {
-    notify("Your contribution has been successfully submitted", "success")
+    notify('Your contribution has been successfully submitted', 'success')
   }
 
-  return <>
-    {
-      evaluation ?
+  return (
+    <>
+      {evaluation ? (
         <div className="flex flex-col items-center justify-center p-6 text-center space-y-2 bg-secondary/20 rounded-lg">
           <h2 className="text-xl font-semibold">Thank you for your contribution!</h2>
           <p className="text-muted-foreground">You have already shared your thoughts on this tank.</p>
         </div>
-        :
+      ) : (
         <div className="flex flex-col w-full">
           <div className="flex-1 space-y-4">
-            {
-              !signedTx &&
+            {!signedTx && (
               <Textarea
                 placeholder="Share your thoughts..."
                 className="flex-1 min-h-[180px] p-2 w-full"
                 onChange={(e) => setNote(e.target.value)}
-                value={note} />
-            }
+                value={note}
+              />
+            )}
           </div>
           <div className="flex space-x-2 justify-center mt-4">
-            {
-              signedTx ?
-                <SendTxButton signedTx={signedTx} onSuccess={submitSuccess}
-                  icon={<Send />} text="Submit" className="w-32" />
-                :
-                <>
-                  <LitButton
-                    action={hintLitAction} actionParams={hintParams} onSuccess={hintSuccess}
-                    icon={<Lightbulb />} text="Hint" variant="outline"
-                    className="w-32" />
+            {signedTx ? (
+              <SendTxButton
+                signedTx={signedTx}
+                onSuccess={submitSuccess}
+                icon={<Send />}
+                text="Submit"
+                className="w-32"
+              />
+            ) : (
+              <>
+                <LitButton
+                  action={hintLitAction}
+                  actionParams={hintParams}
+                  onSuccess={hintSuccess}
+                  icon={<Lightbulb />}
+                  text="Hint"
+                  variant="outline"
+                  className="w-32"
+                />
 
-                  <LitButton
-                    action={submitLitAction} actionParams={submitParams} onSuccess={evaluationSuccess}
-                    icon={<Brain />} text="Evaluate" disabled={!note.trim()}
-                    className="w-32" />
-                </>
-            }
+                <LitButton
+                  action={submitLitAction}
+                  actionParams={submitParams}
+                  onSuccess={evaluationSuccess}
+                  icon={<Brain />}
+                  text="Evaluate"
+                  disabled={!note.trim()}
+                  className="w-32"
+                />
+              </>
+            )}
           </div>
-        </div >
-    }
-  </>
+        </div>
+      )}
+    </>
+  )
 }

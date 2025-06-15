@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef, ReactNode } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { LoaderCircle } from 'lucide-react'
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface InfiniteScrollAreaProps<T> {
   items: T[]
@@ -22,7 +22,7 @@ export function InfiniteScrollArea<T>({
   renderItem,
   newItemAnimation = false,
   isNewItem,
-  className = ""
+  className = '',
 }: InfiniteScrollAreaProps<T>) {
   const [loading, setLoading] = useState(false)
   const { ref, inView } = useInView({
@@ -37,14 +37,17 @@ export function InfiniteScrollArea<T>({
     setLoading(false)
   }, [loading, isLoading, onLoadMore])
 
-  const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
-    if (loading || isLoading || !hasMore) return
-    const target = e.currentTarget;
-    const scrollBottom = target.scrollHeight - target.scrollTop - target.clientHeight;
-    if (scrollBottom < 400) {
-      handleLoadMore();
-    }
-  }, [loading, isLoading, hasMore, handleLoadMore]);
+  const handleScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => {
+      if (loading || isLoading || !hasMore) return
+      const target = e.currentTarget
+      const scrollBottom = target.scrollHeight - target.scrollTop - target.clientHeight
+      if (scrollBottom < 400) {
+        handleLoadMore()
+      }
+    },
+    [loading, isLoading, hasMore, handleLoadMore],
+  )
 
   useEffect(() => {
     if (inView && hasMore && !loading && !isLoading) {
@@ -57,7 +60,7 @@ export function InfiniteScrollArea<T>({
       {items.map((item, index) => (
         <div
           key={index}
-          className={newItemAnimation && isNewItem?.(item) ? "animate-in fade-in slide-in-from-top" : ""}
+          className={newItemAnimation && isNewItem?.(item) ? 'animate-in fade-in slide-in-from-top' : ''}
         >
           {renderItem(item)}
         </div>

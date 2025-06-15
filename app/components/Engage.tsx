@@ -3,7 +3,6 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { ContributeForm } from '@/components/tank/ContributeForm'
 import { PromptForm } from '@/components/tank/PromptForm'
 
-
 interface EngageProps {
   tankId: number
   hasMinted: boolean
@@ -32,7 +31,7 @@ export default function Engage({ tankId, hasMinted, hasContributed, tankAddress 
         <CardHeader className="space-y-6">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="contribute">Contribute</TabsTrigger>
-            <TabsTrigger value="prompt">AI Prompt</TabsTrigger>
+            <TabsTrigger value="prompt">Interact</TabsTrigger>
           </TabsList>
         </CardHeader>
         <CardContent>

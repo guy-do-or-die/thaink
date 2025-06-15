@@ -18,7 +18,7 @@ export function useInfiniteCollection({
   totalItems,
   itemsPerPage = 3,
   initialLoad = itemsPerPage,
-  loadDelay = 500
+  loadDelay = 500,
 }: UseInfiniteCollectionOptions): UseInfiniteCollectionReturn {
   const [displayedItems, setDisplayedItems] = useState<number[]>([])
   const [hasMore, setHasMore] = useState(true)
@@ -30,19 +30,13 @@ export function useInfiniteCollection({
 
       if (displayedItems.length === 0) {
         // Initial load
-        const initialItems = Array.from(
-          { length: initialLoad },
-          (_, i) => totalItems - i
-        ).filter(id => id > 0)
+        const initialItems = Array.from({ length: initialLoad }, (_, i) => totalItems - i).filter((id) => id > 0)
         setDisplayedItems(initialItems)
         setHasMore(initialItems[initialItems.length - 1] > 1)
       } else if (totalItems > currentHighestDisplayed) {
         // New items arrived
-        const newItems = Array.from(
-          { length: totalItems - currentHighestDisplayed },
-          (_, i) => totalItems - i
-        )
-        setDisplayedItems(prev => {
+        const newItems = Array.from({ length: totalItems - currentHighestDisplayed }, (_, i) => totalItems - i)
+        setDisplayedItems((prev) => {
           const merged = [...newItems, ...prev]
           // Remove duplicates while preserving order
           return [...new Set(merged)]
@@ -57,13 +51,13 @@ export function useInfiniteCollection({
     if (lastDisplayedId && lastDisplayedId > 1) {
       const nextItems = Array.from(
         { length: Math.min(itemsPerPage, lastDisplayedId - 1) },
-        (_, i) => lastDisplayedId - 1 - i
-      ).filter(id => id > 0)
+        (_, i) => lastDisplayedId - 1 - i,
+      ).filter((id) => id > 0)
 
       if (nextItems.length > 0) {
         // Add artificial delay
-        await new Promise(resolve => setTimeout(resolve, loadDelay))
-        setDisplayedItems(prev => [...prev, ...nextItems])
+        await new Promise((resolve) => setTimeout(resolve, loadDelay))
+        setDisplayedItems((prev) => [...prev, ...nextItems])
         setHasMore(nextItems[nextItems.length - 1] > 1)
       } else {
         setHasMore(false)
@@ -73,14 +67,17 @@ export function useInfiniteCollection({
     }
   }, [displayedItems, itemsPerPage, loadDelay])
 
-  const isNewItem = useCallback((id: number) => {
-    return id > (displayedItems[1] || 0)
-  }, [displayedItems])
+  const isNewItem = useCallback(
+    (id: number) => {
+      return id > (displayedItems[1] || 0)
+    },
+    [displayedItems],
+  )
 
   return {
     displayedItems,
     hasMore,
     loadMore,
-    isNewItem
+    isNewItem,
   }
 }

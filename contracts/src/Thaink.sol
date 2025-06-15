@@ -7,7 +7,8 @@ import "@openzeppelin/contracts/proxy/Clones.sol";
 
 import "./Tank.sol";
 
-contract Thaink is ERC1155Supply, Ownable {
+
+contract Thaink is Config, ERC1155Supply, Ownable {
     using Strings for uint;
     using Clones for address;
 
@@ -15,18 +16,27 @@ contract Thaink is ERC1155Supply, Ownable {
     mapping(uint => Tank) public tanks;
     uint public tanksNumber;
 
-    bytes32 public immutable pkp;
-
     event MintEvent(address indexed to, uint indexed id);
 
-    constructor(bytes32 _pkp) ERC1155("") Ownable(msg.sender) {
+    constructor() ERC1155("") Ownable(msg.sender) {
         tankImplementation = new Tank();
-        pkp = _pkp;
     }
 
     function makeTank(string calldata _idea) public {
         Tank tank = Tank(address(tankImplementation).clone());
-        tank.initialize(++tanksNumber, _idea, pkp);
+
+        tank.initialize(
+            ++tanksNumber,
+            pkp,
+            _idea,
+            llmUrl,
+            config,
+            configHash,
+            hintActionIpfsId,
+            submitActionIpfsId,
+            promptActionIpfsId
+        );
+
         tanks[tanksNumber] = tank;
     }
 
@@ -46,4 +56,28 @@ contract Thaink is ERC1155Supply, Ownable {
         require(address(tank) != address(0), "Tank does not exist");
         return tank.tokenURI();
     }
+
+    function setPkp(bytes calldata _pkp) public onlyOwner {
+        pkp = _pkp;
+    }
+
+    function setLlmUrl(string calldata _llmUrl) public onlyOwner {
+        llmUrl = _llmUrl;
+    }
+
+    function setConfig(string calldata _config, string calldata _configHash) public onlyOwner {
+        config = _config;
+        configHash = _configHash;
+    }
+
+    function setIpfsIds(
+        string calldata _hintActionIpfsId,
+        string calldata _submitActionIpfsId,
+        string calldata _promptActionIpfsId
+    ) public onlyOwner {
+        hintActionIpfsId = _hintActionIpfsId;
+        submitActionIpfsId = _submitActionIpfsId;
+        promptActionIpfsId = _promptActionIpfsId;
+    }
+
 }

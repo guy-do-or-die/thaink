@@ -6,7 +6,6 @@ import Notification from '@/components/Notification'
 import { useNavigation } from '@/hooks/useNavigation'
 import { ROUTES } from '@/routes.config'
 
-
 export default function Header() {
   const { navigateTo } = useNavigation()
 
@@ -30,5 +29,5 @@ export default function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

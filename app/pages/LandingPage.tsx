@@ -8,9 +8,7 @@ import { useAccount } from '@/wallet'
 import { useNavigation } from '@/hooks/useNavigation'
 import { ROUTES } from '@/routes.config'
 
-
 export default function LandingPage() {
-
   const { connected } = useAccount()
   const { navigateTo } = useNavigation()
 
@@ -23,15 +21,17 @@ export default function LandingPage() {
         <h1 className="text-4xl font-bold">Welcome to Thaink Tank</h1>
       </div>
       <div className="text-center space-y-8 mt-8">
-        {
-          connected ?
-            <Button variant="outline" onClick={() => navigateTo(ROUTES.TANKS.path)}>Continue</Button>
-            :
-            <>
-              <p className="text-xl">Connect your wallet to continue</p>
-              <Connection />
-            </>
-        }
+        {connected ? (
+          <Button variant="outline" onClick={() => navigateTo(ROUTES.TANKS.path)}>
+            Continue
+          </Button>
+        ) : (
+          <>
+            <p className="text-xl">Connect your wallet to continue</p>
+            <Connection />
+          </>
+        )}
       </div>
-    </Content>);
+    </Content>
+  )
 }

@@ -5,12 +5,12 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 import { defineConfig } from 'vite'
 
-
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./app"),
-    }
+      '@': path.resolve(__dirname, './app'),
+      '~': path.resolve(__dirname, './'),
+    },
   },
 })

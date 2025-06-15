@@ -10,7 +10,6 @@ import Content from '@/components/Content'
 import Tank from '@/components/Tank'
 import Engage from '@/components/Engage'
 
-
 export default function TankPage() {
   const { id } = useParams()
   const { navigateTo } = useNavigation()
@@ -21,7 +20,7 @@ export default function TankPage() {
     args: [BigInt(tankId)],
     query: {
       enabled: !!tankId,
-    }
+    },
   })
 
   const { address } = useAccount()
@@ -30,7 +29,7 @@ export default function TankPage() {
     args: [address, BigInt(tankId)],
     query: {
       enabled: !!address,
-    }
+    },
   })
 
   useEffect(() => {
@@ -50,12 +49,7 @@ export default function TankPage() {
     <Content>
       <div className="w-full space-y-8">
         <Tank tankId={tankId} variant="single" />
-        <Engage
-          tankId={tankId}
-          tankAddress={tankAddress}
-          hasMinted={hasMinted}
-          hasContributed={hasContributed}
-        />
+        <Engage tankId={tankId} tankAddress={tankAddress} hasMinted={hasMinted} hasContributed={hasContributed} />
       </div>
     </Content>
   )

@@ -8,18 +8,23 @@ contract DeployScript is Script {
     Thaink public thaink;
     
     function run() public {
-        string memory pkpString = vm.envString("VITE_PKP_PUBLIC_KEY");
-        bytes32 pkp = bytes32(abi.encodePacked(pkpString));
-
         address deployer = msg.sender;
         console2.log("Deploying Thaink contract with address:", deployer);
         
         vm.startBroadcast();
 
-        thaink = new Thaink(pkp);
+        thaink = new Thaink();
         
         if (thaink.owner() != deployer) {
             revert("Ownership verification failed");
+        }
+        
+        string memory newOwnerEnv = vm.envOr("DEV_WALLET_ADDRESS", string(""));
+        if (bytes(newOwnerEnv).length > 0) {
+            address newOwner = vm.parseAddress(newOwnerEnv);
+            console2.log("Transferring ownership to:", newOwner);
+            thaink.transferOwnership(newOwner);
+            console2.log("New owner set to:", thaink.owner());
         }
             
         console2.log("Deployment successful and verified");

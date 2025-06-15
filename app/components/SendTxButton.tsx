@@ -24,7 +24,7 @@ interface SendTxButtonProps {
 export function SendTxButton({
   signedTx,
   disabled = false,
-  className = "",
+  className = '',
   icon,
   text,
   onSuccess,
@@ -81,11 +81,7 @@ export function SendTxButton({
   }, [tx, isConfirmationError])
 
   return (
-    <Button
-      variant="outline"
-      className={className}
-      onClick={handleSubmit}
-      disabled={disabled || !signedTx}>
+    <Button variant="outline" className={className} onClick={handleSubmit} disabled={disabled || !signedTx}>
       {icon} {text}
     </Button>
   )

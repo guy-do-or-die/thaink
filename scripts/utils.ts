@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-
 export function updateEnvFile(key: string, value: string): void {
   const newLine = `${key}=${value}`
   const regex = new RegExp(`^${key}=.*`, 'm')
@@ -21,4 +20,11 @@ export function updateEnvFile(key: string, value: string): void {
   }
 
   fs.writeFileSync(envPath, envContent, 'utf-8')
+}
+
+export function kebabToCamel(str: string): string {
+  return str
+    .split('-')
+    .map((part, index) => (index === 0 ? part : part.charAt(0).toUpperCase() + part.slice(1)))
+    .join('')
 }

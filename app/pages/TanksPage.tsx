@@ -40,12 +40,7 @@ export default function TanksPage({ filter }: TanksPageProps) {
 
   return (
     <Content>
-      <InfiniteScrollArea
-        items={displayedTanks}
-        hasMore={hasMore}
-        onLoadMore={loadMore}
-        renderItem={renderTank}
-      />
+      <InfiniteScrollArea items={displayedTanks} hasMore={hasMore} onLoadMore={loadMore} renderItem={renderTank} />
     </Content>
   )
 }

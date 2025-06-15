@@ -4,7 +4,6 @@ import { ROUTES } from '../routes.config'
 
 import { useNavigation } from '@/hooks/useNavigation'
 
-
 export default function NotFound() {
   const { navigateTo } = useNavigation()
 

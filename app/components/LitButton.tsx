@@ -7,11 +7,10 @@ import { LoaderCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { notify } from '@/components/Notification'
 
-import litService from '@/lit/service'
+import litService from '../../lit/service'
 
 import { tankAbi } from '@/contracts'
 import { chain, RPC_URL } from '@/wallet'
-
 
 interface LitButtonProps {
   icon: React.ReactNode
@@ -22,15 +21,8 @@ interface LitButtonProps {
   variant?: string
 }
 
-const agentEndpoint = import.meta.env.VITE_AGENT_ENDPOINT
-
-const SUBMIT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_SUBMITLITACTION_IPFS_CID
-const HINT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_HINTLITACTION_IPFS_CID
-const PROMPT_LIT_ACTION_IPFS_CID = import.meta.env.VITE_PROMPTLITACTION_IPFS_CID
-
 const PKP_PUBLIC_KEY = import.meta.env.VITE_PKP_PUBLIC_KEY
 const PKP_TOKEN_ID = import.meta.env.VITE_PKP_TOKEN_ID
-
 
 export default function LitButton({
   icon,
@@ -41,7 +33,7 @@ export default function LitButton({
   disabled = false,
   onSuccess,
   onError,
-  variant = 'default'
+  variant = 'default',
 }: LitButtonProps) {
   const [isProcessing, setIsProcessing] = useState(false)
 
@@ -51,14 +43,13 @@ export default function LitButton({
     setIsProcessing(true)
 
     const params = {
+      chainId: chain.id,
       chainNetwork: chain.network.replace(/-([a-z])/g, (_, c) => c.toUpperCase()),
-      ipfsCid: [SUBMIT_LIT_ACTION_IPFS_CID, HINT_LIT_ACTION_IPFS_CID, PROMPT_LIT_ACTION_IPFS_CID],
       pkp: PKP_PUBLIC_KEY,
       pkpTokenId: PKP_TOKEN_ID,
       rpcUrl: RPC_URL,
       contractAbi: tankAbi,
-      agentEndpoint,
-      ...actionParams
+      ...actionParams,
     }
 
     try {
@@ -94,7 +85,9 @@ export default function LitButton({
     <Button
       onClick={handleAction}
       disabled={!signer || disabled || isProcessing}
-      variant={variant} className={`${className} w-32`}>
+      variant={variant}
+      className={`${className} w-32`}
+    >
       {isProcessing ? <LoaderCircle className="animate-spin" /> : <span>{icon}</span>}
       {text}
     </Button>

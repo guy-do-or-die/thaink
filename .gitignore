@@ -8,7 +8,9 @@ logs
 node_modules
 *.local
 
-.vscode/*
+.vscode
+.aw-signer-admin-storage
+.lit-actions
 
 *.swp
 *.swo
@@ -21,7 +23,3 @@ contracts/lib
 contracts/out
 contracts/cache
 contracts/broadcast
-
-
-coinbase_cloud_api_key.json
-wallet_data.txt

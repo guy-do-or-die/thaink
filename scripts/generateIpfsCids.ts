@@ -1,7 +1,7 @@
 import * as ipfsOnlyHash from 'ipfs-only-hash'
-import * as actions from '../app/lit/actions'
+import * as actions from '../lit/actions'
 
-import { minifyWithTerser } from "../app/lit/actions/utils"
+import { minifyWithTerser } from '../lit/actions/utils'
 
 import { updateEnvFile } from './utils'
 

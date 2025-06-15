@@ -1,62 +1,75 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-import "@openzeppelin/contracts/utils/Base64.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import "@openzeppelin/contracts/utils/cryptography/MessageHashUtils.sol";
 
-import "./lib/LibString.sol";
+import "./Meta.sol";
+import "./Config.sol";
 
-contract Tank is Initializable {
-    using Strings for uint256;
-    using LibString for string;
+
+contract Tank is Initializable, Config, Meta {
     using ECDSA for bytes32;
     using MessageHashUtils for bytes32;
 
-    uint256 constant MAX_IDEA_LENGTH = 10000;
+    uint constant MAX_IDEA_LENGTH = 10000;
 
-    error IdeaTooLong(uint256 length, uint256 maxLength);
+    error IdeaTooLong(uint length, uint maxLength);
 
     struct Note {
         string content;
         string contentHash;
         address contributor;
-        uint256 timestamp;
-        uint256 value;
+        uint score;
     }
 
-    uint256 public tokenId;
-
-    string public idea;
     string public digest;
     string public digestHash;
 
-    uint256 public notesCount;
-    uint256 public mintsCount;
+    mapping(uint => Note) public notes;
+    mapping(address => uint) public contributors;
 
-    mapping(uint256 => Note) public notes;
-    mapping(address => uint256) public contributors;
+    event NoteAdded(uint index, address contributor);
+    event Minted(uint index, address contributor);
 
-    event NoteAdded(uint256 index, address contributor);
-    event Minted(uint256 index, address contributor);
-
-    bytes32 public pkp;
-    address public factory;
-
+    address immutable public factory;
+    
     constructor() {
+        factory = address(msg.sender);
         _disableInitializers();
     }
 
-    function initialize(uint256 _tokenId, string calldata _idea, bytes32 _pkp) public initializer {
+    function initialize(
+        uint _tokenId,
+        bytes calldata _pkp,
+        string calldata _idea,
+        string calldata _llmUrl,
+        string calldata _config,
+        string calldata _configHash,
+        string calldata _hintActionIpfsId,
+        string calldata _submitActionIpfsId,
+        string calldata _promptActionIpfsId
+    ) public initializer {
+        require(msg.sender == factory, "Only factory can initialize");
+
         if (bytes(_idea).length > MAX_IDEA_LENGTH) {
             revert IdeaTooLong(bytes(_idea).length, MAX_IDEA_LENGTH);
         }
 
-        factory = msg.sender;
         tokenId = _tokenId;
+
         idea = _idea;
+
+        llmUrl = _llmUrl;
+
         pkp = _pkp;
+        config = _config;
+        configHash = _configHash;
+
+        hintActionIpfsId = _hintActionIpfsId;
+        submitActionIpfsId = _submitActionIpfsId;
+        promptActionIpfsId = _promptActionIpfsId;
     }
 
     function verifySignature(bytes calldata signature) internal view returns (bool) {
@@ -66,31 +79,30 @@ contract Tank is Initializable {
         (address recovered, ECDSA.RecoverError error, bytes32 err) = ECDSA.tryRecover(ethSignedMessageHash, signature);
 
         if (error != ECDSA.RecoverError.NoError) {
-            revert(string(abi.encodePacked("Signature recovery failed: ", uint256(err).toString())));
+            revert(string(abi.encodePacked("Signature recovery failed: ", err)));
         }
 
         require(recovered != address(0), "Zero address recovered");
-        return recovered == address(uint160(uint256(keccak256(abi.encodePacked(pkp)))));
+        return recovered == address(uint160(uint(keccak256(abi.encodePacked(pkp)))));
     }
 
     function addNote(
         address _contributor,
         string calldata _content,
-        string calldata _digest,
         string calldata _contentHash,
+        string calldata _digest,
         string calldata _digestHash,
-        uint256 _value,
-        bytes calldata signature
+        bytes calldata _signature,
+        uint _score
     ) public {
-        //require(verifySignature(signature), "Invalid signature");
+        //require(verifySignature(_signature), "Invalid signature");
         require(contributors[_contributor] == 0, "Contributor has already added a note");
 
         Note memory note;
-        note.timestamp = block.timestamp;
         note.contributor = _contributor;
         note.content = _content;
         note.contentHash = _contentHash;
-        note.value = _value;
+        note.score = _score;
 
         notes[++notesCount] = note;
         contributors[_contributor] = notesCount;
@@ -105,69 +117,6 @@ contract Tank is Initializable {
         require(msg.sender == factory, "Only factory can increment mints count");
         emit Minted(++mintsCount, tx.origin);
     }
-
-    function getImage() private view returns (string memory) {
-        return string(
-            abi.encodePacked(
-                "data:image/svg+xml;base64,",
-                Base64.encode(
-                    bytes(
-                        string(
-                            abi.encodePacked(
-                                '<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">',
-                                '<style>',
-                                '.title { fill: white; font-family: Arial, sans-serif; font-size: 24px; font-weight: bold; }',
-                                '.stats { fill: white; font-family: Arial, sans-serif; font-size: 18px; }',
-                                '.idea { fill: white; font-family: Arial, sans-serif; font-size: 16px; }',
-                                '</style>',
-                                '<rect width="800" height="400" fill="#0052FF"/>',
-                                '<text x="40" y="50" class="title">Tank #', 
-                                tokenId.toString(),
-                                '</text>',
-                                '<text x="40" y="90" class="stats">Notes: ',
-                                notesCount.toString(),
-                                ' | Mints: ',
-                                mintsCount.toString(),
-                                '</text>',
-                                '<foreignObject x="40" y="120" width="720" height="240">',
-                                '<div xmlns="http://www.w3.org/1999/xhtml" style="color: white; font-family: Arial, sans-serif; font-size: 16px; overflow-wrap: break-word;">',
-                                idea,
-                                '</div>',
-                                '</foreignObject>',
-                                '</svg>'
-                            )
-                        )
-                    )
-                )
-            )
-        );
-    }
-
-    function tokenURI() public view returns (string memory) {
-        return string(
-            abi.encodePacked(
-                "data:application/json;base64,",
-                Base64.encode(
-                    bytes(
-                        string(
-                            abi.encodePacked(
-                                '{"name": "Tank #',
-                                tokenId.toString(),
-                                '", "description": "',
-                                idea.escapeJSON(),
-                                '", "image": "',
-                                getImage(),
-                                '", "attributes": [{"trait_type": "Notes", "value": ',
-                                notesCount.toString(),
-                                '}, {"trait_type": "Mints", "value": ',
-                                mintsCount.toString(),
-                                '}]}'
-                            )
-                        )
-                    )
-                )
-            )
-        );
-    }
+ 
 
 }

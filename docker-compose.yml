@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.app
     ports:
-      - "4173:4173"
+      - '4173:4173'
     environment:
       - NODE_ENV=production
       - VITE_CHAIN=${VITE_CHAIN}
@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: Dockerfile.agent
     ports:
-      - "3001:3001"
+      - '3001:3001'
     volumes:
       - ./data:/app/data
     environment:

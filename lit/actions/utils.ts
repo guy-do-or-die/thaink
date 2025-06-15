@@ -1,7 +1,33 @@
-import 'ethers'
+import { ethers } from 'ethers'
 
-export function getAccessControlConditions(ipfsCids: string[]) {
-  const accessControlConditions = []
+declare var Lit: any
+declare var chainNetwork: string
+declare var rpcUrl: string
+declare var contractAddress: string
+declare var contractAbi: Array<object>
+
+// Define types for Access Control Conditions
+interface AccessControlConditionItem {
+  contractAddress: string
+  standardContractType: string
+  chain: string
+  method: string
+  parameters: string[]
+  returnValueTest: {
+    comparator: string
+    value: string
+  }
+}
+
+interface AccessControlConditionOperator {
+  operator: 'or' | 'and'
+}
+
+// Union type for access control conditions
+type AccessControlCondition = AccessControlConditionItem | AccessControlConditionOperator
+
+export function getAccessControlConditions(ipfsCids: string[], network?: string): AccessControlCondition[] {
+  const accessControlConditions: AccessControlCondition[] = []
 
   ipfsCids.forEach((cid, index) => {
     index > 0 && accessControlConditions.push({ operator: 'or' })
@@ -9,7 +35,7 @@ export function getAccessControlConditions(ipfsCids: string[]) {
     accessControlConditions.push({
       contractAddress: '',
       standardContractType: '',
-      chain: chainNetwork,
+      chain: network || chainNetwork,
       method: '',
       parameters: [':currentActionIpfsId'],
       returnValueTest: {
@@ -28,36 +54,24 @@ export async function encrypt(ipfsCids: string[], data: any) {
 
   const { ciphertext, dataToEncryptHash } = await Lit.Actions.encrypt({
     accessControlConditions: getAccessControlConditions(ipfsCids),
-    to_encrypt: dataToEncrypt
+    to_encrypt: dataToEncrypt,
   })
 
   return { ciphertext, dataToEncryptHash }
 }
 
-export async function decrypt(ipfsCids: string[], ciphertext: string, dataToEncryptHash: string) {
-  //try {
+export async function decrypt(ipfsCids: string[], ciphertext: string, dataToEncryptHash: string): Promise<string> {
   const resp = await Lit.Actions.decryptAndCombine({
     accessControlConditions: getAccessControlConditions(ipfsCids),
     dataToEncryptHash,
     chain: chainNetwork,
     ciphertext,
   })
-  console.log(resp)
   return resp
-  //} catch (e) {
-  //  console.error('ERROR in decrypt function')
-  //  console.error('ipfsCids:', ipfsCids)
-  //  console.error('ciphertext:', ciphertext)
-  //  console.error('dataToEncryptHash:', dataToEncryptHash)
-  //  console.error('error:', e)
-  //  throw new Error(JSON.stringify(e))
-  //}
 }
 
 export function injectFunctions(targetFn: Function, functionsToInject: Function[]): string {
-  const injectedFunctionsCode = functionsToInject
-    .map(fn => fn.toString())
-    .join('\n\n')
+  const injectedFunctionsCode = functionsToInject.map((fn) => fn.toString()).join('\n\n')
 
   const targetFnStr = targetFn.toString()
   const firstBraceIndex = targetFnStr.indexOf('{')
@@ -67,47 +81,39 @@ export function injectFunctions(targetFn: Function, functionsToInject: Function[
     ${targetFnStr.slice(firstBraceIndex + 1)}`
 }
 
-/**
- * Minifies JavaScript code using Terser with deterministic settings
- * @param code JavaScript code to minify
- * @returns Promise resolving to minified code or original code if minification fails
- */
 export async function minifyWithTerser(code: string): Promise<string> {
   try {
-    // Dynamically import terser to avoid bundling issues
-    const { minify } = await import('terser');
+    const { minify } = await import('terser')
 
-    // Minify with deterministic settings that preserve more code
     const minifyOptions = {
       mangle: {
-        toplevel: false,  // Don't mangle top-level names to preserve exports
-        properties: false // Don't mangle property names
+        toplevel: false, // Don't mangle top-level names to preserve exports
+        properties: false, // Don't mangle property names
       },
       compress: {
-        dead_code: false,    // Don't remove "dead" code
+        dead_code: false, // Don't remove "dead" code
         drop_console: false, // Keep console.log statements
-        unused: false,       // Don't remove unused variables
-        sequences: false,    // Don't join consecutive statements with commas
-        conditionals: true,  // Optimize if-s and conditional expressions
-        booleans: true,      // Optimize boolean expressions
-        passes: 1            // Just one pass to avoid over-optimization
+        unused: false, // Don't remove unused variables
+        sequences: false, // Don't join consecutive statements with commas
+        conditionals: true, // Optimize if-s and conditional expressions
+        booleans: true, // Optimize boolean expressions
+        passes: 1, // Just one pass to avoid over-optimization
       },
       output: {
-        beautify: false,     // Output compressed
-        comments: false      // Remove comments
+        beautify: false, // Output compressed
+        comments: false, // Remove comments
       },
       keep_classnames: true, // Keep class names
-      keep_fnames: true,     // Keep function names
-      toplevel: false        // Don't transform top-level names
-    };
+      keep_fnames: true, // Keep function names
+      toplevel: false, // Don't transform top-level names
+    }
 
-    const result = await minify(code, minifyOptions);
+    const result = await minify(code, minifyOptions)
 
-    // Verify the minified code isn't just an error-throwing snippet
-    return result.code || code;
+    return result.code || code
   } catch (error) {
-    console.error('Terser minification failed:', error);
-    return code; // Return original code if minification fails
+    console.error('Terser minification failed:', error)
+    return code
   }
 }
 
@@ -117,58 +123,13 @@ export function createLitAction(mainFn: Function, functionsToInject: Function[] 
   return `(${fnWithInjectedCode})()`
 }
 
-export async function callAgent({ agentEndpoint, idea, digest, action, prompt, note }) {
-  const res = await Lit.Actions.runOnce({
-    waitForResponse: true,
-    name: "agentCaller"
-  }, async () => {
-    const agentResponse = await fetch(agentEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        action,
-        idea,
-        digest,
-        ...(prompt && { prompt }),
-        ...(note && { note })
-      })
-    })
-
-    if (!agentResponse.ok) {
-      throw new Error(`Agent call failed: ${agentResponse.statusText}`)
-    }
-
-    return JSON.stringify(await agentResponse.json())
-  })
-
-  if (!res) {
-    throw new Error('Agent response is empty')
-  }
-
-  return JSON.parse(res)
-}
-
-export async function callAgentForHint(agentEndpoint, idea, digest) {
-  return await callAgent({ agentEndpoint, idea, digest, action: 'hint' })
-}
-
-export async function callAgentForPrompt(agentEndpoint, idea, digest, prompt) {
-  return await callAgent({ agentEndpoint, idea, digest, action: 'prompt', prompt })
-}
-
-export async function callAgentForSubmit(agentEndpoint, idea, digest, note) {
-  return await callAgent({ agentEndpoint, idea, digest, action: 'evaluate_and_digest', note })
-}
-
 export async function signMessage(message: string, pkp: string) {
   const toSign = ethers.utils.arrayify(ethers.utils.hashMessage(ethers.utils.arrayify(message)))
 
   const sigObjectStr = await Lit.Actions.signAndCombineEcdsa({
     toSign,
     publicKey: pkp,
-    sigName: 'pkp'
+    sigName: 'pkp',
   })
   const sigObject = typeof sigObjectStr === 'string' ? JSON.parse(sigObjectStr) : sigObjectStr
   return '0x' + sigObject.r + sigObject.s + (sigObject.v === 27 ? '1b' : '1c')
@@ -183,27 +144,25 @@ export async function buildAndSignTransaction({
   noteHash,
   newDigestHash,
   scoreValue,
-  ideaSignature
+  ideaSignature,
 }) {
-  // First create minimal transaction for signing
   const minimalTx = {
     to: contract.address,
-    nonce: 0,  // we can use 0 since this is just for signing
-    gasLimit: '0x5208',  // basic 21000 gas
+    nonce: 0,
+    gasLimit: '0x5208',
     gasPrice: '0x0',
     value: '0x0',
-    data: contract.interface.getSighash('addNote'),  // just the function selector
-    chainId: 1  // placeholder chainId
+    data: contract.interface.getSighash('addNote'),
+    chainId: chainId,
   }
 
   const toSignTx = ethers.utils.arrayify(ethers.utils.keccak256(ethers.utils.serializeTransaction(minimalTx)))
   const txSigStr = await Lit.Actions.signAndCombineEcdsa({
     toSign: toSignTx,
     publicKey: pkp,
-    sigName: 'tx'
+    sigName: 'tx',
   })
   const txSig = typeof txSigStr === 'string' ? JSON.parse(txSigStr) : txSigStr
-  const chainId = 84532 // Base Sepolia
 
   const unsignedTx = {
     to: contract.address,
@@ -214,13 +173,13 @@ export async function buildAndSignTransaction({
     data: contract.interface.encodeFunctionData('addNote', [
       address,
       encryptedNote,
-      encryptedDigest,
       noteHash,
+      encryptedDigest,
       newDigestHash,
+      ideaSignature,
       scoreValue,
-      ideaSignature
     ]),
-    chainId
+    chainId,
   }
 
   // Get the raw transaction hash
@@ -246,8 +205,8 @@ export async function buildAndSignTransaction({
   const recoveredAddr = ethers.utils.recoverAddress(messageHash, sig)
 
   // Only throw if addresses don't match
-  if (recoveredAddr.toLowerCase() !== parsedTx.from.toLowerCase()) {
-    throw new Error(`Address mismatch: recovered=${recoveredAddr}, from=${parsedTx.from}`)
+  if (recoveredAddr.toLowerCase() !== parsedTx?.from?.toLowerCase()) {
+    throw new Error(`Address mismatch: recovered=${recoveredAddr}, from=${parsedTx?.from}`)
   }
 
   return {
@@ -255,6 +214,49 @@ export async function buildAndSignTransaction({
     from: recoveredAddr,
     chainId,
     gasLimit: unsignedTx.gasLimit,
-    gasPrice: unsignedTx.gasPrice
+    gasPrice: unsignedTx.gasPrice,
+  }
+}
+
+export async function getContractData(rpcUrl: string, contractAddress: string, contractAbi: any[]): Promise<any> {
+  const provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+  const contract = new ethers.Contract(contractAddress, contractAbi, provider)
+
+  const calls = [
+    contract.idea(),
+    contract.digest(),
+    contract.digestHash(),
+    contract.llmUrl(),
+    contract.config(),
+    contract.configHash(),
+    contract.hintActionIpfsId(),
+    contract.submitActionIpfsId(),
+    contract.promptActionIpfsId(),
+  ]
+
+  const [
+    idea,
+    digest,
+    digestHash,
+    llmUrl,
+    config,
+    configHash,
+    hintActionIpfsId,
+    submitActionIpfsId,
+    promptActionIpfsId,
+  ] = await Promise.all(calls)
+
+  const ipfsCids = [hintActionIpfsId, submitActionIpfsId, promptActionIpfsId]
+
+  const decryptedDigest = digest ? await decrypt(ipfsCids, digest, digestHash) : 'empty'
+  const decryptedConfig = config ? await decrypt(ipfsCids, config, configHash) : '{}'
+
+  return {
+    contract,
+    idea,
+    llmUrl,
+    digest: decryptedDigest,
+    config: JSON.parse(decryptedConfig),
+    ipfsCids,
   }
 }
