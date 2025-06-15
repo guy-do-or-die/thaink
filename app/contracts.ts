@@ -9,7 +9,9 @@ import {
 // Clones
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const clonesAbi = [{ type: 'error', inputs: [], name: 'CloneArgumentsTooLong' }] as const
+export const clonesAbi = [
+  { type: 'error', inputs: [], name: 'CloneArgumentsTooLong' },
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Config
@@ -71,7 +73,9 @@ export const configAbi = [
 // Create2
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const create2Abi = [{ type: 'error', inputs: [], name: 'Create2EmptyBytecode' }] as const
+export const create2Abi = [
+  { type: 'error', inputs: [], name: 'Create2EmptyBytecode' },
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ECDSA
@@ -1254,7 +1258,9 @@ export const iMulticall3Abi = [
     type: 'function',
     inputs: [],
     name: 'getBlockNumber',
-    outputs: [{ name: 'blockNumber', internalType: 'uint256', type: 'uint256' }],
+    outputs: [
+      { name: 'blockNumber', internalType: 'uint256', type: 'uint256' },
+    ],
     stateMutability: 'view',
   },
   {
@@ -1776,7 +1782,7 @@ export const tankAbi = [
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const thainkAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
@@ -2200,18 +2206,18 @@ export const thainkAbi = [
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const thainkAddress = {
   8453: '0x68aF043C57aC9b4749841c4974dF04D49Ff8fD88',
   31337: '0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d',
-  84532: '0xE6AA88c14345571BcE986d5eE4Ccf90325efB92E',
+  84532: '0x54EF5544bcf88ec16E97E5734c76c41E18F39A46',
 } as const
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const thainkConfig = { address: thainkAddress, abi: thainkAbi } as const
 
@@ -2245,10 +2251,11 @@ export const useReadConfigConfigHash = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"hintActionIpfsId"`
  */
-export const useReadConfigHintActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: configAbi,
-  functionName: 'hintActionIpfsId',
-})
+export const useReadConfigHintActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'hintActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"llmUrl"`
@@ -2269,18 +2276,20 @@ export const useReadConfigPkp = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"promptActionIpfsId"`
  */
-export const useReadConfigPromptActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: configAbi,
-  functionName: 'promptActionIpfsId',
-})
+export const useReadConfigPromptActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'promptActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link configAbi}__ and `functionName` set to `"submitActionIpfsId"`
  */
-export const useReadConfigSubmitActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: configAbi,
-  functionName: 'submitActionIpfsId',
-})
+export const useReadConfigSubmitActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: configAbi,
+    functionName: 'submitActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155Abi}__
@@ -2300,26 +2309,27 @@ export const useReadErc1155BalanceOf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"balanceOfBatch"`
  */
-export const useReadErc1155BalanceOfBatch = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155Abi,
-  functionName: 'balanceOfBatch',
-})
+export const useReadErc1155BalanceOfBatch = /*#__PURE__*/ createUseReadContract(
+  { abi: erc1155Abi, functionName: 'balanceOfBatch' },
+)
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"isApprovedForAll"`
  */
-export const useReadErc1155IsApprovedForAll = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155Abi,
-  functionName: 'isApprovedForAll',
-})
+export const useReadErc1155IsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155Abi,
+    functionName: 'isApprovedForAll',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadErc1155SupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155Abi,
-  functionName: 'supportsInterface',
-})
+export const useReadErc1155SupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155Abi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"uri"`
@@ -2339,26 +2349,29 @@ export const useWriteErc1155 = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useWriteErc1155SafeBatchTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155Abi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useWriteErc1155SafeBatchTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155Abi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useWriteErc1155SafeTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155Abi,
-  functionName: 'safeTransferFrom',
-})
+export const useWriteErc1155SafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155Abi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useWriteErc1155SetApprovalForAll = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155Abi,
-  functionName: 'setApprovalForAll',
-})
+export const useWriteErc1155SetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155Abi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155Abi}__
@@ -2370,26 +2383,29 @@ export const useSimulateErc1155 = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useSimulateErc1155SafeBatchTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155Abi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useSimulateErc1155SafeBatchTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155Abi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useSimulateErc1155SafeTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155Abi,
-  functionName: 'safeTransferFrom',
-})
+export const useSimulateErc1155SafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155Abi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155Abi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useSimulateErc1155SetApprovalForAll = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155Abi,
-  functionName: 'setApprovalForAll',
-})
+export const useSimulateErc1155SetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155Abi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155Abi}__
@@ -2401,34 +2417,38 @@ export const useWatchErc1155Event = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155Abi}__ and `eventName` set to `"ApprovalForAll"`
  */
-export const useWatchErc1155ApprovalForAllEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155Abi,
-  eventName: 'ApprovalForAll',
-})
+export const useWatchErc1155ApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155Abi,
+    eventName: 'ApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155Abi}__ and `eventName` set to `"TransferBatch"`
  */
-export const useWatchErc1155TransferBatchEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155Abi,
-  eventName: 'TransferBatch',
-})
+export const useWatchErc1155TransferBatchEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155Abi,
+    eventName: 'TransferBatch',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155Abi}__ and `eventName` set to `"TransferSingle"`
  */
-export const useWatchErc1155TransferSingleEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155Abi,
-  eventName: 'TransferSingle',
-})
+export const useWatchErc1155TransferSingleEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155Abi,
+    eventName: 'TransferSingle',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155Abi}__ and `eventName` set to `"URI"`
  */
-export const useWatchErc1155UriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155Abi,
-  eventName: 'URI',
-})
+export const useWatchErc1155UriEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155Abi,
+    eventName: 'URI',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155HolderAbi}__
@@ -2440,10 +2460,11 @@ export const useReadErc1155Holder = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155HolderAbi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadErc1155HolderSupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155HolderAbi,
-  functionName: 'supportsInterface',
-})
+export const useReadErc1155HolderSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155HolderAbi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155HolderAbi}__
@@ -2455,39 +2476,45 @@ export const useWriteErc1155Holder = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155HolderAbi}__ and `functionName` set to `"onERC1155BatchReceived"`
  */
-export const useWriteErc1155HolderOnErc1155BatchReceived = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155HolderAbi,
-  functionName: 'onERC1155BatchReceived',
-})
+export const useWriteErc1155HolderOnErc1155BatchReceived =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155HolderAbi,
+    functionName: 'onERC1155BatchReceived',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155HolderAbi}__ and `functionName` set to `"onERC1155Received"`
  */
-export const useWriteErc1155HolderOnErc1155Received = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155HolderAbi,
-  functionName: 'onERC1155Received',
-})
+export const useWriteErc1155HolderOnErc1155Received =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155HolderAbi,
+    functionName: 'onERC1155Received',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155HolderAbi}__
  */
-export const useSimulateErc1155Holder = /*#__PURE__*/ createUseSimulateContract({ abi: erc1155HolderAbi })
+export const useSimulateErc1155Holder = /*#__PURE__*/ createUseSimulateContract(
+  { abi: erc1155HolderAbi },
+)
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155HolderAbi}__ and `functionName` set to `"onERC1155BatchReceived"`
  */
-export const useSimulateErc1155HolderOnErc1155BatchReceived = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155HolderAbi,
-  functionName: 'onERC1155BatchReceived',
-})
+export const useSimulateErc1155HolderOnErc1155BatchReceived =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155HolderAbi,
+    functionName: 'onERC1155BatchReceived',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155HolderAbi}__ and `functionName` set to `"onERC1155Received"`
  */
-export const useSimulateErc1155HolderOnErc1155Received = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155HolderAbi,
-  functionName: 'onERC1155Received',
-})
+export const useSimulateErc1155HolderOnErc1155Received =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155HolderAbi,
+    functionName: 'onERC1155Received',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__
@@ -2499,18 +2526,20 @@ export const useReadErc1155Supply = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"balanceOf"`
  */
-export const useReadErc1155SupplyBalanceOf = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'balanceOf',
-})
+export const useReadErc1155SupplyBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'balanceOf',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"balanceOfBatch"`
  */
-export const useReadErc1155SupplyBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'balanceOfBatch',
-})
+export const useReadErc1155SupplyBalanceOfBatch =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'balanceOfBatch',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"exists"`
@@ -2523,26 +2552,29 @@ export const useReadErc1155SupplyExists = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"isApprovedForAll"`
  */
-export const useReadErc1155SupplyIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'isApprovedForAll',
-})
+export const useReadErc1155SupplyIsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'isApprovedForAll',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadErc1155SupplySupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'supportsInterface',
-})
+export const useReadErc1155SupplySupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"totalSupply"`
  */
-export const useReadErc1155SupplyTotalSupply = /*#__PURE__*/ createUseReadContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'totalSupply',
-})
+export const useReadErc1155SupplyTotalSupply =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'totalSupply',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"uri"`
@@ -2562,92 +2594,105 @@ export const useWriteErc1155Supply = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useWriteErc1155SupplySafeBatchTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useWriteErc1155SupplySafeBatchTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useWriteErc1155SupplySafeTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'safeTransferFrom',
-})
+export const useWriteErc1155SupplySafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useWriteErc1155SupplySetApprovalForAll = /*#__PURE__*/ createUseWriteContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'setApprovalForAll',
-})
+export const useWriteErc1155SupplySetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155SupplyAbi}__
  */
-export const useSimulateErc1155Supply = /*#__PURE__*/ createUseSimulateContract({ abi: erc1155SupplyAbi })
+export const useSimulateErc1155Supply = /*#__PURE__*/ createUseSimulateContract(
+  { abi: erc1155SupplyAbi },
+)
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useSimulateErc1155SupplySafeBatchTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useSimulateErc1155SupplySafeBatchTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useSimulateErc1155SupplySafeTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'safeTransferFrom',
-})
+export const useSimulateErc1155SupplySafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useSimulateErc1155SupplySetApprovalForAll = /*#__PURE__*/ createUseSimulateContract({
-  abi: erc1155SupplyAbi,
-  functionName: 'setApprovalForAll',
-})
+export const useSimulateErc1155SupplySetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc1155SupplyAbi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155SupplyAbi}__
  */
-export const useWatchErc1155SupplyEvent = /*#__PURE__*/ createUseWatchContractEvent({ abi: erc1155SupplyAbi })
+export const useWatchErc1155SupplyEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: erc1155SupplyAbi })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `eventName` set to `"ApprovalForAll"`
  */
-export const useWatchErc1155SupplyApprovalForAllEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155SupplyAbi,
-  eventName: 'ApprovalForAll',
-})
+export const useWatchErc1155SupplyApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155SupplyAbi,
+    eventName: 'ApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `eventName` set to `"TransferBatch"`
  */
-export const useWatchErc1155SupplyTransferBatchEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155SupplyAbi,
-  eventName: 'TransferBatch',
-})
+export const useWatchErc1155SupplyTransferBatchEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155SupplyAbi,
+    eventName: 'TransferBatch',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `eventName` set to `"TransferSingle"`
  */
-export const useWatchErc1155SupplyTransferSingleEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155SupplyAbi,
-  eventName: 'TransferSingle',
-})
+export const useWatchErc1155SupplyTransferSingleEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155SupplyAbi,
+    eventName: 'TransferSingle',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc1155SupplyAbi}__ and `eventName` set to `"URI"`
  */
-export const useWatchErc1155SupplyUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: erc1155SupplyAbi,
-  eventName: 'URI',
-})
+export const useWatchErc1155SupplyUriEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc1155SupplyAbi,
+    eventName: 'URI',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc165Abi}__
@@ -2659,10 +2704,11 @@ export const useReadErc165 = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc165Abi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadErc165SupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: erc165Abi,
-  functionName: 'supportsInterface',
-})
+export const useReadErc165SupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: erc165Abi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155Abi}__
@@ -2682,26 +2728,29 @@ export const useReadIerc1155BalanceOf = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"balanceOfBatch"`
  */
-export const useReadIerc1155BalanceOfBatch = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155Abi,
-  functionName: 'balanceOfBatch',
-})
+export const useReadIerc1155BalanceOfBatch =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155Abi,
+    functionName: 'balanceOfBatch',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"isApprovedForAll"`
  */
-export const useReadIerc1155IsApprovedForAll = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155Abi,
-  functionName: 'isApprovedForAll',
-})
+export const useReadIerc1155IsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155Abi,
+    functionName: 'isApprovedForAll',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadIerc1155SupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155Abi,
-  functionName: 'supportsInterface',
-})
+export const useReadIerc1155SupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155Abi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155Abi}__
@@ -2713,26 +2762,29 @@ export const useWriteIerc1155 = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useWriteIerc1155SafeBatchTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155Abi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useWriteIerc1155SafeBatchTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155Abi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useWriteIerc1155SafeTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155Abi,
-  functionName: 'safeTransferFrom',
-})
+export const useWriteIerc1155SafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155Abi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useWriteIerc1155SetApprovalForAll = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155Abi,
-  functionName: 'setApprovalForAll',
-})
+export const useWriteIerc1155SetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155Abi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155Abi}__
@@ -2744,26 +2796,29 @@ export const useSimulateIerc1155 = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useSimulateIerc1155SafeBatchTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155Abi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useSimulateIerc1155SafeBatchTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155Abi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useSimulateIerc1155SafeTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155Abi,
-  functionName: 'safeTransferFrom',
-})
+export const useSimulateIerc1155SafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155Abi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155Abi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useSimulateIerc1155SetApprovalForAll = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155Abi,
-  functionName: 'setApprovalForAll',
-})
+export const useSimulateIerc1155SetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155Abi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155Abi}__
@@ -2775,34 +2830,38 @@ export const useWatchIerc1155Event = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155Abi}__ and `eventName` set to `"ApprovalForAll"`
  */
-export const useWatchIerc1155ApprovalForAllEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155Abi,
-  eventName: 'ApprovalForAll',
-})
+export const useWatchIerc1155ApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155Abi,
+    eventName: 'ApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155Abi}__ and `eventName` set to `"TransferBatch"`
  */
-export const useWatchIerc1155TransferBatchEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155Abi,
-  eventName: 'TransferBatch',
-})
+export const useWatchIerc1155TransferBatchEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155Abi,
+    eventName: 'TransferBatch',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155Abi}__ and `eventName` set to `"TransferSingle"`
  */
-export const useWatchIerc1155TransferSingleEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155Abi,
-  eventName: 'TransferSingle',
-})
+export const useWatchIerc1155TransferSingleEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155Abi,
+    eventName: 'TransferSingle',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155Abi}__ and `eventName` set to `"URI"`
  */
-export const useWatchIerc1155UriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155Abi,
-  eventName: 'URI',
-})
+export const useWatchIerc1155UriEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155Abi,
+    eventName: 'URI',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__
@@ -2814,139 +2873,156 @@ export const useReadIerc1155MetadataUri = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"balanceOf"`
  */
-export const useReadIerc1155MetadataUriBalanceOf = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'balanceOf',
-})
+export const useReadIerc1155MetadataUriBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'balanceOf',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"balanceOfBatch"`
  */
-export const useReadIerc1155MetadataUriBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'balanceOfBatch',
-})
+export const useReadIerc1155MetadataUriBalanceOfBatch =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'balanceOfBatch',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"isApprovedForAll"`
  */
-export const useReadIerc1155MetadataUriIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'isApprovedForAll',
-})
+export const useReadIerc1155MetadataUriIsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'isApprovedForAll',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadIerc1155MetadataUriSupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'supportsInterface',
-})
+export const useReadIerc1155MetadataUriSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"uri"`
  */
-export const useReadIerc1155MetadataUriUri = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'uri',
-})
+export const useReadIerc1155MetadataUriUri =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'uri',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__
  */
-export const useWriteIerc1155MetadataUri = /*#__PURE__*/ createUseWriteContract({ abi: ierc1155MetadataUriAbi })
+export const useWriteIerc1155MetadataUri = /*#__PURE__*/ createUseWriteContract(
+  { abi: ierc1155MetadataUriAbi },
+)
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useWriteIerc1155MetadataUriSafeBatchTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useWriteIerc1155MetadataUriSafeBatchTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useWriteIerc1155MetadataUriSafeTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'safeTransferFrom',
-})
+export const useWriteIerc1155MetadataUriSafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useWriteIerc1155MetadataUriSetApprovalForAll = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'setApprovalForAll',
-})
+export const useWriteIerc1155MetadataUriSetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__
  */
-export const useSimulateIerc1155MetadataUri = /*#__PURE__*/ createUseSimulateContract({ abi: ierc1155MetadataUriAbi })
+export const useSimulateIerc1155MetadataUri =
+  /*#__PURE__*/ createUseSimulateContract({ abi: ierc1155MetadataUriAbi })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  */
-export const useSimulateIerc1155MetadataUriSafeBatchTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useSimulateIerc1155MetadataUriSafeBatchTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"safeTransferFrom"`
  */
-export const useSimulateIerc1155MetadataUriSafeTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'safeTransferFrom',
-})
+export const useSimulateIerc1155MetadataUriSafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `functionName` set to `"setApprovalForAll"`
  */
-export const useSimulateIerc1155MetadataUriSetApprovalForAll = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155MetadataUriAbi,
-  functionName: 'setApprovalForAll',
-})
+export const useSimulateIerc1155MetadataUriSetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155MetadataUriAbi,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__
  */
-export const useWatchIerc1155MetadataUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155MetadataUriAbi,
-})
+export const useWatchIerc1155MetadataUriEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: ierc1155MetadataUriAbi })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `eventName` set to `"ApprovalForAll"`
  */
-export const useWatchIerc1155MetadataUriApprovalForAllEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155MetadataUriAbi,
-  eventName: 'ApprovalForAll',
-})
+export const useWatchIerc1155MetadataUriApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155MetadataUriAbi,
+    eventName: 'ApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `eventName` set to `"TransferBatch"`
  */
-export const useWatchIerc1155MetadataUriTransferBatchEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155MetadataUriAbi,
-  eventName: 'TransferBatch',
-})
+export const useWatchIerc1155MetadataUriTransferBatchEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155MetadataUriAbi,
+    eventName: 'TransferBatch',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `eventName` set to `"TransferSingle"`
  */
-export const useWatchIerc1155MetadataUriTransferSingleEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155MetadataUriAbi,
-  eventName: 'TransferSingle',
-})
+export const useWatchIerc1155MetadataUriTransferSingleEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155MetadataUriAbi,
+    eventName: 'TransferSingle',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc1155MetadataUriAbi}__ and `eventName` set to `"URI"`
  */
-export const useWatchIerc1155MetadataUriUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ierc1155MetadataUriAbi,
-  eventName: 'URI',
-})
+export const useWatchIerc1155MetadataUriUriEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc1155MetadataUriAbi,
+    eventName: 'URI',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__
@@ -2958,10 +3034,11 @@ export const useReadIerc1155Receiver = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__ and `functionName` set to `"supportsInterface"`
  */
-export const useReadIerc1155ReceiverSupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: ierc1155ReceiverAbi,
-  functionName: 'supportsInterface',
-})
+export const useReadIerc1155ReceiverSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc1155ReceiverAbi,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__
@@ -2973,39 +3050,44 @@ export const useWriteIerc1155Receiver = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__ and `functionName` set to `"onERC1155BatchReceived"`
  */
-export const useWriteIerc1155ReceiverOnErc1155BatchReceived = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155ReceiverAbi,
-  functionName: 'onERC1155BatchReceived',
-})
+export const useWriteIerc1155ReceiverOnErc1155BatchReceived =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155ReceiverAbi,
+    functionName: 'onERC1155BatchReceived',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__ and `functionName` set to `"onERC1155Received"`
  */
-export const useWriteIerc1155ReceiverOnErc1155Received = /*#__PURE__*/ createUseWriteContract({
-  abi: ierc1155ReceiverAbi,
-  functionName: 'onERC1155Received',
-})
+export const useWriteIerc1155ReceiverOnErc1155Received =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc1155ReceiverAbi,
+    functionName: 'onERC1155Received',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__
  */
-export const useSimulateIerc1155Receiver = /*#__PURE__*/ createUseSimulateContract({ abi: ierc1155ReceiverAbi })
+export const useSimulateIerc1155Receiver =
+  /*#__PURE__*/ createUseSimulateContract({ abi: ierc1155ReceiverAbi })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__ and `functionName` set to `"onERC1155BatchReceived"`
  */
-export const useSimulateIerc1155ReceiverOnErc1155BatchReceived = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155ReceiverAbi,
-  functionName: 'onERC1155BatchReceived',
-})
+export const useSimulateIerc1155ReceiverOnErc1155BatchReceived =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155ReceiverAbi,
+    functionName: 'onERC1155BatchReceived',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc1155ReceiverAbi}__ and `functionName` set to `"onERC1155Received"`
  */
-export const useSimulateIerc1155ReceiverOnErc1155Received = /*#__PURE__*/ createUseSimulateContract({
-  abi: ierc1155ReceiverAbi,
-  functionName: 'onERC1155Received',
-})
+export const useSimulateIerc1155ReceiverOnErc1155Received =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc1155ReceiverAbi,
+    functionName: 'onERC1155Received',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__
@@ -3017,82 +3099,88 @@ export const useReadIMulticall3 = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getBasefee"`
  */
-export const useReadIMulticall3GetBasefee = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getBasefee',
-})
+export const useReadIMulticall3GetBasefee = /*#__PURE__*/ createUseReadContract(
+  { abi: iMulticall3Abi, functionName: 'getBasefee' },
+)
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getBlockHash"`
  */
-export const useReadIMulticall3GetBlockHash = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getBlockHash',
-})
+export const useReadIMulticall3GetBlockHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getBlockHash',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getBlockNumber"`
  */
-export const useReadIMulticall3GetBlockNumber = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getBlockNumber',
-})
+export const useReadIMulticall3GetBlockNumber =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getBlockNumber',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getChainId"`
  */
-export const useReadIMulticall3GetChainId = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getChainId',
-})
+export const useReadIMulticall3GetChainId = /*#__PURE__*/ createUseReadContract(
+  { abi: iMulticall3Abi, functionName: 'getChainId' },
+)
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getCurrentBlockCoinbase"`
  */
-export const useReadIMulticall3GetCurrentBlockCoinbase = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getCurrentBlockCoinbase',
-})
+export const useReadIMulticall3GetCurrentBlockCoinbase =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getCurrentBlockCoinbase',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getCurrentBlockDifficulty"`
  */
-export const useReadIMulticall3GetCurrentBlockDifficulty = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getCurrentBlockDifficulty',
-})
+export const useReadIMulticall3GetCurrentBlockDifficulty =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getCurrentBlockDifficulty',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getCurrentBlockGasLimit"`
  */
-export const useReadIMulticall3GetCurrentBlockGasLimit = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getCurrentBlockGasLimit',
-})
+export const useReadIMulticall3GetCurrentBlockGasLimit =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getCurrentBlockGasLimit',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getCurrentBlockTimestamp"`
  */
-export const useReadIMulticall3GetCurrentBlockTimestamp = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getCurrentBlockTimestamp',
-})
+export const useReadIMulticall3GetCurrentBlockTimestamp =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getCurrentBlockTimestamp',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getEthBalance"`
  */
-export const useReadIMulticall3GetEthBalance = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getEthBalance',
-})
+export const useReadIMulticall3GetEthBalance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getEthBalance',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"getLastBlockHash"`
  */
-export const useReadIMulticall3GetLastBlockHash = /*#__PURE__*/ createUseReadContract({
-  abi: iMulticall3Abi,
-  functionName: 'getLastBlockHash',
-})
+export const useReadIMulticall3GetLastBlockHash =
+  /*#__PURE__*/ createUseReadContract({
+    abi: iMulticall3Abi,
+    functionName: 'getLastBlockHash',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__
@@ -3104,50 +3192,56 @@ export const useWriteIMulticall3 = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate"`
  */
-export const useWriteIMulticall3Aggregate = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate',
-})
+export const useWriteIMulticall3Aggregate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate3"`
  */
-export const useWriteIMulticall3Aggregate3 = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate3',
-})
+export const useWriteIMulticall3Aggregate3 =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate3',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate3Value"`
  */
-export const useWriteIMulticall3Aggregate3Value = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate3Value',
-})
+export const useWriteIMulticall3Aggregate3Value =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate3Value',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"blockAndAggregate"`
  */
-export const useWriteIMulticall3BlockAndAggregate = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'blockAndAggregate',
-})
+export const useWriteIMulticall3BlockAndAggregate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'blockAndAggregate',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"tryAggregate"`
  */
-export const useWriteIMulticall3TryAggregate = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'tryAggregate',
-})
+export const useWriteIMulticall3TryAggregate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'tryAggregate',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"tryBlockAndAggregate"`
  */
-export const useWriteIMulticall3TryBlockAndAggregate = /*#__PURE__*/ createUseWriteContract({
-  abi: iMulticall3Abi,
-  functionName: 'tryBlockAndAggregate',
-})
+export const useWriteIMulticall3TryBlockAndAggregate =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iMulticall3Abi,
+    functionName: 'tryBlockAndAggregate',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__
@@ -3159,63 +3253,71 @@ export const useSimulateIMulticall3 = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate"`
  */
-export const useSimulateIMulticall3Aggregate = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate',
-})
+export const useSimulateIMulticall3Aggregate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate3"`
  */
-export const useSimulateIMulticall3Aggregate3 = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate3',
-})
+export const useSimulateIMulticall3Aggregate3 =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate3',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"aggregate3Value"`
  */
-export const useSimulateIMulticall3Aggregate3Value = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'aggregate3Value',
-})
+export const useSimulateIMulticall3Aggregate3Value =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'aggregate3Value',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"blockAndAggregate"`
  */
-export const useSimulateIMulticall3BlockAndAggregate = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'blockAndAggregate',
-})
+export const useSimulateIMulticall3BlockAndAggregate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'blockAndAggregate',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"tryAggregate"`
  */
-export const useSimulateIMulticall3TryAggregate = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'tryAggregate',
-})
+export const useSimulateIMulticall3TryAggregate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'tryAggregate',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iMulticall3Abi}__ and `functionName` set to `"tryBlockAndAggregate"`
  */
-export const useSimulateIMulticall3TryBlockAndAggregate = /*#__PURE__*/ createUseSimulateContract({
-  abi: iMulticall3Abi,
-  functionName: 'tryBlockAndAggregate',
-})
+export const useSimulateIMulticall3TryBlockAndAggregate =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iMulticall3Abi,
+    functionName: 'tryBlockAndAggregate',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link initializableAbi}__
  */
-export const useWatchInitializableEvent = /*#__PURE__*/ createUseWatchContractEvent({ abi: initializableAbi })
+export const useWatchInitializableEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: initializableAbi })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link initializableAbi}__ and `eventName` set to `"Initialized"`
  */
-export const useWatchInitializableInitializedEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: initializableAbi,
-  eventName: 'Initialized',
-})
+export const useWatchInitializableInitializedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: initializableAbi,
+    eventName: 'Initialized',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link metaAbi}__
@@ -3287,18 +3389,20 @@ export const useWriteOwnable = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ownableAbi}__ and `functionName` set to `"renounceOwnership"`
  */
-export const useWriteOwnableRenounceOwnership = /*#__PURE__*/ createUseWriteContract({
-  abi: ownableAbi,
-  functionName: 'renounceOwnership',
-})
+export const useWriteOwnableRenounceOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ownableAbi,
+    functionName: 'renounceOwnership',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ownableAbi}__ and `functionName` set to `"transferOwnership"`
  */
-export const useWriteOwnableTransferOwnership = /*#__PURE__*/ createUseWriteContract({
-  abi: ownableAbi,
-  functionName: 'transferOwnership',
-})
+export const useWriteOwnableTransferOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ownableAbi,
+    functionName: 'transferOwnership',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ownableAbi}__
@@ -3310,18 +3414,20 @@ export const useSimulateOwnable = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ownableAbi}__ and `functionName` set to `"renounceOwnership"`
  */
-export const useSimulateOwnableRenounceOwnership = /*#__PURE__*/ createUseSimulateContract({
-  abi: ownableAbi,
-  functionName: 'renounceOwnership',
-})
+export const useSimulateOwnableRenounceOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ownableAbi,
+    functionName: 'renounceOwnership',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ownableAbi}__ and `functionName` set to `"transferOwnership"`
  */
-export const useSimulateOwnableTransferOwnership = /*#__PURE__*/ createUseSimulateContract({
-  abi: ownableAbi,
-  functionName: 'transferOwnership',
-})
+export const useSimulateOwnableTransferOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ownableAbi,
+    functionName: 'transferOwnership',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ownableAbi}__
@@ -3333,10 +3439,11 @@ export const useWatchOwnableEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ownableAbi}__ and `eventName` set to `"OwnershipTransferred"`
  */
-export const useWatchOwnableOwnershipTransferredEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: ownableAbi,
-  eventName: 'OwnershipTransferred',
-})
+export const useWatchOwnableOwnershipTransferredEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ownableAbi,
+    eventName: 'OwnershipTransferred',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__
@@ -3450,18 +3557,20 @@ export const useReadTankPkp = /*#__PURE__*/ createUseReadContract({
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"promptActionIpfsId"`
  */
-export const useReadTankPromptActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: tankAbi,
-  functionName: 'promptActionIpfsId',
-})
+export const useReadTankPromptActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tankAbi,
+    functionName: 'promptActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"submitActionIpfsId"`
  */
-export const useReadTankSubmitActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: tankAbi,
-  functionName: 'submitActionIpfsId',
-})
+export const useReadTankSubmitActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tankAbi,
+    functionName: 'submitActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"tokenId"`
@@ -3497,10 +3606,11 @@ export const useWriteTankAddNote = /*#__PURE__*/ createUseWriteContract({
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"incrementMintsCount"`
  */
-export const useWriteTankIncrementMintsCount = /*#__PURE__*/ createUseWriteContract({
-  abi: tankAbi,
-  functionName: 'incrementMintsCount',
-})
+export const useWriteTankIncrementMintsCount =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: tankAbi,
+    functionName: 'incrementMintsCount',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"initialize"`
@@ -3528,18 +3638,20 @@ export const useSimulateTankAddNote = /*#__PURE__*/ createUseSimulateContract({
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"incrementMintsCount"`
  */
-export const useSimulateTankIncrementMintsCount = /*#__PURE__*/ createUseSimulateContract({
-  abi: tankAbi,
-  functionName: 'incrementMintsCount',
-})
+export const useSimulateTankIncrementMintsCount =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'incrementMintsCount',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"initialize"`
  */
-export const useSimulateTankInitialize = /*#__PURE__*/ createUseSimulateContract({
-  abi: tankAbi,
-  functionName: 'initialize',
-})
+export const useSimulateTankInitialize =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'initialize',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__
@@ -3551,33 +3663,36 @@ export const useWatchTankEvent = /*#__PURE__*/ createUseWatchContractEvent({
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"Initialized"`
  */
-export const useWatchTankInitializedEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: tankAbi,
-  eventName: 'Initialized',
-})
+export const useWatchTankInitializedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'Initialized',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"Minted"`
  */
-export const useWatchTankMintedEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: tankAbi,
-  eventName: 'Minted',
-})
+export const useWatchTankMintedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'Minted',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"NoteAdded"`
  */
-export const useWatchTankNoteAddedEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: tankAbi,
-  eventName: 'NoteAdded',
-})
+export const useWatchTankNoteAddedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'NoteAdded',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThaink = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3589,7 +3704,7 @@ export const useReadThaink = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3602,7 +3717,7 @@ export const useReadThainkBalanceOf = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3615,7 +3730,7 @@ export const useReadThainkBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkConfig = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3628,7 +3743,7 @@ export const useReadThainkConfig = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkConfigHash = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3641,7 +3756,7 @@ export const useReadThainkConfigHash = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkExists = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3654,33 +3769,35 @@ export const useReadThainkExists = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkHintActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'hintActionIpfsId',
-})
+export const useReadThainkHintActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'hintActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"isApprovedForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkIsApprovedForAll = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'isApprovedForAll',
-})
+export const useReadThainkIsApprovedForAll =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'isApprovedForAll',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"llmUrl"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkLlmUrl = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3693,7 +3810,7 @@ export const useReadThainkLlmUrl = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkOwner = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3706,7 +3823,7 @@ export const useReadThainkOwner = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkPkp = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3719,59 +3836,63 @@ export const useReadThainkPkp = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkPromptActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'promptActionIpfsId',
-})
+export const useReadThainkPromptActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'promptActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"submitActionIpfsId"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkSubmitActionIpfsId = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'submitActionIpfsId',
-})
+export const useReadThainkSubmitActionIpfsId =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'submitActionIpfsId',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"supportsInterface"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkSupportsInterface = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'supportsInterface',
-})
+export const useReadThainkSupportsInterface =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'supportsInterface',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"tankImplementation"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useReadThainkTankImplementation = /*#__PURE__*/ createUseReadContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'tankImplementation',
-})
+export const useReadThainkTankImplementation =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'tankImplementation',
+  })
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"tanks"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkTanks = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3784,7 +3905,7 @@ export const useReadThainkTanks = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkTanksNumber = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3797,7 +3918,7 @@ export const useReadThainkTanksNumber = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3810,7 +3931,7 @@ export const useReadThainkTotalSupply = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useReadThainkUri = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3823,7 +3944,7 @@ export const useReadThainkUri = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThaink = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3835,7 +3956,7 @@ export const useWriteThaink = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkMakeTank = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3848,7 +3969,7 @@ export const useWriteThainkMakeTank = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkMint = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3861,59 +3982,63 @@ export const useWriteThainkMint = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWriteThainkRenounceOwnership = /*#__PURE__*/ createUseWriteContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'renounceOwnership',
-})
+export const useWriteThainkRenounceOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'renounceOwnership',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWriteThainkSafeBatchTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useWriteThainkSafeBatchTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWriteThainkSafeTransferFrom = /*#__PURE__*/ createUseWriteContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'safeTransferFrom',
-})
+export const useWriteThainkSafeTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWriteThainkSetApprovalForAll = /*#__PURE__*/ createUseWriteContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'setApprovalForAll',
-})
+export const useWriteThainkSetApprovalForAll =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setConfig"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkSetConfig = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3926,7 +4051,7 @@ export const useWriteThainkSetConfig = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkSetIpfsIds = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3939,7 +4064,7 @@ export const useWriteThainkSetIpfsIds = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkSetLlmUrl = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3952,7 +4077,7 @@ export const useWriteThainkSetLlmUrl = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWriteThainkSetPkp = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3965,20 +4090,21 @@ export const useWriteThainkSetPkp = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWriteThainkTransferOwnership = /*#__PURE__*/ createUseWriteContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'transferOwnership',
-})
+export const useWriteThainkTransferOwnership =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'transferOwnership',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useSimulateThaink = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -3990,20 +4116,21 @@ export const useSimulateThaink = /*#__PURE__*/ createUseSimulateContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkMakeTank = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'makeTank',
-})
+export const useSimulateThainkMakeTank =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'makeTank',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"mint"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useSimulateThainkMint = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -4016,98 +4143,105 @@ export const useSimulateThainkMint = /*#__PURE__*/ createUseSimulateContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkRenounceOwnership = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'renounceOwnership',
-})
+export const useSimulateThainkRenounceOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'renounceOwnership',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeBatchTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSafeBatchTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'safeBatchTransferFrom',
-})
+export const useSimulateThainkSafeBatchTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'safeBatchTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"safeTransferFrom"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSafeTransferFrom = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'safeTransferFrom',
-})
+export const useSimulateThainkSafeTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'safeTransferFrom',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setApprovalForAll"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSetApprovalForAll = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'setApprovalForAll',
-})
+export const useSimulateThainkSetApprovalForAll =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setConfig"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSetConfig = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'setConfig',
-})
+export const useSimulateThainkSetConfig =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setConfig',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setIpfsIds"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSetIpfsIds = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'setIpfsIds',
-})
+export const useSimulateThainkSetIpfsIds =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setIpfsIds',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setLlmUrl"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkSetLlmUrl = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'setLlmUrl',
-})
+export const useSimulateThainkSetLlmUrl =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setLlmUrl',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setPkp"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useSimulateThainkSetPkp = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -4120,20 +4254,21 @@ export const useSimulateThainkSetPkp = /*#__PURE__*/ createUseSimulateContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useSimulateThainkTransferOwnership = /*#__PURE__*/ createUseSimulateContract({
-  abi: thainkAbi,
-  address: thainkAddress,
-  functionName: 'transferOwnership',
-})
+export const useSimulateThainkTransferOwnership =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'transferOwnership',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
 export const useWatchThainkEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: thainkAbi,
@@ -4145,75 +4280,78 @@ export const useWatchThainkEvent = /*#__PURE__*/ createUseWatchContractEvent({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkApprovalForAllEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'ApprovalForAll',
-})
+export const useWatchThainkApprovalForAllEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: thainkAbi,
+    address: thainkAddress,
+    eventName: 'ApprovalForAll',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"MintEvent"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkMintEventEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'MintEvent',
-})
+export const useWatchThainkMintEventEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: thainkAbi,
+    address: thainkAddress,
+    eventName: 'MintEvent',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"OwnershipTransferred"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkOwnershipTransferredEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'OwnershipTransferred',
-})
+export const useWatchThainkOwnershipTransferredEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: thainkAbi,
+    address: thainkAddress,
+    eventName: 'OwnershipTransferred',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"TransferBatch"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkTransferBatchEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'TransferBatch',
-})
+export const useWatchThainkTransferBatchEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: thainkAbi,
+    address: thainkAddress,
+    eventName: 'TransferBatch',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"TransferSingle"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkTransferSingleEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'TransferSingle',
-})
+export const useWatchThainkTransferSingleEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: thainkAbi,
+    address: thainkAddress,
+    eventName: 'TransferSingle',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link thainkAbi}__ and `eventName` set to `"URI"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xe6aa88c14345571bce986d5ee4ccf90325efb92e)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x54ef5544bcf88ec16e97e5734c76c41e18f39a46)
  */
-export const useWatchThainkUriEvent = /*#__PURE__*/ createUseWatchContractEvent({
-  abi: thainkAbi,
-  address: thainkAddress,
-  eventName: 'URI',
-})
+export const useWatchThainkUriEvent = /*#__PURE__*/ createUseWatchContractEvent(
+  { abi: thainkAbi, address: thainkAddress, eventName: 'URI' },
+)
