@@ -13,7 +13,7 @@ import {
 
 import ipfsHash from 'ipfs-only-hash'
 
-import { minifyWithTerser } from './actions/utils'
+import { minifyWithTerser } from './builder'
 
 import { chain as walletChain } from '@/wallet'
 
@@ -91,6 +91,7 @@ class LitService {
       const minifiedAction = await minifyWithTerser(action.toString())
       console.log(await ipfsHash.of(minifiedAction))
       console.log(params.ipfsCid)
+      console.log(minifiedAction)
       const response = await litClient.executeJs({
         sessionSigs,
         code: minifiedAction,

@@ -1,6 +1,5 @@
-import { ethers } from 'ethers'
+import { createLitAction } from '../builder'
 import {
-  createLitAction,
   getAccessControlConditions,
   encrypt,
   decrypt,
@@ -18,13 +17,13 @@ import {
   createDigestPrompt,
 } from './llm'
 
-declare var Lit: any
-declare var rpcUrl: string
-declare var contractAddress: string
-declare var contractAbi: Array<object>
-declare var note: string
-declare var pkp: string
-declare var address: string
+declare const Lit: any
+declare const rpcUrl: string
+declare const contractAddress: string
+declare const contractAbi: Array<object>
+declare const note: string
+declare const pkp: string
+declare const address: string
 
 export interface submitLitActionParams {
   note: string

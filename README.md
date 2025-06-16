@@ -2,6 +2,8 @@
 
 Thaink Tank is an onchain collaborative ideation platform that leverages AI evaluation, encryption, and decentralized rewards to facilitate structured idea development. Participants contribute anonymous, encrypted notes, which are evaluated by AI before being integrated into a collective digest. The system ensures that all contributions are fairly rewarded and verifiably stored onchain.
 
+**Live on [thaink.in](https://thaink.in)**
+
 ## How It Works
 
 - **Raising an Idea**: An initial concept is introduced, setting the foundation for discussion.

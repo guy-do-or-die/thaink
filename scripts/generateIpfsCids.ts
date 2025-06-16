@@ -1,11 +1,11 @@
 import * as ipfsOnlyHash from 'ipfs-only-hash'
 import * as actions from '../lit/actions'
 
-import { minifyWithTerser } from '../lit/actions/utils'
+import { minifyWithTerser } from '../lit/builder'
 
 import { updateEnvFile } from './utils'
 
-async function generateIpfsCidFromString(data) {
+async function generateIpfsCidFromString(data: string) {
   try {
     return await ipfsOnlyHash.of(data)
   } catch (error) {

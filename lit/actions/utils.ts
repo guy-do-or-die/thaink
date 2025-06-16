@@ -1,12 +1,7 @@
-import { ethers } from 'ethers'
+declare const ethers: any
+declare const Lit: any
+declare const chainNetwork: string
 
-declare var Lit: any
-declare var chainNetwork: string
-declare var rpcUrl: string
-declare var contractAddress: string
-declare var contractAbi: Array<object>
-
-// Define types for Access Control Conditions
 interface AccessControlConditionItem {
   contractAddress: string
   standardContractType: string
@@ -23,7 +18,6 @@ interface AccessControlConditionOperator {
   operator: 'or' | 'and'
 }
 
-// Union type for access control conditions
 type AccessControlCondition = AccessControlConditionItem | AccessControlConditionOperator
 
 export function getAccessControlConditions(ipfsCids: string[], network?: string): AccessControlCondition[] {
@@ -68,59 +62,6 @@ export async function decrypt(ipfsCids: string[], ciphertext: string, dataToEncr
     ciphertext,
   })
   return resp
-}
-
-export function injectFunctions(targetFn: Function, functionsToInject: Function[]): string {
-  const injectedFunctionsCode = functionsToInject.map((fn) => fn.toString()).join('\n\n')
-
-  const targetFnStr = targetFn.toString()
-  const firstBraceIndex = targetFnStr.indexOf('{')
-
-  return `${targetFnStr.slice(0, firstBraceIndex + 1)}
-    ${injectedFunctionsCode}
-    ${targetFnStr.slice(firstBraceIndex + 1)}`
-}
-
-export async function minifyWithTerser(code: string): Promise<string> {
-  try {
-    const { minify } = await import('terser')
-
-    const minifyOptions = {
-      mangle: {
-        toplevel: false, // Don't mangle top-level names to preserve exports
-        properties: false, // Don't mangle property names
-      },
-      compress: {
-        dead_code: false, // Don't remove "dead" code
-        drop_console: false, // Keep console.log statements
-        unused: false, // Don't remove unused variables
-        sequences: false, // Don't join consecutive statements with commas
-        conditionals: true, // Optimize if-s and conditional expressions
-        booleans: true, // Optimize boolean expressions
-        passes: 1, // Just one pass to avoid over-optimization
-      },
-      output: {
-        beautify: false, // Output compressed
-        comments: false, // Remove comments
-      },
-      keep_classnames: true, // Keep class names
-      keep_fnames: true, // Keep function names
-      toplevel: false, // Don't transform top-level names
-    }
-
-    const result = await minify(code, minifyOptions)
-
-    return result.code || code
-  } catch (error) {
-    console.error('Terser minification failed:', error)
-    return code
-  }
-}
-
-export function createLitAction(mainFn: Function, functionsToInject: Function[] = []): string {
-  const fnWithInjectedCode = injectFunctions(mainFn, functionsToInject)
-
-  return `(${fnWithInjectedCode})()`
 }
 
 export async function signMessage(message: string, pkp: string) {

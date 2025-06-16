@@ -1,10 +1,11 @@
-import { createLitAction, getAccessControlConditions, decrypt, getContractData } from './utils'
+import { createLitAction } from '../builder'
+import { getAccessControlConditions, decrypt, getContractData } from './utils'
 import { callAgent, getHint, createHintPrompt, callLLM, getContextHeader } from './llm'
 
-declare var Lit: any
-declare var rpcUrl: string
-declare var contractAddress: string
-declare var contractAbi: Array<object>
+declare const Lit: any
+declare const rpcUrl: string
+declare const contractAddress: string
+declare const contractAbi: Array<object>
 
 export interface hintLitActionParams {
   rpcUrl: string
