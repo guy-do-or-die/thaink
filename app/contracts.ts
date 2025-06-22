@@ -593,6 +593,167 @@ export const erc165Abi = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ERC20
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const erc20Abi = [
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'allowance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientAllowance',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'balance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientBalance',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'approver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidApprover',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'receiver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidReceiver',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'sender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSender',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'spender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSpender',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Errors
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1076,6 +1237,129 @@ export const ierc20ErrorsAbi = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IERC20Metadata
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const ierc20MetadataAbi = [
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // IERC721Errors
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1373,6 +1657,135 @@ export const iMulticall3Abi = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IPoolManager
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iPoolManagerAbi = [
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: 'key',
+        internalType: 'struct IPoolManager.PoolKey',
+        type: 'tuple',
+        components: [
+          { name: 'currency0', internalType: 'address', type: 'address' },
+          { name: 'currency1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+          { name: 'hooks', internalType: 'address', type: 'address' },
+        ],
+      },
+    ],
+    name: 'getPrice',
+    outputs: [
+      { name: 'sqrtPriceX96', internalType: 'uint160', type: 'uint160' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: 'key',
+        internalType: 'struct IPoolManager.PoolKey',
+        type: 'tuple',
+        components: [
+          { name: 'currency0', internalType: 'address', type: 'address' },
+          { name: 'currency1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+          { name: 'hooks', internalType: 'address', type: 'address' },
+        ],
+      },
+      { name: 'sqrtPriceX96', internalType: 'uint160', type: 'uint160' },
+    ],
+    name: 'initialize',
+    outputs: [{ name: 'tick', internalType: 'int24', type: 'int24' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: 'key',
+        internalType: 'struct IPoolManager.PoolKey',
+        type: 'tuple',
+        components: [
+          { name: 'currency0', internalType: 'address', type: 'address' },
+          { name: 'currency1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+          { name: 'hooks', internalType: 'address', type: 'address' },
+        ],
+      },
+      { name: 'tickLower', internalType: 'int24', type: 'int24' },
+      { name: 'tickUpper', internalType: 'int24', type: 'int24' },
+      { name: 'amount', internalType: 'uint128', type: 'uint128' },
+      { name: 'hookData', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'mint',
+    outputs: [
+      { name: 'amount0', internalType: 'uint256', type: 'uint256' },
+      { name: 'amount1', internalType: 'uint256', type: 'uint256' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      {
+        name: 'key',
+        internalType: 'struct IPoolManager.PoolKey',
+        type: 'tuple',
+        components: [
+          { name: 'currency0', internalType: 'address', type: 'address' },
+          { name: 'currency1', internalType: 'address', type: 'address' },
+          { name: 'fee', internalType: 'uint24', type: 'uint24' },
+          { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+          { name: 'hooks', internalType: 'address', type: 'address' },
+        ],
+      },
+      {
+        name: 'params',
+        internalType: 'struct IPoolManager.SwapParams',
+        type: 'tuple',
+        components: [
+          { name: 'zeroForOne', internalType: 'bool', type: 'bool' },
+          { name: 'amountSpecified', internalType: 'int256', type: 'int256' },
+          {
+            name: 'sqrtPriceLimitX96',
+            internalType: 'uint160',
+            type: 'uint160',
+          },
+        ],
+      },
+      { name: 'hookData', internalType: 'bytes', type: 'bytes' },
+    ],
+    name: 'swap',
+    outputs: [
+      { name: 'amount0', internalType: 'int256', type: 'int256' },
+      { name: 'amount1', internalType: 'int256', type: 'int256' },
+    ],
+    stateMutability: 'nonpayable',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// IPoolManagerFactory
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const iPoolManagerFactoryAbi = [
+  {
+    type: 'function',
+    inputs: [],
+    name: 'createPoolManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'nonpayable',
+  },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Initializable
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1494,6 +1907,115 @@ export const ownableAbi = [
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ReentrancyGuard
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const reentrancyGuardAbi = [
+  { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Rewards
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const rewardsAbi = [
+  { type: 'receive', stateMutability: 'payable' },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'claimReward',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'contributorRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'contributor', internalType: 'address', type: 'address' }],
+    name: 'getClaimableReward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTotalAllocatedRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'contributor',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'score',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardAllocated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'contributor',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardClaimed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardsReceived',
+  },
+  { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
+] as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SafeCast
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1549,6 +2071,35 @@ export const stringsAbi = [
 
 export const tankAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
+  { type: 'receive', stateMutability: 'payable' },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_SUPPLY',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'NOTE_TOKEN_PRICE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'POOL_FEE',
+    outputs: [{ name: '', internalType: 'uint24', type: 'uint24' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'WETH',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
   {
     type: 'function',
     inputs: [
@@ -1561,6 +2112,47 @@ export const tankAbi = [
       { name: '_score', internalType: 'uint256', type: 'uint256' },
     ],
     name: 'addNote',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'buyTokenForNote',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'claimReward',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -1581,8 +2173,22 @@ export const tankAbi = [
   {
     type: 'function',
     inputs: [{ name: '', internalType: 'address', type: 'address' }],
+    name: 'contributorRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: '', internalType: 'address', type: 'address' }],
     name: 'contributors',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
     stateMutability: 'view',
   },
   {
@@ -1604,6 +2210,27 @@ export const tankAbi = [
     inputs: [],
     name: 'factory',
     outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'contributor', internalType: 'address', type: 'address' }],
+    name: 'getClaimableReward',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'getTotalAllocatedRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'user', internalType: 'address', type: 'address' }],
+    name: 'hasNoteToken',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
     stateMutability: 'view',
   },
   {
@@ -1639,10 +2266,22 @@ export const tankAbi = [
       { name: '_hintActionIpfsId', internalType: 'string', type: 'string' },
       { name: '_submitActionIpfsId', internalType: 'string', type: 'string' },
       { name: '_promptActionIpfsId', internalType: 'string', type: 'string' },
+      { name: '_poolManagerFactory', internalType: 'address', type: 'address' },
     ],
     name: 'initialize',
     outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_name', internalType: 'string', type: 'string' },
+      { name: '_symbol', internalType: 'string', type: 'string' },
+      { name: '_poolManagerFactory', internalType: 'address', type: 'address' },
+    ],
+    name: 'initializeToken',
+    outputs: [],
+    stateMutability: 'payable',
   },
   {
     type: 'function',
@@ -1656,6 +2295,13 @@ export const tankAbi = [
     inputs: [],
     name: 'mintsCount',
     outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
   },
   {
@@ -1687,6 +2333,26 @@ export const tankAbi = [
   {
     type: 'function',
     inputs: [],
+    name: 'poolKey',
+    outputs: [
+      { name: 'currency0', internalType: 'address', type: 'address' },
+      { name: 'currency1', internalType: 'address', type: 'address' },
+      { name: 'fee', internalType: 'uint24', type: 'uint24' },
+      { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+      { name: 'hooks', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'poolManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
     name: 'promptActionIpfsId',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
@@ -1695,6 +2361,13 @@ export const tankAbi = [
     type: 'function',
     inputs: [],
     name: 'submitActionIpfsId',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
   },
@@ -1711,6 +2384,66 @@ export const tankAbi = [
     name: 'tokenURI',
     outputs: [{ name: '', internalType: 'string', type: 'string' }],
     stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalRewards',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
   },
   {
     type: 'event',
@@ -1764,6 +2497,141 @@ export const tankAbi = [
     name: 'NoteAdded',
   },
   {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'contributor',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'score',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardAllocated',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'contributor',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardClaimed',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'amount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'RewardsReceived',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'buyer',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'ethAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'tokenAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'TokenPurchased',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'allowance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientAllowance',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'balance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientBalance',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'approver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidApprover',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'receiver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidReceiver',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'sender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSender',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'spender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSpender',
+  },
+  {
     type: 'error',
     inputs: [
       { name: 'length', internalType: 'uint256', type: 'uint256' },
@@ -1771,8 +2639,18 @@ export const tankAbi = [
     ],
     name: 'IdeaTooLong',
   },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'user', internalType: 'address', type: 'address' },
+      { name: 'required', internalType: 'uint256', type: 'uint256' },
+      { name: 'balance', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'InsufficientTokens',
+  },
   { type: 'error', inputs: [], name: 'InvalidInitialization' },
   { type: 'error', inputs: [], name: 'NotInitializing' },
+  { type: 'error', inputs: [], name: 'ReentrancyGuardReentrantCall' },
 ] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1782,7 +2660,7 @@ export const tankAbi = [
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const thainkAbi = [
   { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
@@ -1856,7 +2734,7 @@ export const thainkAbi = [
     inputs: [{ name: '_idea', internalType: 'string', type: 'string' }],
     name: 'makeTank',
     outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'payable',
   },
   {
     type: 'function',
@@ -1880,6 +2758,13 @@ export const thainkAbi = [
     inputs: [],
     name: 'pkp',
     outputs: [{ name: '', internalType: 'bytes', type: 'bytes' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'poolManagerFactory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
     stateMutability: 'view',
   },
   {
@@ -1964,6 +2849,15 @@ export const thainkAbi = [
     type: 'function',
     inputs: [{ name: '_pkp', internalType: 'bytes', type: 'bytes' }],
     name: 'setPkp',
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_poolManagerFactory', internalType: 'address', type: 'address' },
+    ],
+    name: 'setPoolManagerFactory',
     outputs: [],
     stateMutability: 'nonpayable',
   },
@@ -2206,20 +3100,287 @@ export const thainkAbi = [
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const thainkAddress = {
   8453: '0x68aF043C57aC9b4749841c4974dF04D49Ff8fD88',
   31337: '0x1fA02b2d6A771842690194Cf62D91bdd92BfE28d',
-  84532: '0xf4b6A2A9acc6F94824b1f8BA852F04DB861830D3',
+  84532: '0x65ef64c499C419160d6cE8e9734558A0DF54066C',
 } as const
 
 /**
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const thainkConfig = { address: thainkAddress, abi: thainkAbi } as const
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Token
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const tokenAbi = [
+  { type: 'constructor', inputs: [], stateMutability: 'nonpayable' },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'INITIAL_SUPPLY',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'NOTE_TOKEN_PRICE',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'POOL_FEE',
+    outputs: [{ name: '', internalType: 'uint24', type: 'uint24' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'WETH',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'owner', internalType: 'address', type: 'address' },
+      { name: 'spender', internalType: 'address', type: 'address' },
+    ],
+    name: 'allowance',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'approve',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'account', internalType: 'address', type: 'address' }],
+    name: 'balanceOf',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'buyTokenForNote',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'decimals',
+    outputs: [{ name: '', internalType: 'uint8', type: 'uint8' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'factory',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [{ name: 'user', internalType: 'address', type: 'address' }],
+    name: 'hasNoteToken',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: '_name', internalType: 'string', type: 'string' },
+      { name: '_symbol', internalType: 'string', type: 'string' },
+      { name: '_poolManagerFactory', internalType: 'address', type: 'address' },
+    ],
+    name: 'initializeToken',
+    outputs: [],
+    stateMutability: 'payable',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'name',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'poolKey',
+    outputs: [
+      { name: 'currency0', internalType: 'address', type: 'address' },
+      { name: 'currency1', internalType: 'address', type: 'address' },
+      { name: 'fee', internalType: 'uint24', type: 'uint24' },
+      { name: 'tickSpacing', internalType: 'int24', type: 'int24' },
+      { name: 'hooks', internalType: 'address', type: 'address' },
+    ],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'poolManager',
+    outputs: [{ name: '', internalType: 'address', type: 'address' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'symbol',
+    outputs: [{ name: '', internalType: 'string', type: 'string' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [],
+    name: 'totalSupply',
+    outputs: [{ name: '', internalType: 'uint256', type: 'uint256' }],
+    stateMutability: 'view',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transfer',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address' },
+      { name: 'to', internalType: 'address', type: 'address' },
+      { name: 'value', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'transferFrom',
+    outputs: [{ name: '', internalType: 'bool', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'owner',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'spender',
+        internalType: 'address',
+        type: 'address',
+        indexed: true,
+      },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Approval',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      {
+        name: 'buyer',
+        internalType: 'address',
+        type: 'address',
+        indexed: false,
+      },
+      {
+        name: 'ethAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+      {
+        name: 'tokenAmount',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'TokenPurchased',
+  },
+  {
+    type: 'event',
+    anonymous: false,
+    inputs: [
+      { name: 'from', internalType: 'address', type: 'address', indexed: true },
+      { name: 'to', internalType: 'address', type: 'address', indexed: true },
+      {
+        name: 'value',
+        internalType: 'uint256',
+        type: 'uint256',
+        indexed: false,
+      },
+    ],
+    name: 'Transfer',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'spender', internalType: 'address', type: 'address' },
+      { name: 'allowance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientAllowance',
+  },
+  {
+    type: 'error',
+    inputs: [
+      { name: 'sender', internalType: 'address', type: 'address' },
+      { name: 'balance', internalType: 'uint256', type: 'uint256' },
+      { name: 'needed', internalType: 'uint256', type: 'uint256' },
+    ],
+    name: 'ERC20InsufficientBalance',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'approver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidApprover',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'receiver', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidReceiver',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'sender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSender',
+  },
+  {
+    type: 'error',
+    inputs: [{ name: 'spender', internalType: 'address', type: 'address' }],
+    name: 'ERC20InvalidSpender',
+  },
+] as const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // React
@@ -2711,6 +3872,148 @@ export const useReadErc165SupportsInterface =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__
+ */
+export const useReadErc20 = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadErc20Allowance = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'allowance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadErc20BalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'balanceOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadErc20Decimals = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'decimals',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"name"`
+ */
+export const useReadErc20Name = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadErc20Symbol = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadErc20TotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: erc20Abi,
+  functionName: 'totalSupply',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc20Abi}__
+ */
+export const useWriteErc20 = /*#__PURE__*/ createUseWriteContract({
+  abi: erc20Abi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteErc20Approve = /*#__PURE__*/ createUseWriteContract({
+  abi: erc20Abi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteErc20Transfer = /*#__PURE__*/ createUseWriteContract({
+  abi: erc20Abi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteErc20TransferFrom = /*#__PURE__*/ createUseWriteContract({
+  abi: erc20Abi,
+  functionName: 'transferFrom',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc20Abi}__
+ */
+export const useSimulateErc20 = /*#__PURE__*/ createUseSimulateContract({
+  abi: erc20Abi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateErc20Approve = /*#__PURE__*/ createUseSimulateContract({
+  abi: erc20Abi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateErc20Transfer = /*#__PURE__*/ createUseSimulateContract(
+  { abi: erc20Abi, functionName: 'transfer' },
+)
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link erc20Abi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateErc20TransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: erc20Abi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc20Abi}__
+ */
+export const useWatchErc20Event = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: erc20Abi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc20Abi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchErc20ApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc20Abi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link erc20Abi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchErc20TransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: erc20Abi,
+    eventName: 'Transfer',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc1155Abi}__
  */
 export const useReadIerc1155 = /*#__PURE__*/ createUseReadContract({
@@ -3090,6 +4393,156 @@ export const useSimulateIerc1155ReceiverOnErc1155Received =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useReadIerc20Metadata = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadIerc20MetadataAllowance =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'allowance',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadIerc20MetadataBalanceOf =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'balanceOf',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadIerc20MetadataDecimals =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'decimals',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadIerc20MetadataName = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadIerc20MetadataSymbol = /*#__PURE__*/ createUseReadContract({
+  abi: ierc20MetadataAbi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadIerc20MetadataTotalSupply =
+  /*#__PURE__*/ createUseReadContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'totalSupply',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useWriteIerc20Metadata = /*#__PURE__*/ createUseWriteContract({
+  abi: ierc20MetadataAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteIerc20MetadataApprove =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteIerc20MetadataTransfer =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteIerc20MetadataTransferFrom =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useSimulateIerc20Metadata =
+  /*#__PURE__*/ createUseSimulateContract({ abi: ierc20MetadataAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateIerc20MetadataApprove =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'approve',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateIerc20MetadataTransfer =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transfer',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateIerc20MetadataTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: ierc20MetadataAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__
+ */
+export const useWatchIerc20MetadataEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({ abi: ierc20MetadataAbi })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchIerc20MetadataApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc20MetadataAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link ierc20MetadataAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchIerc20MetadataTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: ierc20MetadataAbi,
+    eventName: 'Transfer',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link iMulticall3Abi}__
  */
 export const useReadIMulticall3 = /*#__PURE__*/ createUseReadContract({
@@ -3305,6 +4758,118 @@ export const useSimulateIMulticall3TryBlockAndAggregate =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link iPoolManagerAbi}__
+ */
+export const useReadIPoolManager = /*#__PURE__*/ createUseReadContract({
+  abi: iPoolManagerAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"getPrice"`
+ */
+export const useReadIPoolManagerGetPrice = /*#__PURE__*/ createUseReadContract({
+  abi: iPoolManagerAbi,
+  functionName: 'getPrice',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerAbi}__
+ */
+export const useWriteIPoolManager = /*#__PURE__*/ createUseWriteContract({
+  abi: iPoolManagerAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"initialize"`
+ */
+export const useWriteIPoolManagerInitialize =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iPoolManagerAbi,
+    functionName: 'initialize',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"mint"`
+ */
+export const useWriteIPoolManagerMint = /*#__PURE__*/ createUseWriteContract({
+  abi: iPoolManagerAbi,
+  functionName: 'mint',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"swap"`
+ */
+export const useWriteIPoolManagerSwap = /*#__PURE__*/ createUseWriteContract({
+  abi: iPoolManagerAbi,
+  functionName: 'swap',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerAbi}__
+ */
+export const useSimulateIPoolManager = /*#__PURE__*/ createUseSimulateContract({
+  abi: iPoolManagerAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"initialize"`
+ */
+export const useSimulateIPoolManagerInitialize =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iPoolManagerAbi,
+    functionName: 'initialize',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"mint"`
+ */
+export const useSimulateIPoolManagerMint =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iPoolManagerAbi,
+    functionName: 'mint',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerAbi}__ and `functionName` set to `"swap"`
+ */
+export const useSimulateIPoolManagerSwap =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iPoolManagerAbi,
+    functionName: 'swap',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerFactoryAbi}__
+ */
+export const useWriteIPoolManagerFactory = /*#__PURE__*/ createUseWriteContract(
+  { abi: iPoolManagerFactoryAbi },
+)
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link iPoolManagerFactoryAbi}__ and `functionName` set to `"createPoolManager"`
+ */
+export const useWriteIPoolManagerFactoryCreatePoolManager =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: iPoolManagerFactoryAbi,
+    functionName: 'createPoolManager',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerFactoryAbi}__
+ */
+export const useSimulateIPoolManagerFactory =
+  /*#__PURE__*/ createUseSimulateContract({ abi: iPoolManagerFactoryAbi })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link iPoolManagerFactoryAbi}__ and `functionName` set to `"createPoolManager"`
+ */
+export const useSimulateIPoolManagerFactoryCreatePoolManager =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: iPoolManagerFactoryAbi,
+    functionName: 'createPoolManager',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link initializableAbi}__
  */
 export const useWatchInitializableEvent =
@@ -3446,9 +5011,164 @@ export const useWatchOwnableOwnershipTransferredEvent =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link rewardsAbi}__
+ */
+export const useReadRewards = /*#__PURE__*/ createUseReadContract({
+  abi: rewardsAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"contributorRewards"`
+ */
+export const useReadRewardsContributorRewards =
+  /*#__PURE__*/ createUseReadContract({
+    abi: rewardsAbi,
+    functionName: 'contributorRewards',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"getClaimableReward"`
+ */
+export const useReadRewardsGetClaimableReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: rewardsAbi,
+    functionName: 'getClaimableReward',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"getTotalAllocatedRewards"`
+ */
+export const useReadRewardsGetTotalAllocatedRewards =
+  /*#__PURE__*/ createUseReadContract({
+    abi: rewardsAbi,
+    functionName: 'getTotalAllocatedRewards',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"totalRewards"`
+ */
+export const useReadRewardsTotalRewards = /*#__PURE__*/ createUseReadContract({
+  abi: rewardsAbi,
+  functionName: 'totalRewards',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link rewardsAbi}__
+ */
+export const useWriteRewards = /*#__PURE__*/ createUseWriteContract({
+  abi: rewardsAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"claimReward"`
+ */
+export const useWriteRewardsClaimReward = /*#__PURE__*/ createUseWriteContract({
+  abi: rewardsAbi,
+  functionName: 'claimReward',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link rewardsAbi}__
+ */
+export const useSimulateRewards = /*#__PURE__*/ createUseSimulateContract({
+  abi: rewardsAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link rewardsAbi}__ and `functionName` set to `"claimReward"`
+ */
+export const useSimulateRewardsClaimReward =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: rewardsAbi,
+    functionName: 'claimReward',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link rewardsAbi}__
+ */
+export const useWatchRewardsEvent = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: rewardsAbi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link rewardsAbi}__ and `eventName` set to `"RewardAllocated"`
+ */
+export const useWatchRewardsRewardAllocatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: rewardsAbi,
+    eventName: 'RewardAllocated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link rewardsAbi}__ and `eventName` set to `"RewardClaimed"`
+ */
+export const useWatchRewardsRewardClaimedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: rewardsAbi,
+    eventName: 'RewardClaimed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link rewardsAbi}__ and `eventName` set to `"RewardsReceived"`
+ */
+export const useWatchRewardsRewardsReceivedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: rewardsAbi,
+    eventName: 'RewardsReceived',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__
  */
 export const useReadTank = /*#__PURE__*/ createUseReadContract({ abi: tankAbi })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"INITIAL_SUPPLY"`
+ */
+export const useReadTankInitialSupply = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'INITIAL_SUPPLY',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"NOTE_TOKEN_PRICE"`
+ */
+export const useReadTankNoteTokenPrice = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'NOTE_TOKEN_PRICE',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"POOL_FEE"`
+ */
+export const useReadTankPoolFee = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'POOL_FEE',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"WETH"`
+ */
+export const useReadTankWeth = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'WETH',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadTankAllowance = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'allowance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadTankBalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'balanceOf',
+})
 
 /**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"config"`
@@ -3467,11 +5187,28 @@ export const useReadTankConfigHash = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"contributorRewards"`
+ */
+export const useReadTankContributorRewards =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tankAbi,
+    functionName: 'contributorRewards',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"contributors"`
  */
 export const useReadTankContributors = /*#__PURE__*/ createUseReadContract({
   abi: tankAbi,
   functionName: 'contributors',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadTankDecimals = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'decimals',
 })
 
 /**
@@ -3496,6 +5233,32 @@ export const useReadTankDigestHash = /*#__PURE__*/ createUseReadContract({
 export const useReadTankFactory = /*#__PURE__*/ createUseReadContract({
   abi: tankAbi,
   functionName: 'factory',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"getClaimableReward"`
+ */
+export const useReadTankGetClaimableReward =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tankAbi,
+    functionName: 'getClaimableReward',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"getTotalAllocatedRewards"`
+ */
+export const useReadTankGetTotalAllocatedRewards =
+  /*#__PURE__*/ createUseReadContract({
+    abi: tankAbi,
+    functionName: 'getTotalAllocatedRewards',
+  })
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"hasNoteToken"`
+ */
+export const useReadTankHasNoteToken = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'hasNoteToken',
 })
 
 /**
@@ -3531,6 +5294,14 @@ export const useReadTankMintsCount = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadTankName = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'name',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"notes"`
  */
 export const useReadTankNotes = /*#__PURE__*/ createUseReadContract({
@@ -3555,6 +5326,22 @@ export const useReadTankPkp = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"poolKey"`
+ */
+export const useReadTankPoolKey = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'poolKey',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"poolManager"`
+ */
+export const useReadTankPoolManager = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'poolManager',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"promptActionIpfsId"`
  */
 export const useReadTankPromptActionIpfsId =
@@ -3573,6 +5360,14 @@ export const useReadTankSubmitActionIpfsId =
   })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadTankSymbol = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'symbol',
+})
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"tokenId"`
  */
 export const useReadTankTokenId = /*#__PURE__*/ createUseReadContract({
@@ -3589,6 +5384,22 @@ export const useReadTankTokenUri = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"totalRewards"`
+ */
+export const useReadTankTotalRewards = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'totalRewards',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadTankTotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: tankAbi,
+  functionName: 'totalSupply',
+})
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__
  */
 export const useWriteTank = /*#__PURE__*/ createUseWriteContract({
@@ -3601,6 +5412,29 @@ export const useWriteTank = /*#__PURE__*/ createUseWriteContract({
 export const useWriteTankAddNote = /*#__PURE__*/ createUseWriteContract({
   abi: tankAbi,
   functionName: 'addNote',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteTankApprove = /*#__PURE__*/ createUseWriteContract({
+  abi: tankAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"buyTokenForNote"`
+ */
+export const useWriteTankBuyTokenForNote = /*#__PURE__*/ createUseWriteContract(
+  { abi: tankAbi, functionName: 'buyTokenForNote' },
+)
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"claimReward"`
+ */
+export const useWriteTankClaimReward = /*#__PURE__*/ createUseWriteContract({
+  abi: tankAbi,
+  functionName: 'claimReward',
 })
 
 /**
@@ -3621,6 +5455,29 @@ export const useWriteTankInitialize = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"initializeToken"`
+ */
+export const useWriteTankInitializeToken = /*#__PURE__*/ createUseWriteContract(
+  { abi: tankAbi, functionName: 'initializeToken' },
+)
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteTankTransfer = /*#__PURE__*/ createUseWriteContract({
+  abi: tankAbi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteTankTransferFrom = /*#__PURE__*/ createUseWriteContract({
+  abi: tankAbi,
+  functionName: 'transferFrom',
+})
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__
  */
 export const useSimulateTank = /*#__PURE__*/ createUseSimulateContract({
@@ -3634,6 +5491,32 @@ export const useSimulateTankAddNote = /*#__PURE__*/ createUseSimulateContract({
   abi: tankAbi,
   functionName: 'addNote',
 })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateTankApprove = /*#__PURE__*/ createUseSimulateContract({
+  abi: tankAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"buyTokenForNote"`
+ */
+export const useSimulateTankBuyTokenForNote =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'buyTokenForNote',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"claimReward"`
+ */
+export const useSimulateTankClaimReward =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'claimReward',
+  })
 
 /**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"incrementMintsCount"`
@@ -3654,11 +5537,46 @@ export const useSimulateTankInitialize =
   })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"initializeToken"`
+ */
+export const useSimulateTankInitializeToken =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'initializeToken',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateTankTransfer = /*#__PURE__*/ createUseSimulateContract({
+  abi: tankAbi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tankAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateTankTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tankAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__
  */
 export const useWatchTankEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: tankAbi,
 })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchTankApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'Approval',
+  })
 
 /**
  * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"Initialized"`
@@ -3688,11 +5606,56 @@ export const useWatchTankNoteAddedEvent =
   })
 
 /**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"RewardAllocated"`
+ */
+export const useWatchTankRewardAllocatedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'RewardAllocated',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"RewardClaimed"`
+ */
+export const useWatchTankRewardClaimedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'RewardClaimed',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"RewardsReceived"`
+ */
+export const useWatchTankRewardsReceivedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'RewardsReceived',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"TokenPurchased"`
+ */
+export const useWatchTankTokenPurchasedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'TokenPurchased',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tankAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchTankTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tankAbi,
+    eventName: 'Transfer',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThaink = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3704,7 +5667,7 @@ export const useReadThaink = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkBalanceOf = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3717,7 +5680,7 @@ export const useReadThainkBalanceOf = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3730,7 +5693,7 @@ export const useReadThainkBalanceOfBatch = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkConfig = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3743,7 +5706,7 @@ export const useReadThainkConfig = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkConfigHash = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3756,7 +5719,7 @@ export const useReadThainkConfigHash = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkExists = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3769,7 +5732,7 @@ export const useReadThainkExists = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkHintActionIpfsId =
   /*#__PURE__*/ createUseReadContract({
@@ -3783,7 +5746,7 @@ export const useReadThainkHintActionIpfsId =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkIsApprovedForAll =
   /*#__PURE__*/ createUseReadContract({
@@ -3797,7 +5760,7 @@ export const useReadThainkIsApprovedForAll =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkLlmUrl = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3810,7 +5773,7 @@ export const useReadThainkLlmUrl = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkOwner = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3823,7 +5786,7 @@ export const useReadThainkOwner = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkPkp = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3832,11 +5795,25 @@ export const useReadThainkPkp = /*#__PURE__*/ createUseReadContract({
 })
 
 /**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"poolManagerFactory"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
+ * -
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
+ */
+export const useReadThainkPoolManagerFactory =
+  /*#__PURE__*/ createUseReadContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'poolManagerFactory',
+  })
+
+/**
  * Wraps __{@link useReadContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"promptActionIpfsId"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkPromptActionIpfsId =
   /*#__PURE__*/ createUseReadContract({
@@ -3850,7 +5827,7 @@ export const useReadThainkPromptActionIpfsId =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkSubmitActionIpfsId =
   /*#__PURE__*/ createUseReadContract({
@@ -3864,7 +5841,7 @@ export const useReadThainkSubmitActionIpfsId =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkSupportsInterface =
   /*#__PURE__*/ createUseReadContract({
@@ -3878,7 +5855,7 @@ export const useReadThainkSupportsInterface =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkTankImplementation =
   /*#__PURE__*/ createUseReadContract({
@@ -3892,7 +5869,7 @@ export const useReadThainkTankImplementation =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkTanks = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3905,7 +5882,7 @@ export const useReadThainkTanks = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkTanksNumber = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3918,7 +5895,7 @@ export const useReadThainkTanksNumber = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkTotalSupply = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3931,7 +5908,7 @@ export const useReadThainkTotalSupply = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useReadThainkUri = /*#__PURE__*/ createUseReadContract({
   abi: thainkAbi,
@@ -3944,7 +5921,7 @@ export const useReadThainkUri = /*#__PURE__*/ createUseReadContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThaink = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3956,7 +5933,7 @@ export const useWriteThaink = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkMakeTank = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3969,7 +5946,7 @@ export const useWriteThainkMakeTank = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkMint = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -3982,7 +5959,7 @@ export const useWriteThainkMint = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkRenounceOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -3996,7 +5973,7 @@ export const useWriteThainkRenounceOwnership =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSafeBatchTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -4010,7 +5987,7 @@ export const useWriteThainkSafeBatchTransferFrom =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSafeTransferFrom =
   /*#__PURE__*/ createUseWriteContract({
@@ -4024,7 +6001,7 @@ export const useWriteThainkSafeTransferFrom =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSetApprovalForAll =
   /*#__PURE__*/ createUseWriteContract({
@@ -4038,7 +6015,7 @@ export const useWriteThainkSetApprovalForAll =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSetConfig = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -4051,7 +6028,7 @@ export const useWriteThainkSetConfig = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSetIpfsIds = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -4064,7 +6041,7 @@ export const useWriteThainkSetIpfsIds = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSetLlmUrl = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -4077,7 +6054,7 @@ export const useWriteThainkSetLlmUrl = /*#__PURE__*/ createUseWriteContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkSetPkp = /*#__PURE__*/ createUseWriteContract({
   abi: thainkAbi,
@@ -4086,11 +6063,25 @@ export const useWriteThainkSetPkp = /*#__PURE__*/ createUseWriteContract({
 })
 
 /**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setPoolManagerFactory"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
+ * -
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
+ */
+export const useWriteThainkSetPoolManagerFactory =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setPoolManagerFactory',
+  })
+
+/**
  * Wraps __{@link useWriteContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWriteThainkTransferOwnership =
   /*#__PURE__*/ createUseWriteContract({
@@ -4104,7 +6095,7 @@ export const useWriteThainkTransferOwnership =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThaink = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -4116,7 +6107,7 @@ export const useSimulateThaink = /*#__PURE__*/ createUseSimulateContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkMakeTank =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4130,7 +6121,7 @@ export const useSimulateThainkMakeTank =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkMint = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -4143,7 +6134,7 @@ export const useSimulateThainkMint = /*#__PURE__*/ createUseSimulateContract({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkRenounceOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4157,7 +6148,7 @@ export const useSimulateThainkRenounceOwnership =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSafeBatchTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4171,7 +6162,7 @@ export const useSimulateThainkSafeBatchTransferFrom =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSafeTransferFrom =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4185,7 +6176,7 @@ export const useSimulateThainkSafeTransferFrom =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSetApprovalForAll =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4199,7 +6190,7 @@ export const useSimulateThainkSetApprovalForAll =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSetConfig =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4213,7 +6204,7 @@ export const useSimulateThainkSetConfig =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSetIpfsIds =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4227,7 +6218,7 @@ export const useSimulateThainkSetIpfsIds =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSetLlmUrl =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4241,7 +6232,7 @@ export const useSimulateThainkSetLlmUrl =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkSetPkp = /*#__PURE__*/ createUseSimulateContract({
   abi: thainkAbi,
@@ -4250,11 +6241,25 @@ export const useSimulateThainkSetPkp = /*#__PURE__*/ createUseSimulateContract({
 })
 
 /**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"setPoolManagerFactory"`
+ *
+ * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
+ * -
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
+ */
+export const useSimulateThainkSetPoolManagerFactory =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: thainkAbi,
+    address: thainkAddress,
+    functionName: 'setPoolManagerFactory',
+  })
+
+/**
  * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link thainkAbi}__ and `functionName` set to `"transferOwnership"`
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useSimulateThainkTransferOwnership =
   /*#__PURE__*/ createUseSimulateContract({
@@ -4268,7 +6273,7 @@ export const useSimulateThainkTransferOwnership =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkEvent = /*#__PURE__*/ createUseWatchContractEvent({
   abi: thainkAbi,
@@ -4280,7 +6285,7 @@ export const useWatchThainkEvent = /*#__PURE__*/ createUseWatchContractEvent({
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkApprovalForAllEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4294,7 +6299,7 @@ export const useWatchThainkApprovalForAllEvent =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkMintEventEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4308,7 +6313,7 @@ export const useWatchThainkMintEventEvent =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkOwnershipTransferredEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4322,7 +6327,7 @@ export const useWatchThainkOwnershipTransferredEvent =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkTransferBatchEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4336,7 +6341,7 @@ export const useWatchThainkTransferBatchEvent =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkTransferSingleEvent =
   /*#__PURE__*/ createUseWatchContractEvent({
@@ -4350,8 +6355,259 @@ export const useWatchThainkTransferSingleEvent =
  *
  * - [__View Contract on Base Basescan__](https://basescan.org/address/0x68af043c57ac9b4749841c4974df04d49ff8fd88)
  * -
- * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0xf4b6a2a9acc6f94824b1f8ba852f04db861830d3)
+ * - [__View Contract on Base Sepolia Basescan__](https://sepolia.basescan.org/address/0x65ef64c499c419160d6ce8e9734558a0df54066c)
  */
 export const useWatchThainkUriEvent = /*#__PURE__*/ createUseWatchContractEvent(
   { abi: thainkAbi, address: thainkAddress, eventName: 'URI' },
 )
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__
+ */
+export const useReadToken = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"INITIAL_SUPPLY"`
+ */
+export const useReadTokenInitialSupply = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'INITIAL_SUPPLY',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"NOTE_TOKEN_PRICE"`
+ */
+export const useReadTokenNoteTokenPrice = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'NOTE_TOKEN_PRICE',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"POOL_FEE"`
+ */
+export const useReadTokenPoolFee = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'POOL_FEE',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"WETH"`
+ */
+export const useReadTokenWeth = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'WETH',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"allowance"`
+ */
+export const useReadTokenAllowance = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'allowance',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"balanceOf"`
+ */
+export const useReadTokenBalanceOf = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'balanceOf',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"decimals"`
+ */
+export const useReadTokenDecimals = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'decimals',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"factory"`
+ */
+export const useReadTokenFactory = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'factory',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"hasNoteToken"`
+ */
+export const useReadTokenHasNoteToken = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'hasNoteToken',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"name"`
+ */
+export const useReadTokenName = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'name',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"poolKey"`
+ */
+export const useReadTokenPoolKey = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'poolKey',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"poolManager"`
+ */
+export const useReadTokenPoolManager = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'poolManager',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"symbol"`
+ */
+export const useReadTokenSymbol = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'symbol',
+})
+
+/**
+ * Wraps __{@link useReadContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"totalSupply"`
+ */
+export const useReadTokenTotalSupply = /*#__PURE__*/ createUseReadContract({
+  abi: tokenAbi,
+  functionName: 'totalSupply',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__
+ */
+export const useWriteToken = /*#__PURE__*/ createUseWriteContract({
+  abi: tokenAbi,
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"approve"`
+ */
+export const useWriteTokenApprove = /*#__PURE__*/ createUseWriteContract({
+  abi: tokenAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"buyTokenForNote"`
+ */
+export const useWriteTokenBuyTokenForNote =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: tokenAbi,
+    functionName: 'buyTokenForNote',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"initializeToken"`
+ */
+export const useWriteTokenInitializeToken =
+  /*#__PURE__*/ createUseWriteContract({
+    abi: tokenAbi,
+    functionName: 'initializeToken',
+  })
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useWriteTokenTransfer = /*#__PURE__*/ createUseWriteContract({
+  abi: tokenAbi,
+  functionName: 'transfer',
+})
+
+/**
+ * Wraps __{@link useWriteContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useWriteTokenTransferFrom = /*#__PURE__*/ createUseWriteContract({
+  abi: tokenAbi,
+  functionName: 'transferFrom',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__
+ */
+export const useSimulateToken = /*#__PURE__*/ createUseSimulateContract({
+  abi: tokenAbi,
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"approve"`
+ */
+export const useSimulateTokenApprove = /*#__PURE__*/ createUseSimulateContract({
+  abi: tokenAbi,
+  functionName: 'approve',
+})
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"buyTokenForNote"`
+ */
+export const useSimulateTokenBuyTokenForNote =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tokenAbi,
+    functionName: 'buyTokenForNote',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"initializeToken"`
+ */
+export const useSimulateTokenInitializeToken =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tokenAbi,
+    functionName: 'initializeToken',
+  })
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"transfer"`
+ */
+export const useSimulateTokenTransfer = /*#__PURE__*/ createUseSimulateContract(
+  { abi: tokenAbi, functionName: 'transfer' },
+)
+
+/**
+ * Wraps __{@link useSimulateContract}__ with `abi` set to __{@link tokenAbi}__ and `functionName` set to `"transferFrom"`
+ */
+export const useSimulateTokenTransferFrom =
+  /*#__PURE__*/ createUseSimulateContract({
+    abi: tokenAbi,
+    functionName: 'transferFrom',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenAbi}__
+ */
+export const useWatchTokenEvent = /*#__PURE__*/ createUseWatchContractEvent({
+  abi: tokenAbi,
+})
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenAbi}__ and `eventName` set to `"Approval"`
+ */
+export const useWatchTokenApprovalEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tokenAbi,
+    eventName: 'Approval',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenAbi}__ and `eventName` set to `"TokenPurchased"`
+ */
+export const useWatchTokenTokenPurchasedEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tokenAbi,
+    eventName: 'TokenPurchased',
+  })
+
+/**
+ * Wraps __{@link useWatchContractEvent}__ with `abi` set to __{@link tokenAbi}__ and `eventName` set to `"Transfer"`
+ */
+export const useWatchTokenTransferEvent =
+  /*#__PURE__*/ createUseWatchContractEvent({
+    abi: tokenAbi,
+    eventName: 'Transfer',
+  })

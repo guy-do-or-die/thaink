@@ -362,7 +362,8 @@ contract ThainkTest is Test, ERC1155Holder {
             TEST_CONFIG_HASH,
             TEST_HINT_ACTION_IPFS_ID,
             TEST_SUBMIT_ACTION_IPFS_ID,
-            TEST_PROMPT_ACTION_IPFS_ID
+            TEST_PROMPT_ACTION_IPFS_ID,
+            address(0) // _poolManagerFactory
         );
     }
 }

@@ -22,10 +22,17 @@ contract Thaink is Config, ERC1155Supply, Ownable {
         tankImplementation = new Tank();
     }
 
-    function makeTank(string calldata _idea) public {
-        Tank tank = Tank(address(tankImplementation).clone());
+    // Uniswap V4 Pool Manager Factory address
+    address public poolManagerFactory;
+    
+    function setPoolManagerFactory(address _poolManagerFactory) public onlyOwner {
+        poolManagerFactory = _poolManagerFactory;
+    }
+    
+    function makeTank(string calldata _idea) public payable {
+        Tank tank = Tank(payable(address(tankImplementation).clone()));
 
-        tank.initialize(
+        tank.initialize{value: msg.value}(
             ++tanksNumber,
             pkp,
             _idea,
@@ -34,7 +41,8 @@ contract Thaink is Config, ERC1155Supply, Ownable {
             configHash,
             hintActionIpfsId,
             submitActionIpfsId,
-            promptActionIpfsId
+            promptActionIpfsId,
+            poolManagerFactory
         );
 
         tanks[tanksNumber] = tank;

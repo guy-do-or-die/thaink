@@ -413,20 +413,24 @@ export async function callAgent({ idea, digest, action, prompt, note, llmUrl, co
     },
     async () => {
       let result: any
-      if (action === 'hint') {
-        result = await getHint(idea, digest, llmUrl, config)
-      } else if (action === 'prompt') {
-        if (typeof prompt !== 'string') {
-          throw new Error(`'prompt' is required for action 'prompt'`)
-        }
-        result = await getPromptResponse(idea, digest, prompt, llmUrl, config)
-      } else if (action === 'evaluate_and_digest') {
-        if (typeof note !== 'string') {
-          throw new Error(`'note' is required for action 'evaluate_and_digest'`)
-        }
-        result = await evaluateAndDigest(idea, digest, note, llmUrl, config)
-      } else {
-        throw new Error(`Unknown or invalid agent action: ${action}`)
+      switch (action) {
+        case 'hint':
+          result = await getHint(idea, digest, llmUrl, config)
+          break
+        case 'prompt':
+          if (typeof prompt !== 'string') {
+            throw new Error(`'prompt' is required for action 'prompt'`)
+          }
+          result = await getPromptResponse(idea, digest, prompt, llmUrl, config)
+          break
+        case 'evaluate_and_digest':
+          if (typeof note !== 'string') {
+            throw new Error(`'note' is required for action 'evaluate_and_digest'`)
+          }
+          result = await evaluateAndDigest(idea, digest, note, llmUrl, config)
+          break
+        default:
+          throw new Error(`Unknown or invalid agent action: ${action}`)
       }
 
       return JSON.stringify(result)
